@@ -2,10 +2,18 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "outDir": "./frontend/dist",
-    "rootDir": "./frontend/src",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
     "strict": true,
-    "esModuleInterop": true
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "outDir": "./frontend/dist",
+    "rootDir": "./frontend/src"
   },
   "include": ["frontend/src/**/*"],
   "exclude": ["node_modules"]
