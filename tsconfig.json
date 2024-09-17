@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./frontend/dist",
+    "rootDir": "./frontend/src",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["frontend/src/**/*"],
+  "exclude": ["node_modules"]
+}
