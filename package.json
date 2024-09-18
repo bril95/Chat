@@ -19,7 +19,8 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hexlet/chat-server": "^2.0.4",
-    "@mui/material": "^6.1.0"
+    "@mui/material": "^6.1.0",
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@types/node": "^22.5.5",
