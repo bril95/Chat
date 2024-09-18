@@ -12,3 +12,6 @@
 * User authentication
 * A user-friendly and responsive interface with Material-UI
 * Client-side state management of the chat
+
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/a21e4019079fcfb9e124/maintainability)](https://codeclimate.com/github/bril95/Chat/maintainability)

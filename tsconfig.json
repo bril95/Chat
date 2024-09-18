@@ -15,6 +15,6 @@
     "outDir": "./frontend/dist",
     "rootDir": "./frontend/src"
   },
-  "include": ["frontend/src/**/*"],
+  "include": ["frontend/src/**/*", "frontend/src/global.d.ts"],
   "exclude": ["node_modules"]
 }
