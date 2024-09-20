@@ -20,15 +20,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hexlet/chat-server": "^2.0.4",
-    "@mui/material": "^6.1.0",
-    "zustand": "^5.0.0-rc.2"
-  },
-  "devDependencies": {
-    "@types/node": "^22.5.5",
-    "@types/react": "^18.3.7",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@mui/material": "^6.1.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
@@ -38,6 +30,14 @@
     "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-react": "^7.36.1",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "zustand": "^5.0.0-rc.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "@types/react": "^18.3.7",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "npm-run-all": "^4.1.5",
     "typescript": "^5.6.2",
     "vite": "^5.4.6"
