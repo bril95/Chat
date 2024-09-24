@@ -11,3 +11,112 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.not-found-page {
+  width: 100%;
+  height: 100vh;
+  background: #032442;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: radial-gradient(
+    circle,
+    rgba(109, 116, 174, 0.7) 0%,
+    rgba(3, 36, 66, 1) 75%
+  );
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+svg {
+  max-width: 100%;
+  width: 680px;
+  aspect-ratio: 1/1;
+  padding: 20px;
+}
+
+#Ooops,
+#Particles,
+#left-top-leaf,
+#right-top-leaf,
+#left-leaf {
+  transform-box: fill-box;
+}
+
+#left-leaf {
+  animation: left-leaf 1.5s linear infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes left-leaf {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(-4deg);
+  }
+}
+
+#left-top-leaf,#right-top-leaf {
+  animation: swing 5s ease-in infinite alternate-reverse;
+}
+
+#left-top-leaf {
+  transform-origin: left;
+}
+
+#right-top-leaf {
+  transform-origin: right;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(-2deg);
+  }
+}
+
+#Ooops {
+  animation: ooops 2s ease-in-out infinite alternate;
+  transform-origin: bottom;
+}
+
+@keyframes ooops {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(3deg);
+  }
+}
+
+#Particles {
+  animation: flying 4s ease-in-out infinite forwards;
+}
+
+@keyframes flying {
+  0% {
+    transform: translateY(2px) translateX(2px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-2px) translateX(-2px);
+  }
+  100% {
+    transform: translateY(2px) translateX(2px);
+    opacity: 1;
+  }
+}
