@@ -1,18 +1,22 @@
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { Button, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom'; 
+import axios from 'axios';
+import routes from '../../api/routes';
 
 interface MyForm {
-  name: string;
+  username: string;
   password: string;
   confirmPassword: string;
 }
 
 const SignUpPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate(); 
   const { control, handleSubmit, reset } = useForm<MyForm>({
     defaultValues: {
-      name: '',
+      username: '',
       password: '',
       confirmPassword: '',
     }
@@ -20,15 +24,20 @@ const SignUpPage = () => {
 
   const resetForm = () => {
     reset({
-      name: '',
+      username: '',
       password: '',
       confirmPassword: '',
     });
   };
 
-  const submit: SubmitHandler<MyForm> = (data) => {
-    console.log(data);
-    resetForm();
+  const submit: SubmitHandler<MyForm> = async (data) => {
+    try{
+      await axios.post('/api/v1/signup', data);
+      navigate(routes.pages.chatMainPage());
+      resetForm();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -36,7 +45,7 @@ const SignUpPage = () => {
       <h1>{t('signUpPage.registration')}</h1>
       <form onSubmit={handleSubmit(submit)}>
         <Controller
-          name="name"
+          name="username"
           control={control}
           render={({ field }) => (
           <TextField {...field} label={t('signUpPage.username')} variant="outlined" />

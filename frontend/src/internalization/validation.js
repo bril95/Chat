@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const validationSignUpPage = (t) => Yup.object({
+const signUpValidation = (t) => Yup.object({
   username: Yup.string()
     .required(t('schema.requiredField'))
     .min(3, t('schema.min3max20'))
@@ -13,12 +13,12 @@ const validationSignUpPage = (t) => Yup.object({
     .required(t('schema.requiredField')),
 });
 
-const validationSchemaLoginPage = (t) => Yup.object({
+const loginValidation = (t) => Yup.object({
   username: Yup.string().required(t('schema.requiredField')),
   password: Yup.string().required(t('schema.requiredField')),
 });
 
-const validationSchemaChat = (t, channelsName) => Yup.object({
+const mainChatValidation = (t, channelsName) => Yup.object({
   channelName: Yup.string()
     .required(t('schema.requiredField'))
     .notOneOf(channelsName, t('schema.sameNameChannel'))
@@ -26,4 +26,4 @@ const validationSchemaChat = (t, channelsName) => Yup.object({
     .max(20, t('schema.min3max20')),
 });
 
-export { validationSignUpPage, validationSchemaLoginPage, validationSchemaChat };
+export { signUpValidation, loginValidation, mainChatValidation };
