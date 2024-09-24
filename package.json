@@ -21,6 +21,7 @@
     "@emotion/styled": "^11.13.0",
     "@hexlet/chat-server": "^2.0.4",
     "@mui/material": "^6.1.1",
+    "axios": "^1.7.7",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",

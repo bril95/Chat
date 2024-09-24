@@ -5,14 +5,16 @@ import { useTranslation } from 'react-i18next';
 interface MyForm {
   name: string;
   password: string;
+  confirmPassword: string;
 }
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const { t } = useTranslation();
   const { control, handleSubmit, reset } = useForm<MyForm>({
     defaultValues: {
       name: '',
       password: '',
+      confirmPassword: '',
     }
   });
 
@@ -20,6 +22,7 @@ const LoginPage = () => {
     reset({
       name: '',
       password: '',
+      confirmPassword: '',
     });
   };
 
@@ -30,29 +33,33 @@ const LoginPage = () => {
 
   return (
     <>
-      <h1>{t('loginPage.enter')}</h1>
+      <h1>{t('signUpPage.registration')}</h1>
       <form onSubmit={handleSubmit(submit)}>
         <Controller
           name="name"
           control={control}
           render={({ field }) => (
-          <TextField {...field} label={t('loginPage.username')} variant="outlined" />
+          <TextField {...field} label={t('signUpPage.username')} variant="outlined" />
           )}
         />
         <Controller
           name="password"
           control={control}
           render={({ field }) => (
-          <TextField {...field} label={t('loginPage.password')} variant="outlined" />
+          <TextField {...field} label={t('signUpPage.password')} variant="outlined" />
           )}
         />
-        <Button type="submit">{t('loginPage.enter')}</Button>
+        <Controller
+          name="confirmPassword"
+          control={control}
+          render={({ field }) => (
+          <TextField {...field} label={t('signUpPage.confirmPassword')} variant="outlined" />
+          )}
+        />
+        <Button type="submit">{t('signUpPage.signUp')}</Button>
       </form>
-      <span>{t('loginPage.withoutAccount')}</span>
-      <span> </span>
-      <a href="/SignUpPage">{t('loginPage.registration')}</a>
     </>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
