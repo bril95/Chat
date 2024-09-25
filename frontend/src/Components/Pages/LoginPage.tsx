@@ -1,22 +1,15 @@
-import Box from '@mui/material/Box';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import { yupResolver } from "@hookform/resolvers/yup"
-import { useNavigate } from 'react-router-dom'; 
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button, FormHelperText } from '@mui/material';
+import { Button, FormHelperText, Box, Link, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { userStore } from '../../store/userStore';
 import routes from '../../api/routes';
 import { loginValidation } from '../../internalization/validation';
 import HeaderNavbar from '../HeaderNavbar';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
 import { useState } from 'react';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 interface MyForm {
   username: string;
@@ -65,7 +58,7 @@ const LoginPage = () => {
         width: '100%',
         p: 0,
         }}>
-        <h1>{t('loginPage.enter')}</h1>
+        <Typography variant="h3">{t('loginPage.enter')}</Typography>
         <form onSubmit={handleSubmit(submit)}>
           <Box>
             <Controller
@@ -90,7 +83,6 @@ const LoginPage = () => {
               name="password"
               control={control}
               render={({ field }) => (
-                <>
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                   <InputLabel htmlFor="password">{t('loginPage.password')}</InputLabel>
                   <OutlinedInput
@@ -115,14 +107,13 @@ const LoginPage = () => {
                     <FormHelperText error>{errors.password.message}</FormHelperText>
                   )}
                 </FormControl>
-                </>
               )}
             />
           </Box>
           <Button sx={{ m: 1, p: 1, width: '100%', boxSizing: 'border-box'}} color="primary" variant="contained" type="submit">{t('loginPage.enter')}</Button>
         </form>
-        <span>{t('loginPage.withoutAccount')}</span>
-        <a href={routes.pages.signUpPage()}>{t('loginPage.registration')}</a>
+        <Typography>{t('loginPage.withoutAccount')}</Typography>
+        <Link href={routes.pages.signUpPage()} underline="hover" sx={{m: 1}}>{t('loginPage.registration')}</Link>
       </Box>
     </>
   );

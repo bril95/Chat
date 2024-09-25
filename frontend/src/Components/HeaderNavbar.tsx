@@ -1,16 +1,16 @@
+import { Button, Link, Toolbar} from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import routes from '../api/routes'
 
 export default function HeaderNavbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 , ml: '3rem',}}>
-            Chat
-          </Typography>
+          <Button>
+            <Link href={routes.pages.loginPage()} underline="none" color='#FFF' variant='h5' sx={{m: 1}}>Chat</Link>
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
