@@ -104,7 +104,7 @@ svg {
 }
 
 #Particles {
-  animation: flying 4s ease-in-out infinite forwards;
+  animation: flying 4s ease-in-out infinite alternate forwards;
 }
 
 @keyframes flying {
