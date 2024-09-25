@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
-const ParticlesComponent = () => {
+const Particles = () => {
   useEffect(() => {
     if (window.particlesJS) {
       window.particlesJS.load('particles-js', '/particles-config.json');
@@ -10,4 +10,4 @@ const ParticlesComponent = () => {
   return <div id="particles-js" style={{ width: '100%', height: '100vh', position: 'absolute' }} />;
 };
 
-export default ParticlesComponent;
+export default Particles;
