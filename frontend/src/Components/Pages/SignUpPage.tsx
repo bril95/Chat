@@ -121,7 +121,7 @@ const SignUpPage = () => {
                 id="confirmPassword"
                 {...field}
                 error={!!errors.confirmPassword}
-                label={t('loginPage.password')}
+                label={t('signUpPage.confirmPassword')}
               />
               {errors.confirmPassword && (
                 <FormHelperText error>{errors.confirmPassword.message}</FormHelperText>
