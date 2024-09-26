@@ -2,7 +2,8 @@
 const ru = {
   translation: {
     headers: {
-      hexletChat: 'Hexlet Chat',
+      chat: 'Chat',
+      exit: 'Выйти',
     },
     loginPage: {
       enter: 'Войти',
@@ -14,11 +15,9 @@ const ru = {
       isLoading: 'В процессе...',
     },
     chatMainPage: {
-      exit: 'Выйти',
       channels: 'Каналы',
       placeholderMessage: 'Введите сообщение...',
       toastError: 'Ошибка соединения',
-      plus: '+',
       messages: {
         key_zero: '{{count}} сообщений',
         key_one: '{{count}} сообщение',

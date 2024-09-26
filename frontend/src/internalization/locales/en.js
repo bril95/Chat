@@ -17,7 +17,6 @@ const en = {
       channels: 'Channels',
       placeholderMessage: 'Enter a message...',
       toastError: 'Connection error',
-      plus: '+',
       messages: {
         key_zero: '{{count}} messages',
         key_one: '{{count}} message',
