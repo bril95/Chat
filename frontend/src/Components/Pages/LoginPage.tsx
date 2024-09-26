@@ -11,6 +11,7 @@ import HeaderNavbar from '../HeaderNavbar';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Footer from '../Footer';
+import SnackbarComponent from '../Snackbar';
 
 interface MyForm {
   username: string;
@@ -38,6 +39,8 @@ const LoginPage = () => {
     });
   };
 
+  const [showSnackbar, setShowSnackbar] = useState(false)
+
   const submit: SubmitHandler<MyForm> = async (data) => {
     try {
       const response = await axios.post('/api/v1/login', data);
@@ -46,6 +49,7 @@ const LoginPage = () => {
       resetForm();
     } catch (error) {
       console.error(error);
+      setShowSnackbar(true);
     }
   };
 
@@ -131,6 +135,11 @@ const LoginPage = () => {
         </Box>
         <Footer />
       </Box>
+      <SnackbarComponent
+        message={t('loginPage.error')}
+        open={showSnackbar}
+        onClose={() => setShowSnackbar(false)}
+      />
     </>
   );
 };

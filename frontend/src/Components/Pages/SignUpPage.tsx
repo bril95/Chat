@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
+import { useState } from 'react';
 import { Button, Box, FormControl, InputLabel, OutlinedInput, FormHelperText, Typography } from '@mui/material';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
@@ -8,6 +9,7 @@ import routes from '../../api/routes';
 import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../HeaderNavbar';
 import Footer from '../Footer';
+import SnackbarComponent from '../Snackbar';
 
 interface MyForm {
   username: string;
@@ -35,6 +37,8 @@ const SignUpPage = () => {
     });
   };
 
+  const [showSnackbar, setShowSnackbar] = useState(false)
+
   const submit: SubmitHandler<MyForm> = async (data) => {
     try{
       await axios.post('/api/v1/signup', data);
@@ -42,6 +46,7 @@ const SignUpPage = () => {
       resetForm();
     } catch (error) {
       console.error(error);
+      setShowSnackbar(true);
     }
   };
 
@@ -135,6 +140,11 @@ const SignUpPage = () => {
         </Box>
         <Footer />
       </Box>
+      <SnackbarComponent
+        message={t('signUpPage.errorPassword')}
+        open={showSnackbar}
+        onClose={() => setShowSnackbar(false)}
+      />
     </>
   );
 };
