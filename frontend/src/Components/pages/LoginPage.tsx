@@ -19,11 +19,13 @@ interface MyForm {
 }
 
 const LoginPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
   const { t } = useTranslation();
   const navigate = useNavigate(); 
-  const setUserToken = userStore((state) => state.setToken);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const setUserToken = userStore((store) => store.setToken);
+  const setUser = userStore((store) => store.setUsername);
   const { control, handleSubmit, reset, formState: { errors } } = useForm<MyForm>({
     defaultValues: {
       username: '',
@@ -45,6 +47,7 @@ const LoginPage = () => {
     try {
       const response = await axios.post('/api/v1/login', data);
       setUserToken(response.data.token);
+      setUser(response.data.username);
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {

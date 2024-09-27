@@ -4,9 +4,13 @@ import Footer from '../common/Footer';
 import { useTranslation } from 'react-i18next';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import MessageForm from '../chatComponents/MessageForm';
+import { userStore } from '../../store/userStore';
+import ChannelsRender from '../chatComponents/ChannelsRender';
 
 const ChatMainPage = () => {
   const { t } = useTranslation();
+  const username = userStore((store) => store.username);
+  const token = userStore((store) => store.token);
 
   return (
     <>
@@ -26,6 +30,7 @@ const ChatMainPage = () => {
             <Typography variant="h5">{t('chatMainPage.channels')}</Typography>
             <IconButton sx={{m: 0, p: 0}} color='info' href={''}><AddCircleOutlineIcon /></IconButton>
           </Box>
+          <ChannelsRender token={token} />
         </Grid2>
         <Grid2 size={{ xs: 8, md: 10 }} 
         sx={{
@@ -48,7 +53,7 @@ const ChatMainPage = () => {
             justifyContent: 'flex-end',
             p: 1,
           }}>
-            <Typography variant="body1">Сообщение1</Typography>
+            <Typography variant="body1">{username}Сообщение1</Typography>
             <Typography variant="body1">Сообщение2</Typography>
             <Typography variant="body1">Сообщение3</Typography>
             <Typography variant="body1">Сообщение4</Typography>

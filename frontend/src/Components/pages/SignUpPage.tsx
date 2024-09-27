@@ -10,6 +10,7 @@ import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
+import { userStore } from '../../store/userStore';
 
 interface MyForm {
   username: string;
@@ -37,11 +38,16 @@ const SignUpPage = () => {
     });
   };
 
-  const [showSnackbar, setShowSnackbar] = useState(false)
+  const [showSnackbar, setShowSnackbar] = useState(false);
+
+  const setUserToken = userStore((store) => store.setToken);
+  const setUser = userStore((store) => store.setUsername);
 
   const submit: SubmitHandler<MyForm> = async (data) => {
     try{
-      await axios.post('/api/v1/signup', data);
+      const response = await axios.post('/api/v1/signup', data);
+      setUserToken(response.data.token);
+      setUser(response.data.username);
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {
@@ -49,6 +55,7 @@ const SignUpPage = () => {
       setShowSnackbar(true);
     }
   };
+  
 
   return (
     <>
