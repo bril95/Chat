@@ -1,4 +1,4 @@
-import Particles from "../Particles";
+import Particles from "../misc/Particles";
 
 const NotFound = () => {
   return <>

@@ -7,11 +7,11 @@ import { useTranslation } from 'react-i18next';
 import { userStore } from '../../store/userStore';
 import routes from '../../api/routes';
 import { loginValidation } from '../../internalization/validation';
-import HeaderNavbar from '../HeaderNavbar';
+import HeaderNavbar from '../common/HeaderNavbar';
 import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import Footer from '../Footer';
-import SnackbarComponent from '../Snackbar';
+import Footer from '../common/Footer';
+import SnackbarComponent from '../common/Snackbar';
 
 interface MyForm {
   username: string;

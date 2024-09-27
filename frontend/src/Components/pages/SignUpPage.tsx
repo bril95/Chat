@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import routes from '../../api/routes';
 import { signUpValidation } from '../../internalization/validation';
-import HeaderNavbar from '../HeaderNavbar';
-import Footer from '../Footer';
-import SnackbarComponent from '../Snackbar';
+import HeaderNavbar from '../common/HeaderNavbar';
+import Footer from '../common/Footer';
+import SnackbarComponent from '../common/Snackbar';
 
 interface MyForm {
   username: string;

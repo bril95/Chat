@@ -1,9 +1,9 @@
 import { Grid2, Box, Typography, IconButton } from '@mui/material';
-import HeaderNavbar from '../HeaderNavbar';
-import Footer from '../Footer';
+import HeaderNavbar from '../common/HeaderNavbar';
+import Footer from '../common/Footer';
 import { useTranslation } from 'react-i18next';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import MessageForm from '../MessageForm';
+import MessageForm from '../chatComponents/MessageForm';
 
 const ChatMainPage = () => {
   const { t } = useTranslation();

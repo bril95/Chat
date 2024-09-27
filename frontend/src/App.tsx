@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from './Components/Pages/LoginPage';
-import NotFound from './Components/Pages/NotFoundPage';
-import SignUpPage from './Components/Pages/SignUpPage';
-import ChatMainPage from './Components/Pages/ChatMainPage'
+import LoginPage from './Components/pages/LoginPage';
+import NotFound from './Components/pages/NotFoundPage';
+import SignUpPage from './Components/pages/SignUpPage';
+import ChatMainPage from './Components/pages/ChatMainPage'
 import routes from './api/routes';
 
 function App() {
