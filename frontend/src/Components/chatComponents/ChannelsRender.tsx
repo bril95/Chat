@@ -1,16 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
-
-interface Channel {
-  id: string;
-  name: string;
-  removable: boolean;
-}
+import channelStore from "../../store/channelStore";
 
 const ChannelsRender = ({ token }: { token: string }) => {
 
-  const [channels, setChannels] = useState<Channel[]>([]);
+  const setNewChannel = channelStore((store) => store.setChannels);
+  const getAllChannels = channelStore((store) => store.allChannels);
 
   useEffect(() => {
     const requestData = async () => {
@@ -19,25 +15,25 @@ const ChannelsRender = ({ token }: { token: string }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      setChannels(response.data);
+      setNewChannel(response.data)
     };
     requestData()
-  }, [token]);
+  }, [token, setNewChannel]);
 
   return (
     <>
-      {channels.length > 0 && (
+      {getAllChannels.length > 0 && (
         <List
         sx={{
           width: '100%',
           maxWidth: 360,
           position: 'relative',
           overflow: 'auto',
-          maxHeight: 300,
+          maxHeight: '100%',
           '& ul': { padding: 0 },
         }}
         >
-          {channels.map((el) => (
+          {getAllChannels.map((el) => (
              <ListItem key={el.id}>
               <ListItemText primary={el.name} />
             </ListItem>

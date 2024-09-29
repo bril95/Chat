@@ -39,9 +39,6 @@ const ru = {
       confirmPassword: 'Подтвердите пароль',
       signUp: 'Зарегистрироваться',
     },
-    notFoundPage: {
-      pageNotFound: 'Страница не найдена',
-    },
     modalWindows: {
       cancel: 'Отмена',
       submit: 'Отправить',

@@ -8,7 +8,7 @@ type Store = {
   setToken: (token: string) => void;
 }
 
-export const userStore = create<Store>()(
+const userStore = create<Store>()(
   persist(
     (set) => ({
       username: '',
@@ -23,4 +23,4 @@ export const userStore = create<Store>()(
   )
 )
 
-
+export default userStore;

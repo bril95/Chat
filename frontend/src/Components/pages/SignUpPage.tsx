@@ -10,7 +10,7 @@ import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import { userStore } from '../../store/userStore';
+import userStore from '../../store/userStore';
 
 interface MyForm {
   username: string;

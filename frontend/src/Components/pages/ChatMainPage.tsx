@@ -4,13 +4,24 @@ import Footer from '../common/Footer';
 import { useTranslation } from 'react-i18next';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import MessageForm from '../chatComponents/MessageForm';
-import { userStore } from '../../store/userStore';
+import userStore from '../../store/userStore';
 import ChannelsRender from '../chatComponents/ChannelsRender';
+import AddChannel from '../chatComponents/AddChannel';
+import { useState } from 'react';
 
 const ChatMainPage = () => {
   const { t } = useTranslation();
   const username = userStore((store) => store.username);
   const token = userStore((store) => store.token);
+
+  const [open, setOpen] = useState(false);
+  const handleOpenAddChannel = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAddChannel = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -28,7 +39,8 @@ const ChatMainPage = () => {
             alignItems: 'center',
           }}>
             <Typography variant="h5">{t('chatMainPage.channels')}</Typography>
-            <IconButton sx={{m: 0, p: 0}} color='info' href={''}><AddCircleOutlineIcon /></IconButton>
+            <IconButton sx={{m: 0, p: 0}} color='info' onClick={handleOpenAddChannel}><AddCircleOutlineIcon aria-hidden="false" /></IconButton>
+            <AddChannel open={open} handleClose ={() => handleCloseAddChannel()}/>
           </Box>
           <ChannelsRender token={token} />
         </Grid2>
