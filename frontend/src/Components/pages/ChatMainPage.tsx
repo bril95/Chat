@@ -9,12 +9,17 @@ import ChannelsRender from '../chatComponents/ChannelsRender';
 import AddChannel from '../chatComponents/AddChannel';
 import { useState } from 'react';
 import channelStore from "../../store/channelStore";
+import { Navigate } from 'react-router-dom';
+import routes from '../../api/routes';
+import MessageRender from '../chatComponents/MessageRender';
+import messageStore from '../../store/messageStore';
 
 const ChatMainPage = () => {
   const { t } = useTranslation();
-  const username = userStore((store) => store.username);
   const token = userStore((store) => store.token);
+
   const getCurrentChannel = channelStore((store) => store.currentChannel);
+  const getAllMessages = messageStore((store) => store.allMessages);
 
   const [open, setOpen] = useState(false);
   const handleOpenAddChannel = () => {
@@ -24,6 +29,10 @@ const ChatMainPage = () => {
   const handleCloseAddChannel = () => {
     setOpen(false);
   };
+
+  if (!token) {
+    return <Navigate to={routes.pages.loginPage()} replace />;
+  }
 
   return (
     <>
@@ -58,7 +67,7 @@ const ChatMainPage = () => {
             alignItems: 'left',
           }}>
             <Typography variant="body1">{getCurrentChannel.name}</Typography>
-            <Typography variant="body1">Кол-во сообщений</Typography>
+            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.length })}</Typography>
           </Box>
           <Box sx={{
             display: 'flex',
@@ -67,11 +76,7 @@ const ChatMainPage = () => {
             justifyContent: 'flex-end',
             p: 1,
           }}>
-            <Typography variant="body1">{username}Сообщение1</Typography>
-            <Typography variant="body1">Сообщение2</Typography>
-            <Typography variant="body1">Сообщение3</Typography>
-            <Typography variant="body1">Сообщение4</Typography>
-            <Typography variant="body1">Сообщение5</Typography>
+          <MessageRender token={token}/>
           </Box>
           <MessageForm />
         </Grid2>
