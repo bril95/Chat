@@ -8,11 +8,13 @@ import userStore from '../../store/userStore';
 import ChannelsRender from '../chatComponents/ChannelsRender';
 import AddChannel from '../chatComponents/AddChannel';
 import { useState } from 'react';
+import channelStore from "../../store/channelStore";
 
 const ChatMainPage = () => {
   const { t } = useTranslation();
   const username = userStore((store) => store.username);
   const token = userStore((store) => store.token);
+  const getCurrentChannel = channelStore((store) => store.currentChannel);
 
   const [open, setOpen] = useState(false);
   const handleOpenAddChannel = () => {
@@ -44,7 +46,7 @@ const ChatMainPage = () => {
           </Box>
           <ChannelsRender token={token} />
         </Grid2>
-        <Grid2 size={{ xs: 8, md: 10 }} 
+        <Grid2 size={{ xs: 8, md: 10 }}
         sx={{
           p: 2,
           display: 'flex',
@@ -55,7 +57,7 @@ const ChatMainPage = () => {
             flexDirection: 'column',
             alignItems: 'left',
           }}>
-            <Typography variant="body1">Текущий канал</Typography>
+            <Typography variant="body1">{getCurrentChannel.name}</Typography>
             <Typography variant="body1">Кол-во сообщений</Typography>
           </Box>
           <Box sx={{

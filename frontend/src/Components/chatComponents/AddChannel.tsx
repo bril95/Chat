@@ -7,7 +7,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useTranslation } from 'react-i18next';
 import userStore from '../../store/userStore';
-import channelStore from "../../store/channelStore";
 
 interface AddChannelProps {
   open: boolean;
@@ -17,7 +16,6 @@ interface AddChannelProps {
 export default function AddChannel({ open, handleClose }: AddChannelProps) {
   const { t } = useTranslation();
   const token = userStore((store) => store.token);
-  const setNewChannel = channelStore((store) => store.setChannels);
 
   const openModal = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -26,13 +24,11 @@ export default function AddChannel({ open, handleClose }: AddChannelProps) {
     const addNewChannel = { name: newChannel };
 
     try {
-      const response = await axios.post('/api/v1/channels', addNewChannel, {
+     await axios.post('/api/v1/channels', addNewChannel, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setNewChannel(response.data);
       handleClose();
     } catch (error) {
       console.error(error);
