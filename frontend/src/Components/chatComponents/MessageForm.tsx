@@ -35,7 +35,7 @@ const MessageForm = () => {
           input: {
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton sx={{m: 0, p: 0}} color='info' type='submit' ><SendIcon /></IconButton>
+                <IconButton sx={{m: 0, p: 0}} color='info' type='submit' ><SendIcon sx={{p: 0}}/></IconButton>
               </InputAdornment>
             ),
           }

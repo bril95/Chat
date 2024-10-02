@@ -1,7 +1,9 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { List, ListItemButton, ListItemText } from "@mui/material";
+import { useEffect, useState } from "react";
+import { List, ListItemButton, ListItemText, IconButton, ListItem, Box } from "@mui/material";
 import channelStore from "../../store/channelStore";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import PopoverMenu from "../common/Popover";
 
 interface Channel {
   id: string;
@@ -34,6 +36,18 @@ const ChannelsRender = ({ token }: { token: string }) => {
     requestData();
   }, [token, setNewChannel]);
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClosePopover = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
   return (
     <>
       {getAllChannels.length > 0 && (
@@ -48,9 +62,45 @@ const ChannelsRender = ({ token }: { token: string }) => {
           }}
         >
           {getAllChannels.map((el) => (
-            <ListItemButton key={el.id} onClick={() => handleClickChannel(el)}>
-              <ListItemText primary={el.name} />
-            </ListItemButton>
+            <ListItem key={el.id}>
+              <ListItemButton
+                sx={{
+                  m: 0,
+                  p: 0,
+                }}
+                onClick={() => handleClickChannel(el)}
+              >
+                <ListItemText primary={el.name} />
+              </ListItemButton>
+              {el.removable === false ? <></> :
+              <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                m: 0,
+                p: 0,
+                justifyContent: 'right',
+                width: 'auto',
+              }}
+            >
+              <IconButton
+                sx={{
+                  m: 0,
+                  p: 0,
+                }}
+                color="info"
+                onClick={handleOpenPopover}
+              >
+                <ChevronRightIcon sx={{ p: 0 }} />
+              </IconButton>
+              <PopoverMenu
+                open={open}
+                anchorEl={anchorEl}
+                handleClosePopover={handleClosePopover}
+              />
+            </Box>
+              }
+            </ListItem>
           ))}
         </List>
       )}

@@ -50,7 +50,7 @@ const ChatMainPage = () => {
             alignItems: 'center',
           }}>
             <Typography variant="h5">{t('chatMainPage.channels')}</Typography>
-            <IconButton sx={{m: 0, p: 0}} color='info' onClick={handleOpenAddChannel}><AddCircleOutlineIcon aria-hidden="false" /></IconButton>
+            <IconButton sx={{m: 0, p: 0}} color='info' onClick={handleOpenAddChannel}><AddCircleOutlineIcon aria-hidden="false" sx={{p: 0}}/></IconButton>
             <AddChannel open={open} handleClose ={() => handleCloseAddChannel()}/>
           </Box>
           <ChannelsRender token={token} />
