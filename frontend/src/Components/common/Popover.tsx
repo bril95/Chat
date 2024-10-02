@@ -1,5 +1,7 @@
 import { Popover, List, ListItemButton, ListItem } from "@mui/material";
 import { useTranslation } from 'react-i18next';
+import RenameChannel from "../chatComponents/RenameChannel";
+import { useState } from "react";
 
 interface PopoverMenuProps {
   open: boolean;
@@ -9,11 +11,17 @@ interface PopoverMenuProps {
 
 const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) => {
   const { t } = useTranslation();
+  const [openRenameChannel, setOpenRenameChannel] = useState(false);
 
-  const handleRename = () => {
-    console.log('Rename Channel')
+  const handleOpenRenameChannel = () => {
+    setOpenRenameChannel(true);
   }
-  
+
+  const handleCloseRenameChannel = () => {
+    setOpenRenameChannel(false);
+  }
+
+
   const handleDelete = () => {
     console.log('Delete Channel')
   }
@@ -34,7 +42,7 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) =
     >
       <List>
         <ListItem sx={{p: 0}}>
-          <ListItemButton onClick={handleRename}>
+          <ListItemButton onClick={handleOpenRenameChannel}>
             {t('modalWindows.renameChannel.rename')}
           </ListItemButton>
         </ListItem>
@@ -44,6 +52,7 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) =
           </ListItemButton>
         </ListItem>
       </List>
+      <RenameChannel open={openRenameChannel} handleClose ={() => handleCloseRenameChannel()} />
     </Popover>
   );
 };
