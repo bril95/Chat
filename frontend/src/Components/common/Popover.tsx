@@ -2,6 +2,7 @@ import { Popover, List, ListItemButton, ListItem } from "@mui/material";
 import { useTranslation } from 'react-i18next';
 import RenameChannel from "../chatComponents/RenameChannel";
 import { useState } from "react";
+import DeleteChannel from "../chatComponents/DeleteChannel";
 
 interface PopoverMenuProps {
   open: boolean;
@@ -12,6 +13,7 @@ interface PopoverMenuProps {
 const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) => {
   const { t } = useTranslation();
   const [openRenameChannel, setOpenRenameChannel] = useState(false);
+  const [openDeleteChannel, setOpenDeleteChannel] = useState(false);
 
   const handleOpenRenameChannel = () => {
     setOpenRenameChannel(true);
@@ -21,9 +23,12 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) =
     setOpenRenameChannel(false);
   }
 
+  const handleOpenDeleteChannel = () => {
+    setOpenDeleteChannel(true);
+  }
 
-  const handleDelete = () => {
-    console.log('Delete Channel')
+  const handleCloseDeleteChannel = () => {
+    setOpenDeleteChannel(false);
   }
 
   return (
@@ -47,12 +52,13 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) =
           </ListItemButton>
         </ListItem>
         <ListItem sx={{p: 0}}>
-          <ListItemButton onClick={handleDelete}>
+          <ListItemButton onClick={handleOpenDeleteChannel}>
             {t('modalWindows.deleteChannel.delete')}
           </ListItemButton>
         </ListItem>
       </List>
       <RenameChannel open={openRenameChannel} handleClose ={() => handleCloseRenameChannel()} />
+      <DeleteChannel open={openDeleteChannel} handleClose ={() => handleCloseDeleteChannel()} />
     </Popover>
   );
 };
