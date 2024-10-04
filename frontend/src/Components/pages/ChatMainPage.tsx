@@ -20,6 +20,7 @@ const ChatMainPage = () => {
 
   const getCurrentChannel = channelStore((store) => store.currentChannel);
   const getAllMessages = messageStore((store) => store.allMessages);
+  const currentChannelID = channelStore((store) => store.currentChannel.id);
 
   const [open, setOpen] = useState(false);
   const handleOpenAddChannel = () => {
@@ -67,7 +68,7 @@ const ChatMainPage = () => {
             alignItems: 'left',
           }}>
             <Typography variant="body1">{getCurrentChannel.name}</Typography>
-            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.length })}</Typography>
+            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.filter((el) => el.channelId === currentChannelID).length })}</Typography>
           </Box>
           <Box sx={{
             display: 'flex',

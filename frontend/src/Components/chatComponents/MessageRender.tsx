@@ -2,10 +2,12 @@ import axios from "axios";
 import { useEffect } from "react";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import messageStore from "../../store/messageStore";
+import channelStore from "../../store/channelStore";
 
 const MessageRender = ({ token }: { token: string }) => {
   const setAllMessages = messageStore((store) => store.setMessages);
   const getAllMessages = messageStore((store) => store.allMessages);
+  const currentChannelID = channelStore((store) => store.currentChannel.id);
 
   useEffect(() => {
     const requestData = async () => {
@@ -35,7 +37,9 @@ const MessageRender = ({ token }: { token: string }) => {
             '& ul': { padding: 0 },
           }}
         >
-          {getAllMessages.map((el) => (
+          {getAllMessages
+            .filter((el) => el.channelId === currentChannelID)
+            .map((el) => (
             <ListItemButton key={el.id}>
               <ListItemText primary={`${el.username}: ${el.body}`} />
             </ListItemButton>
