@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import userStore from '../../store/userStore';
 import channelStore from '../../store/channelStore';
+import { useState, useEffect } from 'react';
 
 interface RenameChannelProps {
   open: boolean;
@@ -13,6 +14,11 @@ export default function RenameChannel({ open, handleClose }: RenameChannelProps)
   const { t } = useTranslation();
   const token = userStore((store) => store.token);
   const currentChannelPopoverChannel = channelStore((store) => store.currentChannelPopover)
+  const [channelName, setChannelName] = useState(currentChannelPopoverChannel.name);
+
+  useEffect(() => {
+    setChannelName(currentChannelPopoverChannel.name);
+  }, [currentChannelPopoverChannel]);
 
   return (
     <Dialog
@@ -42,6 +48,8 @@ export default function RenameChannel({ open, handleClose }: RenameChannelProps)
         name="renameChannel"
         type="text"
         variant="standard"
+        value={channelName}
+        onChange={(e) => setChannelName(e.target.value)}
       />
     </DialogContent>
     <DialogActions>
