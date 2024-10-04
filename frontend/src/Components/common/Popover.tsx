@@ -65,8 +65,8 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover, currentChannelPopover
           </ListItemButton>
         </ListItem>
       </List>
-      <RenameChannel open={openRenameChannel} handleClose ={() => handleCloseRenameChannel()} currentChannelPopoverChannel={currentChannelPopoverChannel}/>
-      <DeleteChannel open={openDeleteChannel} handleClose ={() => handleCloseDeleteChannel()} currentChannelPopoverChannel={currentChannelPopoverChannel}/>
+      <RenameChannel open={openRenameChannel} handleClose ={() => handleCloseRenameChannel()} />
+      <DeleteChannel open={openDeleteChannel} handleClose ={() => handleCloseDeleteChannel()} />
     </Popover>
   );
 };

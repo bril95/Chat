@@ -9,14 +9,17 @@ interface Channel {
 type Store = {
   allChannels: Channel[];
   currentChannel: Channel;
+  currentChannelPopover: Channel;
   setCurrentChannel: (channel: Channel) => void;
   setChannels: (newChannels: Channel[]) => void;
+  setCurrentChannelPopover: (channel: Channel) => void;
 }
 
 const channelStore = create<Store>()(
   (set) => ({
     allChannels: [],
     currentChannel: {} as Channel,
+    currentChannelPopover: {} as Channel,
     setCurrentChannel: (currentChannel: Channel) => set({ currentChannel }),
     setChannels: (channels) => {
       set({ allChannels: channels });
@@ -24,6 +27,7 @@ const channelStore = create<Store>()(
         set({ currentChannel: channels[0] });
       }
     },
+    setCurrentChannelPopover: (currentChannelPopover: Channel) => set({ currentChannelPopover }),
   }
 ));
 

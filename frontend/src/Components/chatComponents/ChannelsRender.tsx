@@ -15,6 +15,7 @@ const ChannelsRender = ({ token }: { token: string }) => {
   const setNewChannel = channelStore((store) => store.setChannels);
   const getAllChannels = channelStore((store) => store.allChannels);
   const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
+  const setCurrentChannelPopover = channelStore((store) => store.setCurrentChannelPopover)
 
   const handleClickChannel = (el: Channel) => {
     setCurrentChannel(el);
@@ -38,8 +39,9 @@ const ChannelsRender = ({ token }: { token: string }) => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleOpenPopover = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenPopover = (event: React.MouseEvent<HTMLElement>, el: Channel) => {
     setAnchorEl(event.currentTarget);
+    setCurrentChannelPopover(el)
   };
 
   const handleClosePopover = () => {
@@ -89,7 +91,7 @@ const ChannelsRender = ({ token }: { token: string }) => {
                   p: 0,
                 }}
                 color="info"
-                onClick={(event) => handleOpenPopover(event)}
+                onClick={(event) => handleOpenPopover(event, el)}
               >
                 <ChevronRightIcon sx={{ p: 0 }} />
               </IconButton>
