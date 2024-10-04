@@ -1,16 +1,31 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import userStore from '../../store/userStore';
+
+interface Channel {
+  id: string;
+  name: string;
+  removable: boolean;
+}
 
 interface RenameChannelProps {
   open: boolean;
   handleClose: () => void;
+  currentChannelPopoverChannel: Channel | null;
+  
 }
 
-export default function DeleteChannel({ open, handleClose }: RenameChannelProps) {
+export default function DeleteChannel({ open, handleClose,currentChannelPopoverChannel }: RenameChannelProps) {
   const { t } = useTranslation();
+  const token = userStore((store) => store.token);
 
   const deleteChannel = () => {
-    console.log('канал удален');
+    axios.delete(`/api/v1/channels/${currentChannelPopoverChannel?.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     handleClose();
   }
 

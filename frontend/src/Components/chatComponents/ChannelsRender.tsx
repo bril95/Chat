@@ -89,7 +89,7 @@ const ChannelsRender = ({ token }: { token: string }) => {
                   p: 0,
                 }}
                 color="info"
-                onClick={handleOpenPopover}
+                onClick={(event) => handleOpenPopover(event)}
               >
                 <ChevronRightIcon sx={{ p: 0 }} />
               </IconButton>
@@ -97,6 +97,7 @@ const ChannelsRender = ({ token }: { token: string }) => {
                 open={open}
                 anchorEl={anchorEl}
                 handleClosePopover={handleClosePopover}
+                currentChannelPopoverChannel={el}
               />
             </Box>
               }

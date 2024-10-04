@@ -36,7 +36,7 @@ const MessageRender = ({ token }: { token: string }) => {
           }}
         >
           {getAllMessages.map((el) => (
-            <ListItemButton key={el.id} onClick={() => console.log(el)}>
+            <ListItemButton key={el.id}>
               <ListItemText primary={`${el.username}: ${el.body}`} />
             </ListItemButton>
           ))}

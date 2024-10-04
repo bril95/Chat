@@ -4,13 +4,20 @@ import RenameChannel from "../chatComponents/RenameChannel";
 import { useState } from "react";
 import DeleteChannel from "../chatComponents/DeleteChannel";
 
+interface Channel {
+  id: string;
+  name: string;
+  removable: boolean;
+}
+
 interface PopoverMenuProps {
   open: boolean;
   anchorEl: HTMLElement | null;
   handleClosePopover: () => void;
+  currentChannelPopoverChannel: Channel | null;
 }
 
-const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) => {
+const PopoverMenu = ({ open, anchorEl, handleClosePopover, currentChannelPopoverChannel }: PopoverMenuProps) => {
   const { t } = useTranslation();
   const [openRenameChannel, setOpenRenameChannel] = useState(false);
   const [openDeleteChannel, setOpenDeleteChannel] = useState(false);
@@ -30,6 +37,7 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) =
   const handleCloseDeleteChannel = () => {
     setOpenDeleteChannel(false);
   }
+
 
   return (
     <Popover
@@ -57,8 +65,8 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) =
           </ListItemButton>
         </ListItem>
       </List>
-      <RenameChannel open={openRenameChannel} handleClose ={() => handleCloseRenameChannel()} />
-      <DeleteChannel open={openDeleteChannel} handleClose ={() => handleCloseDeleteChannel()} />
+      <RenameChannel open={openRenameChannel} handleClose ={() => handleCloseRenameChannel()} currentChannelPopoverChannel={currentChannelPopoverChannel}/>
+      <DeleteChannel open={openDeleteChannel} handleClose ={() => handleCloseDeleteChannel()} currentChannelPopoverChannel={currentChannelPopoverChannel}/>
     </Popover>
   );
 };
