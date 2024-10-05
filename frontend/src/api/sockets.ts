@@ -6,6 +6,8 @@ const socket = io();
 const setNewChannel = channelStore((store) => store.setNewChannel);
 const setAllChannels = channelStore((store) => store.setAllChannels);
 const allChannels = channelStore((store) => store.allChannels);
+const currentChannel = channelStore((store) => store.currentChannel);
+const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
 
 const handleSocketEvents = () => {
   socket.on('newChannel', (newChannel) => {
@@ -17,9 +19,23 @@ const handleSocketEvents = () => {
     setAllChannels(allNewChannels);
   });
 
+  socket.on('renameChannel', (payload) => {
+    const allNewChannels = allChannels.map((el) => {
+      if (el.id === payload.id) {
+        el = payload;
+      }
+      if(currentChannel.id === payload.id) {
+        setCurrentChannel(payload);
+      }
+      return el;
+    })
+    setAllChannels(allNewChannels)
+  });
+
   return () => {
-    socket.off('newChannel')
-    socket.off('removeChannel')
+    socket.off('newChannel');
+    socket.off('removeChannel');
+    socket.off('renameChannel');
   };
 }
 
