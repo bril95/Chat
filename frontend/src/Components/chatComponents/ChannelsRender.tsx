@@ -114,7 +114,6 @@ const ChannelsRender = ({ token }: { token: string }) => {
               open={open}
               anchorEl={anchorEl}
               handleClosePopover={handleClosePopover}
-              currentChannelPopoverChannel={el}
             />
           </Box>
             }

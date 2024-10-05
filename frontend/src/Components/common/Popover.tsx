@@ -4,20 +4,13 @@ import RenameChannel from "../chatComponents/RenameChannel";
 import { useState } from "react";
 import DeleteChannel from "../chatComponents/DeleteChannel";
 
-interface Channel {
-  id: string;
-  name: string;
-  removable: boolean;
-}
-
 interface PopoverMenuProps {
   open: boolean;
   anchorEl: HTMLElement | null;
   handleClosePopover: () => void;
-  currentChannelPopoverChannel: Channel | null;
 }
 
-const PopoverMenu = ({ open, anchorEl, handleClosePopover, currentChannelPopoverChannel }: PopoverMenuProps) => {
+const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) => {
   const { t } = useTranslation();
   const [openRenameChannel, setOpenRenameChannel] = useState(false);
   const [openDeleteChannel, setOpenDeleteChannel] = useState(false);

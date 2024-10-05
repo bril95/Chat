@@ -9,15 +9,19 @@ interface Message {
 
 type Store = {
   allMessages: Message[];
-  setMessages: (newMessages: Message[]) => void;
+  setMessages: (messages: Message[]) => void;
+  setNewMessage: (newMessage: Message) => void;
 }
 
 const messageStore = create<Store>()(
-  (set) => ({
+  (set, get) => ({
     allMessages: [],
     setMessages: (messages) => {
       set({ allMessages: messages });
     },
+    setNewMessage: (newMessage) => {
+      set({ allMessages: [...get().allMessages, newMessage] })
+    }
   }
 ));
 

@@ -3,11 +3,15 @@ import { useEffect } from "react";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import messageStore from "../../store/messageStore";
 import channelStore from "../../store/channelStore";
+import { io } from 'socket.io-client';
+
+const socket = io();
 
 const MessageRender = ({ token }: { token: string }) => {
   const setAllMessages = messageStore((store) => store.setMessages);
   const getAllMessages = messageStore((store) => store.allMessages);
   const currentChannelID = channelStore((store) => store.currentChannel.id);
+  const setNewMessage = messageStore((store) => store.setNewMessage)
 
   useEffect(() => {
     const requestData = async () => {
@@ -24,6 +28,15 @@ const MessageRender = ({ token }: { token: string }) => {
     };
     requestData();
   }, [token, setAllMessages]);
+
+  useEffect(() => {
+    socket.on('newMessage', (payload) => {
+      setNewMessage(payload)
+    });
+    return () => {
+      socket.off('newMessage')
+    };
+  },[setNewMessage])
 
   return (
     <>

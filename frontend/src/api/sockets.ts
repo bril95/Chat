@@ -1,5 +1,6 @@
 import { io } from 'socket.io-client';
 import channelStore from '../store/channelStore';
+import messageStore from '../store/messageStore';
 
 const socket = io();
 
@@ -8,6 +9,7 @@ const setAllChannels = channelStore((store) => store.setAllChannels);
 const allChannels = channelStore((store) => store.allChannels);
 const currentChannel = channelStore((store) => store.currentChannel);
 const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
+const setNewMessage = messageStore((store) => store.setNewMessage);
 
 const handleSocketEvents = () => {
   socket.on('newChannel', (newChannel) => {
@@ -32,10 +34,15 @@ const handleSocketEvents = () => {
     setAllChannels(allNewChannels)
   });
 
+  socket.on('newMessage', (payload) => {
+    setNewMessage(payload)
+  });
+
   return () => {
     socket.off('newChannel');
     socket.off('removeChannel');
     socket.off('renameChannel');
+    socket.off('newMessage')
   };
 }
 
