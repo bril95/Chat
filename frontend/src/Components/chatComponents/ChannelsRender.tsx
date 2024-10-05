@@ -4,6 +4,7 @@ import { List, ListItemButton, ListItemText, IconButton, ListItem, Box } from "@
 import channelStore from "../../store/channelStore";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from "../common/Popover";
+import { io } from 'socket.io-client';
 
 interface Channel {
   id: string;
@@ -11,8 +12,11 @@ interface Channel {
   removable: boolean;
 }
 
+const socket = io();
+
 const ChannelsRender = ({ token }: { token: string }) => {
-  const setNewChannel = channelStore((store) => store.setChannels);
+  const setNewChannel = channelStore((store) => store.setNewChannel);
+  const setAllChannels = channelStore((store) => store.setAllChannels);
   const getAllChannels = channelStore((store) => store.allChannels);
   const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
   const setCurrentChannelPopover = channelStore((store) => store.setCurrentChannelPopover)
@@ -29,13 +33,14 @@ const ChannelsRender = ({ token }: { token: string }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setNewChannel(response.data);
+        setAllChannels(response.data);
       } catch (error) {
         console.error(error);
       }
     };
     requestData();
-  }, [token, setNewChannel]);
+
+  }, [token, setAllChannels]);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -49,6 +54,16 @@ const ChannelsRender = ({ token }: { token: string }) => {
   };
 
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    socket.on('newChannel', (newChannel) => {
+      setNewChannel(newChannel)
+    });
+  
+    return () => {
+      socket.off('newChannel')
+    };
+  },[getAllChannels, setNewChannel])
 
   return (
     <>
@@ -65,45 +80,45 @@ const ChannelsRender = ({ token }: { token: string }) => {
         >
           {getAllChannels.map((el) => (
             <ListItem key={el.id}>
-              <ListItemButton
-                sx={{
-                  m: 0,
-                  p: 0,
-                }}
-                onClick={() => handleClickChannel(el)}
-              >
-                <ListItemText primary={el.name} />
-              </ListItemButton>
-              {el.removable === false ? <></> :
-              <Box
+            <ListItemButton
               sx={{
-                display: 'flex',
-                alignItems: 'center',
                 m: 0,
                 p: 0,
-                justifyContent: 'right',
-                width: 'auto',
               }}
+              onClick={() => handleClickChannel(el)}
             >
-              <IconButton
-                sx={{
-                  m: 0,
-                  p: 0,
-                }}
-                color="info"
-                onClick={(event) => handleOpenPopover(event, el)}
-              >
-                <ChevronRightIcon sx={{ p: 0 }} />
-              </IconButton>
-              <PopoverMenu
-                open={open}
-                anchorEl={anchorEl}
-                handleClosePopover={handleClosePopover}
-                currentChannelPopoverChannel={el}
-              />
-            </Box>
-              }
-            </ListItem>
+              <ListItemText primary={el.name} />
+            </ListItemButton>
+            {el.removable === false ? null :
+            <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              m: 0,
+              p: 0,
+              justifyContent: 'right',
+              width: 'auto',
+            }}
+          >
+            <IconButton
+              sx={{
+                m: 0,
+                p: 0,
+              }}
+              color="info"
+              onClick={(event) => handleOpenPopover(event, el)}
+            >
+              <ChevronRightIcon sx={{ p: 0 }} />
+            </IconButton>
+            <PopoverMenu
+              open={open}
+              anchorEl={anchorEl}
+              handleClosePopover={handleClosePopover}
+              currentChannelPopoverChannel={el}
+            />
+          </Box>
+            }
+          </ListItem>
           ))}
         </List>
       )}
