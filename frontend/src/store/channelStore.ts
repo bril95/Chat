@@ -22,13 +22,12 @@ const channelStore = create<Store>()(
     currentChannel: {} as Channel,
     currentChannelPopover: {} as Channel,
     setCurrentChannel: (currentChannel) => set({ currentChannel }),
-    setAllChannels: (allChannels) => set({ allChannels }),
-    setNewChannel: (newChannel) => {
-      set({ allChannels: [...get().allChannels, newChannel] });
+    setAllChannels: (allChannels) => {
+      set({ allChannels });
       if (get().allChannels.length > 0) {
         set({ currentChannel: get().allChannels[0] });
-      }
-    },
+      }},
+    setNewChannel: (newChannel) => set({ allChannels: [...get().allChannels, newChannel] }),
     setCurrentChannelPopover: (currentChannelPopover) => set({ currentChannelPopover }),
   }
 ));

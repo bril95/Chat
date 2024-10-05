@@ -63,7 +63,7 @@ const ChannelsRender = ({ token }: { token: string }) => {
     return () => {
       socket.off('newChannel')
     };
-  },[getAllChannels, setNewChannel])
+  },[setNewChannel])
 
   return (
     <>
