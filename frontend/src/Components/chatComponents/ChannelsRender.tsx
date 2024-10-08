@@ -5,12 +5,7 @@ import channelStore from "../../store/channelStore";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from "../common/Popover";
 import { io } from 'socket.io-client';
-
-interface Channel {
-  id: string;
-  name: string;
-  removable: boolean;
-}
+import Channel from "../../store/interface";
 
 const socket = io();
 

@@ -1,10 +1,5 @@
-import { create } from 'zustand'
-
-interface Channel {
-  id: string;
-  name: string;
-  removable: boolean;
-}
+import { create } from 'zustand';
+import Channel from './interface';
 
 type Store = {
   allChannels: Channel[];

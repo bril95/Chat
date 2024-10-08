@@ -1,11 +1,5 @@
-import { create } from 'zustand'
-
-interface Message {
-  id: string;
-  body: string;
-  channelId: string;
-  username: string;
-}
+import { create } from 'zustand';
+import Message from './interface';
 
 type Store = {
   allMessages: Message[];

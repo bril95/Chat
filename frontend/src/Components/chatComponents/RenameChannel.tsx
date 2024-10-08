@@ -5,15 +5,11 @@ import userStore from '../../store/userStore';
 import channelStore from '../../store/channelStore';
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-
-interface RenameChannelProps {
-  open: boolean;
-  handleClose: () => void;
-}
+import ChannelProps from '../../store/interface';
 
 const socket = io();
 
-export default function RenameChannel({ open, handleClose }: RenameChannelProps) {
+export default function RenameChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const token = userStore((store) => store.token);
   const currentChannelPopoverChannel = channelStore((store) => store.currentChannelPopover)

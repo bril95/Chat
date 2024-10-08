@@ -5,15 +5,11 @@ import { io } from 'socket.io-client';
 import axios from 'axios';
 import userStore from '../../store/userStore';
 import channelStore from '../../store/channelStore';
-
-interface RenameChannelProps {
-  open: boolean;
-  handleClose: () => void; 
-}
+import ChannelProps from '../../store/interface';
 
 const socket = io();
 
-export default function DeleteChannel({ open, handleClose }: RenameChannelProps) {
+export default function DeleteChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const token = userStore((store) => store.token);
   const currentChannelPopoverChannel = channelStore((store) => store.currentChannelPopover);
