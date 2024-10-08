@@ -3,19 +3,9 @@ import LoginPage from './Components/pages/LoginPage';
 import NotFound from './Components/pages/NotFoundPage';
 import SignUpPage from './Components/pages/SignUpPage';
 import ChatMainPage from './Components/pages/ChatMainPage'
-import routes from './api/routes';
-import handleSocketEvents from './api/sockets';
-import { useEffect } from 'react';
+import routes from './routes';
 
 function App() {
-  // useEffect(() => {
-  //   const cleanupSocketEvents = handleSocketEvents();
-
-  //   return () => {
-  //     cleanupSocketEvents();
-  //   };
-  // }, [])
-
   return (
     <BrowserRouter>
       <Routes>

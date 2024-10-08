@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
-import routes from '../../api/routes';
+import routes from '../../routes';
 import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
