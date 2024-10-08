@@ -3,7 +3,7 @@ import LoginPage from './Components/pages/LoginPage';
 import NotFound from './Components/pages/NotFoundPage';
 import SignUpPage from './Components/pages/SignUpPage';
 import ChatMainPage from './Components/pages/ChatMainPage'
-import routes from './api/routes';
+import routes from './routes';
 
 function App() {
   return (
