@@ -32,7 +32,7 @@ export default function DeleteChannel({ open, handleClose }: RenameChannelProps)
         Authorization: `Bearer ${token}`,
       },
     });
-    if (currentChannelPopoverChannel.id === currentChanne.id && defaultsChannel !== null) { // перенести проверку на null
+    if (currentChannelPopoverChannel.id === currentChanne.id && defaultsChannel !== null) {
       setCurrentChannel(defaultsChannel);
     }
     handleClose();
