@@ -12,11 +12,7 @@ import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-
-interface MyForm {
-  username: string;
-  password: string;
-}
+import { MyForm } from '../../store/interface';
 
 const LoginPage = () => {
   const { t } = useTranslation();

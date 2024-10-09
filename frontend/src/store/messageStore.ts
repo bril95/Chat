@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import Message from './interface';
+import { Message } from './interface';
 
 type Store = {
   allMessages: Message[];

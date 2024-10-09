@@ -11,12 +11,7 @@ import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
 import userStore from '../../store/userStore';
-
-interface MyForm {
-  username: string;
-  password: string;
-  confirmPassword: string;
-}
+import { MyForm } from '../../store/interface';
 
 const SignUpPage = () => {
   const { t } = useTranslation();

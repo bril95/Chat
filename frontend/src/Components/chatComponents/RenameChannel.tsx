@@ -5,7 +5,7 @@ import userStore from '../../store/userStore';
 import channelStore from '../../store/channelStore';
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-import ChannelProps from '../../store/interface';
+import { ChannelProps } from '../../store/interface';
 
 const socket = io();
 

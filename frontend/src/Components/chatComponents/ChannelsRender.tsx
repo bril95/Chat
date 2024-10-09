@@ -5,12 +5,11 @@ import channelStore from "../../store/channelStore";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from "../common/Popover";
 import { io } from 'socket.io-client';
-import Channel from "../../store/interface";
+import { Channel } from "../../store/interface";
 
 const socket = io();
 
 const ChannelsRender = ({ token }: { token: string }) => {
-  const setNewChannel = channelStore((store) => store.setNewChannel);
   const setAllChannels = channelStore((store) => store.setAllChannels);
   const getAllChannels = channelStore((store) => store.allChannels);
   const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
@@ -52,13 +51,13 @@ const ChannelsRender = ({ token }: { token: string }) => {
 
   useEffect(() => {
     socket.on('newChannel', (newChannel) => {
-      setNewChannel(newChannel)
+      setAllChannels(newChannel)
     });
   
     return () => {
       socket.off('newChannel')
     };
-  },[setNewChannel])
+  },[setAllChannels])
 
   return (
     <>

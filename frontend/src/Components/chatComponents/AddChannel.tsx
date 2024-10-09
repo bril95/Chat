@@ -1,19 +1,10 @@
-import Button from '@mui/material/Button';
 import axios from 'axios';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import userStore from '../../store/userStore';
+import { ChannelProps } from '../../store/interface';
 
-interface AddChannelProps {
-  open: boolean;
-  handleClose: () => void;
-}
-
-export default function AddChannel({ open, handleClose }: AddChannelProps) {
+export default function AddChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const token = userStore((store) => store.token);
 
