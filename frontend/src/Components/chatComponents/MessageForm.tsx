@@ -2,15 +2,15 @@ import { Box, TextField, IconButton, InputAdornment } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
-import userStore from '../../store/userStore';
-import channelStore from '../../store/channelStore';
+import { useGetToken, useGetUsername } from '../../store/userStoreActions';
+import { useGetCurrentChannel } from "../../store/channelStoreActions";
 
 const MessageForm = () => {
   const { t } = useTranslation();
 
-  const token = userStore((store) => store.token);
-  const username = userStore((store) => store.username);
-  const getCurrentChannel = channelStore((store) => store.currentChannel);
+  const token = useGetToken();
+  const username = useGetUsername();
+  const getCurrentChannel = useGetCurrentChannel();
 
   const sendMessage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

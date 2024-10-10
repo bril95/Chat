@@ -4,23 +4,22 @@ import Footer from '../common/Footer';
 import { useTranslation } from 'react-i18next';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import MessageForm from '../chatComponents/MessageForm';
-import userStore from '../../store/userStore';
+import { useGetToken } from '../../store/userStoreActions';
 import ChannelsRender from '../chatComponents/ChannelsRender';
 import AddChannel from '../chatComponents/AddChannel';
 import { useState } from 'react';
-import channelStore from "../../store/channelStore";
 import { Navigate } from 'react-router-dom';
 import routes from '../../routes';
 import MessageRender from '../chatComponents/MessageRender';
-import messageStore from '../../store/messageStore';
+import { useGetAllMessages } from "../../store/mesageStoreActions";
+import { useGetCurrentChannel } from "../../store/channelStoreActions";
 
 const ChatMainPage = () => {
   const { t } = useTranslation();
-  const token = userStore((store) => store.token);
+  const token = useGetToken();
 
-  const getCurrentChannel = channelStore((store) => store.currentChannel);
-  const getAllMessages = messageStore((store) => store.allMessages);
-  const currentChannelID = channelStore((store) => store.currentChannel.id);
+  const currentChannel = useGetCurrentChannel();
+  const getAllMessages = useGetAllMessages();
 
   const [open, setOpen] = useState(false);
   const handleOpenAddChannel = () => {
@@ -67,8 +66,8 @@ const ChatMainPage = () => {
             flexDirection: 'column',
             alignItems: 'left',
           }}>
-            <Typography variant="body1">{getCurrentChannel.name}</Typography>
-            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.filter((el) => el.channelId === currentChannelID).length })}</Typography>
+            <Typography variant="body1">{currentChannel.name}</Typography>
+            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.filter((el) => el.channelId === currentChannel.id).length })}</Typography>
           </Box>
           <Box sx={{
             display: 'flex',
