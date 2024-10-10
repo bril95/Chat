@@ -1,10 +1,9 @@
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
-import userStore from '../../store/userStore';
 import channelStore from '../../store/channelStore';
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
+import { editedChannelResponse } from '../../services/api/channelsApi';
 
 interface RenameChannelProps {
   open: boolean;
@@ -15,7 +14,6 @@ const socket = io();
 
 export default function RenameChannel({ open, handleClose }: RenameChannelProps) {
   const { t } = useTranslation();
-  const token = userStore((store) => store.token);
   const currentChannelPopoverChannel = channelStore((store) => store.currentChannelPopover)
   const [channelName, setChannelName] = useState(currentChannelPopoverChannel.name);
   const allChannels = channelStore((store) => store.allChannels);
@@ -55,11 +53,7 @@ export default function RenameChannel({ open, handleClose }: RenameChannelProps)
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const editedChannel = { name: formData.get('renameChannel') };
-        axios.patch(`/api/v1/channels/${currentChannelPopoverChannel?.id}`, editedChannel, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        editedChannelResponse(currentChannelPopoverChannel.id, editedChannel)
         handleClose();
       },
     }}

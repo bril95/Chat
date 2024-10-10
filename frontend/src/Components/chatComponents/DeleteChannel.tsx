@@ -2,9 +2,8 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogConten
 import { useTranslation } from 'react-i18next';
 import { useEffect } from "react";
 import { io } from 'socket.io-client';
-import axios from 'axios';
-import userStore from '../../store/userStore';
 import channelStore from '../../store/channelStore';
+import { deleteChannelResponse } from '../../services/api/channelsApi';
 
 interface RenameChannelProps {
   open: boolean;
@@ -15,17 +14,12 @@ const socket = io();
 
 export default function DeleteChannel({ open, handleClose }: RenameChannelProps) {
   const { t } = useTranslation();
-  const token = userStore((store) => store.token);
   const currentChannelPopoverChannel = channelStore((store) => store.currentChannelPopover);
   const allChannels = channelStore((store) => store.allChannels);
   const setAllChannels = channelStore((store) => store.setAllChannels);
 
-  const deleteChannel = () => {
-    axios.delete(`/api/v1/channels/${currentChannelPopoverChannel?.id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+  const deleteChannel = async () => {
+    await deleteChannelResponse(currentChannelPopoverChannel?.id)
     handleClose();
   }
 

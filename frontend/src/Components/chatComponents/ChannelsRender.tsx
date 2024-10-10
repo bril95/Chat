@@ -1,10 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { List, ListItemButton, ListItemText, IconButton, ListItem, Box } from "@mui/material";
 import channelStore from "../../store/channelStore";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from "../common/Popover";
 import { io } from 'socket.io-client';
+import { getChannelsResponse } from "../../services/api/channelsApi";
 
 interface Channel {
   id: string;
@@ -28,12 +28,8 @@ const ChannelsRender = ({ token }: { token: string }) => {
   useEffect(() => {
     const requestData = async () => {
       try {
-        const response = await axios.get('/api/v1/channels', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setAllChannels(response.data);
+        const response = await getChannelsResponse();
+        setAllChannels(response);
       } catch (error) {
         console.error(error);
       }
