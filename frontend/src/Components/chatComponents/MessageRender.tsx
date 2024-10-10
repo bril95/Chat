@@ -2,15 +2,15 @@ import axios from "axios";
 import { useEffect } from "react";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import messageStore from "../../store/messageStore";
-import channelStore from "../../store/channelStore";
 import { io } from 'socket.io-client';
+import { useGetCurrentChannel } from "../../store/channelStoreActions";
 
 const socket = io();
 
 const MessageRender = ({ token }: { token: string }) => {
   const setAllMessages = messageStore((store) => store.setMessages);
   const getAllMessages = messageStore((store) => store.allMessages);
-  const currentChannelID = channelStore((store) => store.currentChannel.id);
+  const currentChannelID = useGetCurrentChannel().id;
   const setNewMessage = messageStore((store) => store.setNewMessage)
 
   useEffect(() => {

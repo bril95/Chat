@@ -2,22 +2,23 @@ import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } 
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import userStore from '../../store/userStore';
-import channelStore from '../../store/channelStore';
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { ChannelProps } from '../../store/interface';
+import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useGetCurrentChannelPopover, useGetCurrentChannel } from "../../store/channelStoreActions";
 
 const socket = io();
 
 export default function RenameChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const token = userStore((store) => store.token);
-  const currentChannelPopoverChannel = channelStore((store) => store.currentChannelPopover)
+  const currentChannelPopoverChannel = useGetCurrentChannelPopover();
+  const allChannels = useGetAllChannels();
+  const setAllChannels = useSetAllChannels();
+  const currentChannel = useGetCurrentChannel();
+  const setCurrentChannel = useSetCurrentChannel();
+
   const [channelName, setChannelName] = useState(currentChannelPopoverChannel.name);
-  const allChannels = channelStore((store) => store.allChannels);
-  const setAllChannels = channelStore((store) => store.setAllChannels);
-  const currentChannel = channelStore((store) => store.currentChannel);
-  const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
 
   useEffect(() => {
     setChannelName(currentChannelPopoverChannel.name);

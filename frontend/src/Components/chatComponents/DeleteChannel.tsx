@@ -4,17 +4,17 @@ import { useEffect } from "react";
 import { io } from 'socket.io-client';
 import axios from 'axios';
 import userStore from '../../store/userStore';
-import channelStore from '../../store/channelStore';
 import { ChannelProps } from '../../store/interface';
+import { useGetAllChannels, useSetAllChannels, useGetCurrentChannelPopover } from "../../store/channelStoreActions";
 
 const socket = io();
 
 export default function DeleteChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const token = userStore((store) => store.token);
-  const currentChannelPopover = channelStore((store) => store.currentChannelPopover);
-  const allChannels = channelStore((store) => store.allChannels);
-  const setAllChannels = channelStore((store) => store.setAllChannels);
+  const currentChannelPopover = useGetCurrentChannelPopover();
+  const allChannels = useGetAllChannels();
+  const setAllChannels = useSetAllChannels();
 
   const deleteChannel = () => {
     axios.delete(`/api/v1/channels/${currentChannelPopover.id}`, {

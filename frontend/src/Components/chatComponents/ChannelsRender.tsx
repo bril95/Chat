@@ -1,19 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { List, ListItemButton, ListItemText, IconButton, ListItem, Box } from "@mui/material";
-import channelStore from "../../store/channelStore";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from "../common/Popover";
 import { io } from 'socket.io-client';
 import { Channel } from "../../store/interface";
+import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useSetCurrentChannelPopover } from "../../store/channelStoreActions";
 
 const socket = io();
 
 const ChannelsRender = ({ token }: { token: string }) => {
-  const setAllChannels = channelStore((store) => store.setAllChannels);
-  const getAllChannels = channelStore((store) => store.allChannels);
-  const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
-  const setCurrentChannelPopover = channelStore((store) => store.setCurrentChannelPopover)
+  const setAllChannels = useSetAllChannels();
+  const getAllChannels = useGetAllChannels();
+  const setCurrentChannel = useSetCurrentChannel();
+  const setCurrentChannelPopover = useSetCurrentChannelPopover();
 
   const handleClickChannel = (el: Channel) => {
     setCurrentChannel(el);

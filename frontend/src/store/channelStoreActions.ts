@@ -1,31 +1,25 @@
 import channelStore from "./channelStore";
-import { Channel } from "./interface";
 
-// Геттеры
-// export const getAllChannels = () => channelStore((store) => store.allChannels);
-// export const getCurrentChannel = () => channelStore((store) => store.currentChannel);
-// export const getCurrentChannelPopover = () => channelStore((store) => store.currentChannelPopover);
+export const useGetAllChannels = () => {
+  return channelStore((state) => state.allChannels);
+};
 
-// Сеттеры
-// export const setAllChannels = () => (channel: Channel) => {
-//   const set = channelStore((store) => store.setAllChannels);
-//   return set(channel);
-// }
-// export export const setCurrentChannel = (channel: Channel) => {
-//   const set = channelStore((store) => store.setCurrentChannel);
-//   return set(channel);
-// }
-// export const setCurrentChannelPopover = (channel: Channel) => {
-//   const set = channelStore((store) => store.setCurrentChannelPopover);
-//   return set(channel);
-// }
+export const useGetCurrentChannel = () => {
+  return channelStore((state) => state.currentChannel);
+};
 
-// Геттеры
-export const getAllChannels = () => channelStore.getState().allChannels;
-export const getCurrentChannel = () => channelStore.getState().currentChannel;
-export const getCurrentChannelPopover = () => channelStore.getState().currentChannelPopover;
+export const useGetCurrentChannelPopover = () => {
+  return channelStore((state) => state.currentChannelPopover);
+};
 
-// Сеттеры
-export const setAllChannels = (channels: Channel) => channelStore.getState().setAllChannels(channels);
-export const setCurrentChannel = (channel: Channel) => channelStore.getState().setCurrentChannel(channel);
-export const setCurrentChannelPopover = (channel: Channel) => channelStore.getState().setCurrentChannelPopover(channel);
+export const useSetAllChannels = () => {
+  return channelStore((state) => state.setAllChannels);
+};
+
+export const useSetCurrentChannel = () => {
+  return channelStore((state) => state.setCurrentChannel);
+};
+
+export const useSetCurrentChannelPopover = () => {
+  return channelStore((state) => state.setCurrentChannelPopover);
+};

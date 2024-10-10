@@ -8,17 +8,17 @@ import userStore from '../../store/userStore';
 import ChannelsRender from '../chatComponents/ChannelsRender';
 import AddChannel from '../chatComponents/AddChannel';
 import { useState } from 'react';
-import channelStore from "../../store/channelStore";
 import { Navigate } from 'react-router-dom';
 import routes from '../../routes';
 import MessageRender from '../chatComponents/MessageRender';
 import messageStore from '../../store/messageStore';
+import { useGetCurrentChannel } from "../../store/channelStoreActions";
 
 const ChatMainPage = () => {
   const { t } = useTranslation();
   const token = userStore((store) => store.token);
 
-  const getCurrentChannel = channelStore((store) => store.currentChannel);
+  const currentChannel = useGetCurrentChannel();
   const getAllMessages = messageStore((store) => store.allMessages);
 
   const [open, setOpen] = useState(false);
@@ -66,8 +66,8 @@ const ChatMainPage = () => {
             flexDirection: 'column',
             alignItems: 'left',
           }}>
-            <Typography variant="body1">{getCurrentChannel.name}</Typography>
-            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.filter((el) => el.channelId === getCurrentChannel.id).length })}</Typography>
+            <Typography variant="body1">{currentChannel.name}</Typography>
+            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.filter((el) => el.channelId === currentChannel.id).length })}</Typography>
           </Box>
           <Box sx={{
             display: 'flex',
