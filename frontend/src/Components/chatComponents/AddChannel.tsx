@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useTranslation } from 'react-i18next';
-import { postChannelsResponse } from '../../services/api/channelsApi';
+import { postChannelsResponse } from '../../services/api/channelApi';
 
 interface AddChannelProps {
   open: boolean;

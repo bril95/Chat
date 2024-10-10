@@ -4,7 +4,7 @@ import channelStore from "../../store/channelStore";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from "../common/Popover";
 import { io } from 'socket.io-client';
-import { getChannelsResponse } from "../../services/api/channelsApi";
+import { getChannelsResponse } from "../../services/api/channelApi";
 
 interface Channel {
   id: string;

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import channelStore from '../../store/channelStore';
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-import { editedChannelResponse } from '../../services/api/channelsApi';
+import { editedChannelResponse } from '../../services/api/channelApi';
 
 interface RenameChannelProps {
   open: boolean;
