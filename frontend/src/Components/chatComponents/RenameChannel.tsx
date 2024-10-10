@@ -52,7 +52,7 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const editedChannel = { name: formData.get('renameChannel') };
-        axios.patch(`/api/v1/channels/${currentChannelPopoverChannel?.id}`, editedChannel, {
+        axios.patch(`/api/v1/channels/${currentChannelPopoverChannel.id}`, editedChannel, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
