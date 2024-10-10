@@ -1,7 +1,6 @@
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Button, FormHelperText, Box, Link, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import userStore from '../../store/userStore';
@@ -12,6 +11,7 @@ import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
+import { loginUserResponse } from '../../services/api/userApi';
 
 interface MyForm {
   username: string;
@@ -45,9 +45,9 @@ const LoginPage = () => {
 
   const submit: SubmitHandler<MyForm> = async (data) => {
     try {
-      const response = await axios.post('/api/v1/login', data);
-      setUserToken(response.data.token);
-      setUser(response.data.username);
+      const response = await loginUserResponse(data);
+      setUserToken(response.token);
+      setUser(response.username);
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {
