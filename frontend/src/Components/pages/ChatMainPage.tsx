@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import routes from '../../routes';
 import MessageRender from '../chatComponents/MessageRender';
-import messageStore from '../../store/messageStore';
+import { useGetAllMessages } from "../../store/mesageStoreActions";
 import { useGetCurrentChannel } from "../../store/channelStoreActions";
 
 const ChatMainPage = () => {
@@ -19,7 +19,7 @@ const ChatMainPage = () => {
   const token = userStore((store) => store.token);
 
   const currentChannel = useGetCurrentChannel();
-  const getAllMessages = messageStore((store) => store.allMessages);
+  const getAllMessages = useGetAllMessages();
 
   const [open, setOpen] = useState(false);
   const handleOpenAddChannel = () => {
