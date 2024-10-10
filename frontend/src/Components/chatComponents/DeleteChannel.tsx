@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from "react";
 import { io } from 'socket.io-client';
 import axios from 'axios';
-import userStore from '../../store/userStore';
+import { useGetToken } from '../../store/userStoreActions';
 import { ChannelProps } from '../../store/interface';
 import { useGetAllChannels, useSetAllChannels, useGetCurrentChannelPopover } from "../../store/channelStoreActions";
 
@@ -11,7 +11,7 @@ const socket = io();
 
 export default function DeleteChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
-  const token = userStore((store) => store.token);
+  const token = useGetToken();
   const currentChannelPopover = useGetCurrentChannelPopover();
   const allChannels = useGetAllChannels();
   const setAllChannels = useSetAllChannels();

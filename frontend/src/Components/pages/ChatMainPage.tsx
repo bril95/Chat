@@ -4,7 +4,7 @@ import Footer from '../common/Footer';
 import { useTranslation } from 'react-i18next';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import MessageForm from '../chatComponents/MessageForm';
-import userStore from '../../store/userStore';
+import { useGetToken } from '../../store/userStoreActions';
 import ChannelsRender from '../chatComponents/ChannelsRender';
 import AddChannel from '../chatComponents/AddChannel';
 import { useState } from 'react';
@@ -16,7 +16,7 @@ import { useGetCurrentChannel } from "../../store/channelStoreActions";
 
 const ChatMainPage = () => {
   const { t } = useTranslation();
-  const token = userStore((store) => store.token);
+  const token = useGetToken();
 
   const currentChannel = useGetCurrentChannel();
   const getAllMessages = useGetAllMessages();

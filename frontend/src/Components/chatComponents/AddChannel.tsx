@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import userStore from '../../store/userStore';
 import { ChannelProps } from '../../store/interface';
+import { useGetToken } from '../../store/userStoreActions';
 
 export default function AddChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
-  const token = userStore((store) => store.token);
+  const token = useGetToken();
 
   const openModal = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

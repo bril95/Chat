@@ -1,7 +1,7 @@
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import userStore from '../../store/userStore';
+import { useGetToken } from '../../store/userStoreActions';
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { ChannelProps } from '../../store/interface';
@@ -11,7 +11,7 @@ const socket = io();
 
 export default function RenameChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
-  const token = userStore((store) => store.token);
+  const token = useGetToken();
   const currentChannelPopoverChannel = useGetCurrentChannelPopover();
   const allChannels = useGetAllChannels();
   const setAllChannels = useSetAllChannels();
