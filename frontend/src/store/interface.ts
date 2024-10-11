@@ -16,10 +16,15 @@ interface ChannelProps {
   handleClose: () => void;
 }
 
+enum PopoverAction {
+  Rename = 'openRename',
+  Delete = 'openDelete'
+}
+
 interface PopoverMenuProps {
   open: boolean;
   anchorEl: HTMLElement | null;
-  handleClosePopover: () => void;
+  handleClosePopover: (action: PopoverAction | null) => void;
 }
 
 interface MyForm {
@@ -35,4 +40,4 @@ interface SnackbarComponentProps {
   onClose: () => void;
 };
 
-export { Channel, Message, ChannelProps, PopoverMenuProps, MyForm, SnackbarComponentProps }
+export { Channel, Message, ChannelProps, PopoverMenuProps, MyForm, SnackbarComponentProps, PopoverAction }

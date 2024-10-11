@@ -4,7 +4,6 @@ import { Channel } from './interface';
 type Store = {
   allChannels: Channel[];
   currentChannel: Channel;
-  defaultsChannel: Channel | null;
   currentChannelPopover: Channel;
   setCurrentChannel: (channel: Channel) => void;
   setAllChannels: (channels: Channel[]) => void;
@@ -12,22 +11,23 @@ type Store = {
   setCurrentChannelPopover: (channel: Channel) => void;
 };
 
-const defaultChannel = { id: '', name: '', removable: true };
+const defaultChannel: Channel = { id: '', name: '', removable: true };
 
-const channelStore = create<Store>()(
-  (set, get) => ({
-    allChannels: [],
-    currentChannel: {} as Channel,
-    currentChannelPopover: {} as Channel,
-    setCurrentChannel: (currentChannel) => set({ currentChannel }),
-    setAllChannels: (allChannels) => {
-      set({ allChannels });
-      if (get().allChannels.length > 0 && Object.keys(get().currentChannel).length === 0) {
-        set({ currentChannel: get().allChannels[0] });
-      }},
+const channelStore = create<Store>((set, get) => ({
+  allChannels: [],
+  currentChannel: defaultChannel,
+  currentChannelPopover: defaultChannel,
+  setCurrentChannel: (currentChannel) => set({ currentChannel }),
+  setAllChannels: (allChannels) => {
+    set({ allChannels });
+    if (allChannels.length > 0 && get().currentChannel.id === '') {
+      set({
+        currentChannel: allChannels[0],
+      });
+    }
+  },
     setChannel: (channel) => set({ allChannels: [...get().allChannels, channel] }),
-    setCurrentChannelPopover: (currentChannelPopover) => set({ currentChannelPopover }),
-  })
-);
+  setCurrentChannelPopover: (currentChannelPopover) => set({ currentChannelPopover }),
+}));
 
 export default channelStore;
