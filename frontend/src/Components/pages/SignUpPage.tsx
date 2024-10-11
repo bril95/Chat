@@ -10,13 +10,8 @@ import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import userStore from '../../store/userStore';
-
-interface MyForm {
-  username: string;
-  password: string;
-  confirmPassword: string;
-}
+import { useSetToken, useSetUsername } from '../../store/userStoreActions';
+import { MyForm } from '../../store/interface';
 
 const SignUpPage = () => {
   const { t } = useTranslation();
@@ -40,8 +35,8 @@ const SignUpPage = () => {
 
   const [showSnackbar, setShowSnackbar] = useState(false);
 
-  const setUserToken = userStore((store) => store.setToken);
-  const setUser = userStore((store) => store.setUsername);
+  const setUserToken = useSetToken();
+  const setUser = useSetUsername();
 
   const submit: SubmitHandler<MyForm> = async (data) => {
     try{

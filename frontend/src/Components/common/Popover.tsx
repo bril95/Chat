@@ -1,16 +1,6 @@
 import { Popover, List, ListItemButton, ListItem } from "@mui/material";
 import { useTranslation } from 'react-i18next';
-
-enum PopoverAction {
-  Rename = 'openRename',
-  Delete = 'openDelete'
-}
-
-interface PopoverMenuProps {
-  open: boolean;
-  anchorEl: HTMLElement | null;
-  handleClosePopover: (action: PopoverAction | null) => void;
-}
+import { PopoverMenuProps, PopoverAction } from './../../store/interface';
 
 const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) => {
   const { t } = useTranslation();

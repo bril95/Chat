@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button, FormHelperText, Box, Link, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import userStore from '../../store/userStore';
+import { useSetToken, useSetUsername } from '../../store/userStoreActions';
 import routes from '../../routes';
 import { loginValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
@@ -12,11 +12,7 @@ import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-
-interface MyForm {
-  username: string;
-  password: string;
-}
+import { MyForm } from '../../store/interface';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -24,8 +20,8 @@ const LoginPage = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const setUserToken = userStore((store) => store.setToken);
-  const setUser = userStore((store) => store.setUsername);
+  const setUserToken = useSetToken();
+  const setUser = useSetUsername();
   const { control, handleSubmit, reset, formState: { errors } } = useForm<MyForm>({
     defaultValues: {
       username: '',
