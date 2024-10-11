@@ -16,6 +16,10 @@ export const useSetAllChannels = () => {
   return channelStore((state) => state.setAllChannels);
 };
 
+export const useSetChannel = () => {
+  return channelStore((state) => state.setChannel);
+};
+
 export const useSetCurrentChannel = () => {
   return channelStore((state) => state.setCurrentChannel);
 };

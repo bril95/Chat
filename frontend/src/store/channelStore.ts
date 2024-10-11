@@ -6,26 +6,25 @@ type Store = {
   currentChannel: Channel;
   currentChannelPopover: Channel;
   setCurrentChannel: (channel: Channel) => void;
-  setAllChannels: (channels: Channel[] | Channel) => void;
+  setAllChannels: (channels: Channel[]) => void;
+  setChannel: (channel: Channel) => void;
   setCurrentChannelPopover: (channel: Channel) => void;
 };
+
+const defaultChannel = { id: '', name: '', removable: true };
 
 const channelStore = create<Store>()(
   (set, get) => ({
     allChannels: [],
-    currentChannel: { id: '', name: '', removable: true },
-    currentChannelPopover: { id: '', name: '', removable: true },
+    currentChannel: defaultChannel,
+    currentChannelPopover: defaultChannel,
     setCurrentChannel: (currentChannel) => set({ currentChannel }),
-    setAllChannels: (channels) => {
-      if (Array.isArray(channels)) {
-        set({ allChannels: channels });
-        if (get().currentChannel.id === '' && channels.length > 0) {
-          set({ currentChannel: channels[0] });
-        }
-      } else {
-        set({ allChannels: [...get().allChannels, channels] });
-      }
-    },
+    setAllChannels: (allChannels) => {
+      set({ allChannels });
+      if (get().allChannels.length > 0 && Object.keys(get().currentChannel).length === 0) {
+        set({ currentChannel: get().allChannels[0] });
+      }},
+    setChannel: (channel) => set({ allChannels: [...get().allChannels, channel] }),
     setCurrentChannelPopover: (currentChannelPopover) => set({ currentChannelPopover }),
   })
 );

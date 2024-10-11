@@ -5,7 +5,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from "../common/Popover";
 import { io } from 'socket.io-client';
 import { Channel } from "../../store/interface";
-import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useSetCurrentChannelPopover } from "../../store/channelStoreActions";
+import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useSetChannel, useSetCurrentChannelPopover } from "../../store/channelStoreActions";
 
 const socket = io();
 
@@ -14,6 +14,7 @@ const ChannelsRender = ({ token }: { token: string }) => {
   const getAllChannels = useGetAllChannels();
   const setCurrentChannel = useSetCurrentChannel();
   const setCurrentChannelPopover = useSetCurrentChannelPopover();
+  const setChannel = useSetChannel()
 
   const handleClickChannel = (el: Channel) => {
     setCurrentChannel(el);
@@ -51,13 +52,13 @@ const ChannelsRender = ({ token }: { token: string }) => {
 
   useEffect(() => {
     socket.on('newChannel', (newChannel) => {
-      setAllChannels(newChannel)
+      setChannel(newChannel)
     });
   
     return () => {
       socket.off('newChannel')
     };
-  },[setAllChannels])
+  },[setChannel])
 
   return (
     <>
