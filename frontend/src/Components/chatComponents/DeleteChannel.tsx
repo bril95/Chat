@@ -5,11 +5,10 @@ import { io } from 'socket.io-client';
 import axios from 'axios';
 import userStore from '../../store/userStore';
 import channelStore from '../../store/channelStore';
-import messageStore from '../../store/messageStore';
 
 interface RenameChannelProps {
   open: boolean;
-  handleClose: () => void;
+  handleClose: () => void; 
 }
 
 const socket = io();
@@ -20,36 +19,26 @@ export default function DeleteChannel({ open, handleClose }: RenameChannelProps)
   const currentChannelPopoverChannel = channelStore((store) => store.currentChannelPopover);
   const allChannels = channelStore((store) => store.allChannels);
   const setAllChannels = channelStore((store) => store.setAllChannels);
-  const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
-  const currentChanne = channelStore((store) => store.currentChannel);
-  const allMessages = messageStore((store) => store.allMessages);
-  const setAllMessage = messageStore((store) => store.setMessages);
-  const defaultsChannel = channelStore((store) => store.defaultsChannel);
 
   const deleteChannel = () => {
     axios.delete(`/api/v1/channels/${currentChannelPopoverChannel?.id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
-    if (currentChannelPopoverChannel.id === currentChanne.id && defaultsChannel !== null) {
-      setCurrentChannel(defaultsChannel);
-    }
+    })
     handleClose();
   }
 
   useEffect(() => {
     socket.on('removeChannel', (payload) => {
       const allNewChannels = allChannels.filter((channel) => channel.id !== payload.id);
-      const allNewMessages = allMessages.filter((message) => message.channelId !==payload.id);
-      setAllMessage(allNewMessages);
       setAllChannels(allNewChannels);
     });
-
+  
     return () => {
       socket.off('removeChannel')
     };
-  },[setAllChannels, allChannels, allMessages, setAllMessage])
+  },[setAllChannels, allChannels])
 
   return (
     <Dialog
