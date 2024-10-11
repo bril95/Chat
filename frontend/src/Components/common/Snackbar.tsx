@@ -1,12 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Snackbar, Alert } from '@mui/material';
-
-type SnackbarComponentProps = {
-  message: string;
-  open: boolean;
-  duration?: number;
-  onClose: () => void;
-};
+import { SnackbarComponentProps } from '../../store/interface';
 
 export default function SnackbarComponent({ message, open, duration = 4000, onClose }: SnackbarComponentProps) {
   const [openSnackbar, setOpenSnackbar] = useState(open);

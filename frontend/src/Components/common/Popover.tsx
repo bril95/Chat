@@ -3,12 +3,7 @@ import { useTranslation } from 'react-i18next';
 import RenameChannel from "../chatComponents/RenameChannel";
 import { useState } from "react";
 import DeleteChannel from "../chatComponents/DeleteChannel";
-
-interface PopoverMenuProps {
-  open: boolean;
-  anchorEl: HTMLElement | null;
-  handleClosePopover: () => void;
-}
+import { PopoverMenuProps } from './../../store/interface';
 
 const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) => {
   const { t } = useTranslation();
