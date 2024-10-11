@@ -9,10 +9,13 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
+    if(config.url.includes('/login')) {
+      console.log('11')
+    }
     const storageItem = sessionStorage.getItem('username-storage');
     if (storageItem !== null) {
       const storage = JSON.parse(storageItem);
-      const token = storage.state?.token;
+      const token = storage.state.token;
       if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }

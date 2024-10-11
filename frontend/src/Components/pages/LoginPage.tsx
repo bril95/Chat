@@ -46,6 +46,7 @@ const LoginPage = () => {
   const submit: SubmitHandler<MyForm> = async (data) => {
     try {
       const response = await loginUserResponse(data);
+      console.log(response)
       setUserToken(response.token);
       setUser(response.username);
       navigate(routes.pages.chatMainPage());
