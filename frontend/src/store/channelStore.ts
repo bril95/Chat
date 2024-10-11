@@ -21,7 +21,7 @@ const channelStore = create<Store>()(
     setCurrentChannel: (currentChannel) => set({ currentChannel }),
     setAllChannels: (allChannels) => {
       set({ allChannels });
-      if (get().allChannels.length > 0 && Object.keys(get().currentChannel).length === 0) {
+      if (get().allChannels.length > 0 && get().currentChannel.id === '') {
         set({ currentChannel: get().allChannels[0] });
       }},
     setChannel: (channel) => set({ allChannels: [...get().allChannels, channel] }),
