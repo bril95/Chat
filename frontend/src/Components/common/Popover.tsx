@@ -1,37 +1,15 @@
 import { Popover, List, ListItemButton, ListItem } from "@mui/material";
 import { useTranslation } from 'react-i18next';
-import RenameChannel from "../chatComponents/RenameChannel";
-import { useState } from "react";
-import DeleteChannel from "../chatComponents/DeleteChannel";
-import { PopoverMenuProps } from './../../store/interface';
+import { PopoverMenuProps, PopoverAction } from './../../store/interface';
 
 const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) => {
   const { t } = useTranslation();
-  const [openRenameChannel, setOpenRenameChannel] = useState(false);
-  const [openDeleteChannel, setOpenDeleteChannel] = useState(false);
-
-  const handleOpenRenameChannel = () => {
-    setOpenRenameChannel(true);
-  }
-
-  const handleCloseRenameChannel = () => {
-    setOpenRenameChannel(false);
-  }
-
-  const handleOpenDeleteChannel = () => {
-    setOpenDeleteChannel(true);
-  }
-
-  const handleCloseDeleteChannel = () => {
-    setOpenDeleteChannel(false);
-  }
-
 
   return (
     <Popover
       open={open}
       anchorEl={anchorEl}
-      onClose={handleClosePopover}
+      onClose={() => handleClosePopover(null)}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'right',
@@ -43,18 +21,16 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) =
     >
       <List>
         <ListItem sx={{p: 0}}>
-          <ListItemButton onClick={handleOpenRenameChannel}>
+        <ListItemButton onClick={() => handleClosePopover(PopoverAction.Rename)}>
             {t('modalWindows.renameChannel.rename')}
           </ListItemButton>
         </ListItem>
         <ListItem sx={{p: 0}}>
-          <ListItemButton onClick={handleOpenDeleteChannel}>
+        <ListItemButton onClick={() => handleClosePopover(PopoverAction.Delete)}>
             {t('modalWindows.deleteChannel.delete')}
           </ListItemButton>
         </ListItem>
       </List>
-      <RenameChannel open={openRenameChannel} handleClose ={() => handleCloseRenameChannel()} />
-      <DeleteChannel open={openDeleteChannel} handleClose ={() => handleCloseDeleteChannel()} />
     </Popover>
   );
 };

@@ -4,6 +4,8 @@ import { List, ListItemButton, ListItemText, IconButton, ListItem, Box } from "@
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from "../common/Popover";
 import { io } from 'socket.io-client';
+import RenameChannel from "./RenameChannel";
+import DeleteChannel from "./DeleteChannel";
 import { Channel } from "../../store/interface";
 import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useSetChannel, useSetCurrentChannelPopover } from "../../store/channelStoreActions";
 
@@ -44,21 +46,36 @@ const ChannelsRender = ({ token }: { token: string }) => {
     setCurrentChannelPopover(el)
   };
 
-  const handleClosePopover = () => {
-    setAnchorEl(null);
-  };
-
   const open = Boolean(anchorEl);
 
   useEffect(() => {
     socket.on('newChannel', (newChannel) => {
       setChannel(newChannel)
     });
-  
+
     return () => {
       socket.off('newChannel')
     };
   },[setChannel])
+
+  const [openRenameChannel, setOpenRenameChannel] = useState(false);
+  const [openDeleteChannel, setOpenDeleteChannel] = useState(false);
+
+  const handleClosePopover = (action: String | null) => {
+    if (action === 'openRename') {
+      setOpenRenameChannel(true);
+    }
+    if (action === 'openDelete') {
+      setOpenDeleteChannel(true);
+    }
+    setAnchorEl(null);
+  };
+  const handleCloseRenameChannel = () => {
+    setOpenRenameChannel(false);
+  }
+  const handleCloseDeleteChannel = () => {
+    setOpenDeleteChannel(false);
+  }
 
   return (
     <>
@@ -110,6 +127,8 @@ const ChannelsRender = ({ token }: { token: string }) => {
               anchorEl={anchorEl}
               handleClosePopover={handleClosePopover}
             />
+            <RenameChannel open={openRenameChannel} handleClose ={handleCloseRenameChannel}/>
+            <DeleteChannel open={openDeleteChannel} handleClose ={handleCloseDeleteChannel} />
           </Box>
             }
           </ListItem>
