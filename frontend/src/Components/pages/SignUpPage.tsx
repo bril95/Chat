@@ -9,7 +9,6 @@ import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import userStore from '../../store/userStore';
 import { signupUserResponse } from '../../services/api/userApi';
 
 interface MyForm {
@@ -40,14 +39,9 @@ const SignUpPage = () => {
 
   const [showSnackbar, setShowSnackbar] = useState(false);
 
-  const setUserToken = userStore((store) => store.setToken);
-  const setUser = userStore((store) => store.setUsername);
-
   const submit: SubmitHandler<MyForm> = async (data) => {
     try{
-      const response = await signupUserResponse(data);
-      setUserToken(response.token);
-      setUser(response.username);
+      await signupUserResponse(data);
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {

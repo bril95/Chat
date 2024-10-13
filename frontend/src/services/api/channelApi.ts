@@ -1,5 +1,9 @@
 import axiosInstance from "../axiosInstance";
 
+interface ChannelResponse {
+  name: FormDataEntryValue | null;
+};
+
 export const getChannelsResponse = async () => {
   try {
     const response = await axiosInstance.get('/channels');
@@ -9,7 +13,7 @@ export const getChannelsResponse = async () => {
   }
 };
 
-export const postChannelsResponse = async (channel) => {
+export const postChannelsResponse = async (channel: ChannelResponse) => {
   try {
     await axiosInstance.post('/channels', channel);
   } catch (error) {
@@ -17,7 +21,7 @@ export const postChannelsResponse = async (channel) => {
   }
 };
 
-export const deleteChannelResponse = async (id) => {
+export const deleteChannelResponse = async (id: string) => {
   try {
     await axiosInstance.delete(`/channels/${id}`);
   } catch (error) {
@@ -25,7 +29,7 @@ export const deleteChannelResponse = async (id) => {
   }
 };
 
-export const editedChannelResponse = async (id, channel) => {
+export const editedChannelResponse = async (id: string, channel: ChannelResponse) => {
   try {
     await axiosInstance.patch(`/channels/${id}`, channel);
   } catch (error) {

@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from 'react-router-dom';
 import { Button, FormHelperText, Box, Link, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import userStore from '../../store/userStore';
 import routes from '../../routes';
 import { loginValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
@@ -24,8 +23,6 @@ const LoginPage = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const setUserToken = userStore((store) => store.setToken);
-  const setUser = userStore((store) => store.setUsername);
   const { control, handleSubmit, reset, formState: { errors } } = useForm<MyForm>({
     defaultValues: {
       username: '',
@@ -45,10 +42,7 @@ const LoginPage = () => {
 
   const submit: SubmitHandler<MyForm> = async (data) => {
     try {
-      const response = await loginUserResponse(data);
-      console.log(response)
-      setUserToken(response.token);
-      setUser(response.username);
+      await loginUserResponse(data);
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {

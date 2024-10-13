@@ -1,15 +1,21 @@
 import axiosInstance from "../axiosInstance";
 
-export const loginUserResponse = async (data) => {
+interface UserProfile {
+  password: string,
+  username: string,
+};
+
+export const loginUserResponse = async (data: UserProfile) => {
+  console.log(data)
   try {
     const response = await axiosInstance.post('/login', data);
-    return response.data;
+    return response;
   } catch (error) {
     throw error;
   }
 };
 
-export const signupUserResponse = async (data) => {
+export const signupUserResponse = async (data: UserProfile) => {
   try {
     const response = await axiosInstance.post('/signup', data);
     return response.data;

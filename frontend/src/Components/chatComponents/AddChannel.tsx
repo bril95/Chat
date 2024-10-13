@@ -22,7 +22,7 @@ export default function AddChannel({ open, handleClose }: AddChannelProps) {
     const addNewChannel = { name: newChannel };
 
     try {
-      await postChannelsResponse(addNewChannel)
+      await postChannelsResponse(addNewChannel);
       handleClose();
     } catch (error) {
       console.error(error);

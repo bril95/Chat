@@ -1,5 +1,11 @@
 import axiosInstance from "../axiosInstance";
 
+interface Message {
+  body: FormDataEntryValue | null;
+  channelId: string;
+  username: string;
+};
+
 export const getMessagesResponse = async () => {
   try {
     const response = await axiosInstance.get('/messages');
@@ -9,7 +15,7 @@ export const getMessagesResponse = async () => {
   }
 };
 
-export const postMessagesResponse = async (message) => {
+export const postMessagesResponse = async (message: Message) => {
   try {
     const response = await axiosInstance.post('/messages', message);
     return response.data;
