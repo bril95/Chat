@@ -36,7 +36,6 @@ axiosInstance.interceptors.response.use(
       if (token && username) {
         setToken(token);
         setUsername(username);
-
         sessionStorage.setItem('username-storage', JSON.stringify({
           state: { token, username }
         }));
