@@ -46,8 +46,8 @@ const ru = {
       addChannel: {
         addChannel: 'Добавить канал',
         channelName: 'Имя канала',
-        toastAddName: 'Канал создан',
-        toastErrorAddName: 'Ошибка при создании канала',
+        emptyChannel: 'Необходимо ввести название канала',
+        sameNameChannel: 'Это имя канала уже используется',
       },
       renameChannel: {
         rename: 'Переименовать',
@@ -68,8 +68,6 @@ const ru = {
       min3max20: 'От 3 до 20 символов',
       min6: 'Не менее 6 символов',
       samePassword: 'Пароли должны совпадать',
-      sameNameChannel: 'Это имя канала уже используется',
-      enterNewName: 'Введите новое имя канала',
     },
   },
 };

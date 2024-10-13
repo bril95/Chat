@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { ChannelProps } from '../../store/interface';
 import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useGetCurrentChannelPopover, useGetCurrentChannel } from "../../store/channelStoreActions";
+import SnackbarComponent from '../common/Snackbar';
 
 const socket = io();
 
@@ -13,10 +14,12 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const token = useGetToken();
   const currentChannelPopoverChannel = useGetCurrentChannelPopover();
-  const allChannels = useGetAllChannels();
+  const getAllChannels = useGetAllChannels();
   const setAllChannels = useSetAllChannels();
   const currentChannel = useGetCurrentChannel();
   const setCurrentChannel = useSetCurrentChannel();
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [currentError, setCurrentError] = useState('');
 
   const [channelName, setChannelName] = useState(currentChannelPopoverChannel.name);
 
@@ -26,7 +29,7 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
   
   useEffect(() => {
     socket.on('renameChannel', (payload) => {
-      const allNewChannels = allChannels.map((el) => {
+      const allNewChannels = getAllChannels.map((el) => {
         if (el.id === payload.id) {
           el = payload;
         }
@@ -40,7 +43,7 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
     return () => {
       socket.off('renameChannel')
     };
-  },[allChannels, setAllChannels, setCurrentChannel, currentChannel])
+  },[getAllChannels, setAllChannels, setCurrentChannel, currentChannel])
 
   return (
     <Dialog
@@ -51,8 +54,20 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
       onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        const editedChannel = { name: formData.get('renameChannel') };
-        axios.patch(`/api/v1/channels/${currentChannelPopoverChannel.id}`, editedChannel, {
+        const editedChannel = formData.get('renameChannel');
+        if(String(editedChannel).length === 0) {
+          setCurrentError(t('modalWindows.addChannel.emptyChannel'));
+          setShowSnackbar(true);
+          throw Error;
+        }
+        const allChannelsName = getAllChannels.map((el) => el.name);
+        if(allChannelsName.includes(String(editedChannel))) {
+          setCurrentError(t('modalWindows.addChannel.sameNameChannel'))
+          setShowSnackbar(true);
+          throw Error;
+        }
+        const getEditedChannel = { name: editedChannel };
+        axios.patch(`/api/v1/channels/${currentChannelPopoverChannel.id}`, getEditedChannel, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -78,6 +93,11 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
       <Button onClick={handleClose}>{t('modalWindows.cancel')}</Button>
       <Button type="submit">{t('modalWindows.submit')}</Button>
     </DialogActions>
+    <SnackbarComponent
+        message={currentError}
+        open={showSnackbar}
+        onClose={() => setShowSnackbar(false)}
+        />
   </Dialog>
   );
 }
