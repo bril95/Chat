@@ -3,20 +3,13 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { useGetToken } from '../../store/userStoreActions';
 import { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
 import { ChannelProps } from '../../store/interface';
-import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useGetCurrentChannelPopover, useGetCurrentChannel } from "../../store/channelStoreActions";
-
-const socket = io();
+import {  useGetCurrentChannelPopover } from "../../store/channelStoreActions";
 
 export default function RenameChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const token = useGetToken();
   const currentChannelPopoverChannel = useGetCurrentChannelPopover();
-  const allChannels = useGetAllChannels();
-  const setAllChannels = useSetAllChannels();
-  const currentChannel = useGetCurrentChannel();
-  const setCurrentChannel = useSetCurrentChannel();
 
   const [channelName, setChannelName] = useState(currentChannelPopoverChannel.name);
 
@@ -24,24 +17,6 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
     setChannelName(currentChannelPopoverChannel.name);
   }, [currentChannelPopoverChannel]);
   
-  useEffect(() => {
-    socket.on('renameChannel', (payload) => {
-      const allNewChannels = allChannels.map((el) => {
-        if (el.id === payload.id) {
-          el = payload;
-        }
-        if(currentChannel.id === payload.id) {
-          setCurrentChannel(payload);
-        }
-        return el;
-      })
-      setAllChannels(allNewChannels)
-    });
-    return () => {
-      socket.off('renameChannel')
-    };
-  },[allChannels, setAllChannels, setCurrentChannel, currentChannel])
-
   return (
     <Dialog
     open={open}
