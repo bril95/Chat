@@ -28,9 +28,9 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    if (response.config.url.includes('/login') || response.config.url.includes('/signup')) {
+    const url = response.config.url;
+    if (url && (url.includes('/login') || url.includes('/signup'))) {
       const { setToken, setUsername } = userStore.getState();
-
       const { token, username } = response.data;
       if (token && username) {
         setToken(token);
