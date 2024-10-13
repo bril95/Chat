@@ -4,7 +4,7 @@ import { Button, Box, FormControl, InputLabel, OutlinedInput, FormHelperText, Ty
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom'; 
-import routes from '../../routes';
+import routes from '../../services/routes';
 import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';

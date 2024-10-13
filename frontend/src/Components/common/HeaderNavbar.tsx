@@ -1,6 +1,6 @@
 import { Button, Link, Toolbar, AppBar} from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import routes from '../../routes'
+import routes from '../../services/routes'
 
 export default function HeaderNavbar() {
   const { t } = useTranslation();

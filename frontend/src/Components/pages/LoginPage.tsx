@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from 'react-router-dom';
 import { Button, FormHelperText, Box, Link, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import routes from '../../routes';
+import routes from '../../services/routes';
 import { loginValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import { useState } from 'react';

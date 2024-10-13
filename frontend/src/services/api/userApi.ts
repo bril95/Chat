@@ -6,7 +6,6 @@ interface UserProfile {
 };
 
 export const loginUserResponse = async (data: UserProfile) => {
-  console.log(data)
   try {
     const response = await axiosInstance.post('/login', data);
     return response;
