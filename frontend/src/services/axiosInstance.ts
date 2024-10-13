@@ -1,8 +1,9 @@
 import axios from 'axios';
 import userStore from '../store/userStore';
+import routes from './routes';
 
 const axiosInstance = axios.create({
-  baseURL: '/api/v1',
+  baseURL: routes.defaultApi(),
   headers: {
     'Content-Type': 'application/json',
   },
@@ -29,7 +30,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => {
     const url = response.config.url;
-    if (url && (url.includes('/login') || url.includes('/signup'))) {
+    if (url && (url.includes(routes.path.loginPath()) || url.includes(routes.path.signUpPath()))) {
       const { setToken, setUsername } = userStore.getState();
       const { token, username } = response.data;
       if (token && username) {

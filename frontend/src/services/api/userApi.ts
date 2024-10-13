@@ -1,4 +1,5 @@
 import axiosInstance from "../axiosInstance";
+import routes from "../routes";
 
 interface UserProfile {
   password: string,
@@ -7,7 +8,7 @@ interface UserProfile {
 
 export const loginUserResponse = async (data: UserProfile) => {
   try {
-    const response = await axiosInstance.post('/login', data);
+    const response = await axiosInstance.post(routes.path.loginPath(), data);
     return response;
   } catch (error) {
     throw error;
@@ -16,7 +17,7 @@ export const loginUserResponse = async (data: UserProfile) => {
 
 export const signupUserResponse = async (data: UserProfile) => {
   try {
-    const response = await axiosInstance.post('/signup', data);
+    const response = await axiosInstance.post(routes.path.signUpPath(), data);
     return response.data;
   } catch (error) {
     throw error;

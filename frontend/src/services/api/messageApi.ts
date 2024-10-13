@@ -1,4 +1,5 @@
 import axiosInstance from "../axiosInstance";
+import routes from "../routes";
 
 interface Message {
   body: FormDataEntryValue | null;
@@ -8,7 +9,7 @@ interface Message {
 
 export const getMessagesResponse = async () => {
   try {
-    const response = await axiosInstance.get('/messages');
+    const response = await axiosInstance.get(routes.path.messagesPath());
     return response.data;
   } catch (error) {
     throw error;
@@ -17,7 +18,7 @@ export const getMessagesResponse = async () => {
 
 export const postMessagesResponse = async (message: Message) => {
   try {
-    const response = await axiosInstance.post('/messages', message);
+    const response = await axiosInstance.post(routes.path.messagesPath(), message);
     return response.data;
   } catch (error) {
     throw error;
