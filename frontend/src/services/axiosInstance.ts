@@ -26,7 +26,6 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-
 axiosInstance.interceptors.response.use(
   (response) => {
     const url = response.config.url;
@@ -36,9 +35,6 @@ axiosInstance.interceptors.response.use(
       if (token && username) {
         setToken(token);
         setUsername(username);
-        sessionStorage.setItem('username-storage', JSON.stringify({
-          state: { token, username }
-        }));
       }
     }
     return response;
