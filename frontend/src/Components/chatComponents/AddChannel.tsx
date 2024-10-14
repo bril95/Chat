@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ChannelProps } from '../../store/interface';
 import { useGetToken } from '../../store/userStoreActions';
 import SnackbarComponent from '../common/Snackbar';
-import { useGetAllChannels } from '../../store/channelStoreActions';
+import { useGetAllChannels, useSetCurrentChannel } from '../../store/channelStoreActions';
 
 export default function AddChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
@@ -13,6 +13,7 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [currentError, setCurrentError] = useState('');
   const getAllChannels = useGetAllChannels();
+  const setCurrentChannel = useSetCurrentChannel();
 
   const openModal = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,13 +31,14 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
       throw Error;
     }
     const addNewChannel = { name: newChannel };
-
+    
     try {
-     await axios.post('/api/v1/channels', addNewChannel, {
+     const resp = await axios.post('/api/v1/channels', addNewChannel, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      setCurrentChannel(resp.data);
       handleClose();
     } catch (error) {
       console.error(error);
