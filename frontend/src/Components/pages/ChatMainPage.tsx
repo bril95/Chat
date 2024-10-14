@@ -22,7 +22,8 @@ const ChatMainPage = () => {
   const getAllMessages = useGetAllMessages();
 
   const [open, setOpen] = useState(false);
-  const handleOpenAddChannel = () => {
+  const handleOpenAddChannel = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.currentTarget.blur();
     setOpen(true);
   };
 
