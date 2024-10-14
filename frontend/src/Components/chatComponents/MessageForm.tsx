@@ -4,6 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import { useGetToken, useGetUsername } from '../../store/userStoreActions';
 import { useGetCurrentChannel } from "../../store/channelStoreActions";
+import { useState } from 'react';
 
 const MessageForm = () => {
   const { t } = useTranslation();
@@ -11,17 +12,22 @@ const MessageForm = () => {
   const token = useGetToken();
   const username = useGetUsername();
   const getCurrentChannel = useGetCurrentChannel();
+  const [message, setMessage] = useState('');
 
   const sendMessage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const newMessage = { body: formData.get('messageForm'), channelId: getCurrentChannel.id, username: username };
+    const newMessage = { body: message, channelId: getCurrentChannel.id, username: username };
     axios.post('/api/v1/messages', newMessage, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+    setMessage('');
     event.currentTarget.reset()
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(event.target.value);
   };
 
   return (
@@ -30,12 +36,14 @@ const MessageForm = () => {
         fullWidth
         placeholder={t('chatMainPage.placeholderMessage')}
         id="messageForm"
-        name='messageForm'
+        name="messageForm"
+        value={message}
+        onChange={handleInputChange}
         slotProps={{
           input: {
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton sx={{m: 0, p: 0}} color='info' type='submit' ><SendIcon sx={{p: 0}}/></IconButton>
+                <IconButton sx={{m: 0, p: 0}} color='info' type='submit' disabled={!message.trim()}><SendIcon sx={{p: 0}}/></IconButton>
               </InputAdornment>
             ),
           }
