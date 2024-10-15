@@ -7,7 +7,7 @@ import { io } from 'socket.io-client';
 import RenameChannel from "./RenameChannel";
 import DeleteChannel from "./DeleteChannel";
 import { Channel } from "../../store/interface";
-import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useSetChannel, useSetCurrentChannelPopover } from "../../store/channelStoreActions";
+import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useSetChannel, useSetCurrentChannelPopover, useGetCurrentChannel } from "../../store/channelStoreActions";
 
 const socket = io();
 
@@ -16,7 +16,8 @@ const ChannelsRender = ({ token }: { token: string }) => {
   const getAllChannels = useGetAllChannels();
   const setCurrentChannel = useSetCurrentChannel();
   const setCurrentChannelPopover = useSetCurrentChannelPopover();
-  const setChannel = useSetChannel()
+  const setChannel = useSetChannel();
+  const getCurrentChannel = useGetCurrentChannel();
 
   const handleClickChannel = (el: Channel) => {
     setCurrentChannel(el);
@@ -96,6 +97,9 @@ const ChannelsRender = ({ token }: { token: string }) => {
               sx={{
                 m: 0,
                 p: 0,
+                pl: 1,
+                backgroundColor: getCurrentChannel.id === el.id ? 'gray' : 'inherit',
+                borderRadius: 3,
               }}
               onClick={() => handleClickChannel(el)}
             >
@@ -114,8 +118,10 @@ const ChannelsRender = ({ token }: { token: string }) => {
           >
             <IconButton
               sx={{
+                p: '4px',
                 m: 0,
-                p: 0,
+                backgroundColor: getCurrentChannel.id === el.id ? 'gray' : 'inherit',
+                borderRadius: 3,
               }}
               color="info"
               onClick={(event) => handleOpenPopover(event, el)}
