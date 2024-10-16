@@ -1,17 +1,13 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { List, ListItemButton, ListItemText } from "@mui/material";
-import { io } from 'socket.io-client';
 import { useGetCurrentChannel } from "../../store/channelStoreActions";
-import { useGetAllMessages, useSetAllMessages, useSetNewMessage } from "../../store/mesageStoreActions";
-
-const socket = io();
+import { useGetAllMessages, useSetAllMessages } from "../../store/mesageStoreActions";
 
 const MessageRender = ({ token }: { token: string }) => {
   const setAllMessages = useSetAllMessages();
   const getAllMessages = useGetAllMessages();
   const currentChannelID = useGetCurrentChannel().id;
-  const setNewMessage = useSetNewMessage();
 
   useEffect(() => {
     const requestData = async () => {
@@ -28,15 +24,6 @@ const MessageRender = ({ token }: { token: string }) => {
     };
     requestData();
   }, [token, setAllMessages]);
-
-  useEffect(() => {
-    socket.on('newMessage', (payload) => {
-      setNewMessage(payload)
-    });
-    return () => {
-      socket.off('newMessage')
-    };
-  },[setNewMessage])
 
   return (
     <>
