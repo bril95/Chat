@@ -4,6 +4,8 @@ import messageStore from './store/messageStore';
 
 const socket = io();
 
+const removeItemsById = <T>(items: T[], field: keyof T, value: string) => items.filter((item) => item[field] !== value);;
+
 const handleSocketEvents = () => {
   const { setChannel, setAllChannels, setCurrentChannel } = channelStore.getState();
   const { setNewMessage, setMessages } = messageStore.getState();
@@ -15,26 +17,20 @@ const handleSocketEvents = () => {
   socket.on('removeChannel', (payload) => {
     const { allChannels } = channelStore.getState();
     const { allMessages } = messageStore.getState();
-    const allNewChannels = allChannels.filter((channel) => channel.id !== payload.id);
-    const allNewMessages = allMessages.filter((message) => message.channelId !== payload.id);
+    const allNewChannels = removeItemsById(allChannels, 'id', payload.id);
+    const allNewMessages = removeItemsById(allMessages, 'channelId', payload.channelId);
     setMessages(allNewMessages);
     setAllChannels(allNewChannels);
   });
 
   socket.on('renameChannel', (payload) => {
-    const { currentChannel } = channelStore.getState();
-    const { allChannels } = channelStore.getState();
+    const { currentChannel, allChannels } = channelStore.getState();
 
-    const allNewChannels = allChannels.map((el) => {
-      if (el.id === payload.id) {
-        return payload;
-      }
-      if (currentChannel.id === payload.id) {
-        setCurrentChannel(payload);
-      }
-      return el;
-    });
+    if (currentChannel.id === payload.id) {
+      setCurrentChannel(payload);
+    }
 
+    const allNewChannels = allChannels.map((el) => (el.id === payload.id ? payload : el));
     setAllChannels(allNewChannels);
   });
 
