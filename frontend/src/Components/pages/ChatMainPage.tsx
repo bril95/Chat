@@ -68,7 +68,7 @@ const ChatMainPage = () => {
             alignItems: 'left',
           }}>
             <Typography variant="body1">{currentChannel.name}</Typography>
-            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.length })}</Typography>
+            <Typography variant="body1">{t('chatMainPage.messages.key', { count: getAllMessages.filter((el) => el.channelId === currentChannel.id).length })}</Typography>
           </Box>
           <Box sx={{
             display: 'flex',

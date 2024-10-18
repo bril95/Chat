@@ -20,8 +20,7 @@ const en = {
       messages: {
         key_zero: '{{count}} messages',
         key_one: '{{count}} message',
-        key_few: '{{count}} messages',
-        key_many: '{{count}} messages',
+        key_other: '{{count}} messages',
       },
     },
     signUpPage: {
