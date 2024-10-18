@@ -8,19 +8,19 @@ import { useGetAllChannels, useGetCurrentChannelPopover, useSetCurrentChannel, u
 export default function DeleteChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const setCurrentChannel = useSetCurrentChannel();
-  const currentChanne = useGetCurrentChannel();
+  const currentChanneId = useGetCurrentChannel().id;
   const token = useGetToken();
-  const currentChannelPopover = useGetCurrentChannelPopover();
+  const currentChannelPopoverId = useGetCurrentChannelPopover().id;
   const allChannels = useGetAllChannels();
 
   const deleteChannel = () => {
-    axios.delete(`/api/v1/channels/${currentChannelPopover.id}`, {
+    axios.delete(`/api/v1/channels/${currentChannelPopoverId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     try {
-      if (currentChannelPopover.id === currentChanne.id) {
+      if (currentChannelPopoverId === currentChanneId) {
         setCurrentChannel(allChannels[0]);
       }
     } catch (error) {
