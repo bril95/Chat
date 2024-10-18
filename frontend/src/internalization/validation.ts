@@ -18,12 +18,14 @@ const loginValidation = (t: (key: string) => string) => Yup.object({
   password: Yup.string().required(t('schema.requiredField')),
 });
 
-// const mainChatValidation = (t, channelsName) => Yup.object({
-//   channelName: Yup.string()
-//     .required(t('schema.requiredField'))
-//     .notOneOf(channelsName, t('schema.sameNameChannel'))
-//     .min(3, t('schema.min3max20'))
-//     .max(20, t('schema.min3max20')),
-// });
+const mainChatValidation = (t: (key: string) => string, channelsName: string[]) => Yup.object({
+  name: Yup.string()
+    .required(t('schema.requiredField'))
+    .notOneOf(channelsName, t('schema.sameNameChannel'))
+    .min(3, t('schema.min3max20'))
+    .max(20, t('schema.min3max20')),
+});
 
-export { signUpValidation, loginValidation };
+const yupValidationError = Yup.ValidationError;
+
+export { signUpValidation, loginValidation, mainChatValidation, yupValidationError };

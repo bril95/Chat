@@ -6,6 +6,7 @@ import { ChannelProps } from '../../store/interface';
 import { useGetToken } from '../../store/userStoreActions';
 import SnackbarComponent from '../common/Snackbar';
 import { useGetAllChannels, useSetCurrentChannel } from '../../store/channelStoreActions';
+import { mainChatValidation, yupValidationError } from '../../internalization/validation';
 
 export default function AddChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
@@ -19,21 +20,13 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newChannel = formData.get('channelName');
-    if(String(newChannel).length === 0) {
-      setCurrentError(t('modalWindows.addChannel.emptyChannel'));
-      setShowSnackbar(true);
-      throw Error;
-    }
-    const allChannelsName = getAllChannels.map((el) => el.name);
-    if(allChannelsName.includes(String(newChannel))) {
-      setCurrentError(t('modalWindows.addChannel.sameNameChannel'))
-      setShowSnackbar(true);
-      throw Error;
-    }
     const addNewChannel = { name: newChannel };
-    
+    const allChannelsName = getAllChannels.map((el) => el.name);
+    const validationSchema = mainChatValidation(t, allChannelsName);
+
     try {
-     const resp = await axios.post('/api/v1/channels', addNewChannel, {
+      await validationSchema.validate(addNewChannel)
+      const resp = await axios.post('/api/v1/channels', addNewChannel, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +34,12 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
       setCurrentChannel(resp.data);
       handleClose();
     } catch (error) {
-      console.error(error);
+      if (error instanceof yupValidationError) {
+        setCurrentError(error.message);
+        setShowSnackbar(true);
+      } else {
+        console.error(error);
+      }
     }
   };
 

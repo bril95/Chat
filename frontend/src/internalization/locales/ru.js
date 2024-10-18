@@ -65,6 +65,7 @@ const ru = {
     },
     schema: {
       requiredField: 'Обязательное поле',
+      sameNameChannel: 'Это имя канала уже используется',
       min3max20: 'От 3 до 20 символов',
       min6: 'Не менее 6 символов',
       samePassword: 'Пароли должны совпадать',
