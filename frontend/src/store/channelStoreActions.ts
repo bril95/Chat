@@ -12,6 +12,10 @@ export const useGetCurrentChannelPopover = () => {
   return channelStore((state) => state.currentChannelPopover);
 };
 
+export const useGetDefaultChannel = () => {
+  return channelStore((state) => state.defaultChannel);
+};
+
 export const useSetAllChannels = () => {
   return channelStore((state) => state.setAllChannels);
 };

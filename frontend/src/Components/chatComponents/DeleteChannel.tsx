@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { useGetToken } from '../../store/userStoreActions';
 import { ChannelProps } from '../../store/interface';
-import { useGetAllChannels, useGetCurrentChannelPopover, useSetCurrentChannel, useGetCurrentChannel } from "../../store/channelStoreActions";
+import { useGetCurrentChannelPopover, useSetCurrentChannel, useGetCurrentChannel, useGetDefaultChannel } from "../../store/channelStoreActions";
 
 export default function DeleteChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ export default function DeleteChannel({ open, handleClose }: ChannelProps) {
   const currentChanneId = useGetCurrentChannel().id;
   const token = useGetToken();
   const currentChannelPopoverId = useGetCurrentChannelPopover().id;
-  const allChannels = useGetAllChannels();
+  const defaultChannel = useGetDefaultChannel();
 
   const deleteChannel = () => {
     axios.delete(`/api/v1/channels/${currentChannelPopoverId}`, {
@@ -21,7 +21,7 @@ export default function DeleteChannel({ open, handleClose }: ChannelProps) {
     });
     try {
       if (currentChannelPopoverId === currentChanneId) {
-        setCurrentChannel(allChannels[0]);
+        setCurrentChannel(defaultChannel);
       }
     } catch (error) {
       console.error(error);
