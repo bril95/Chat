@@ -1,16 +1,14 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import channelStore from '../../store/channelStore';
 import { useGetToken } from '../../store/userStoreActions';
 import { ChannelProps } from '../../store/interface';
-import { useGetAllChannels, useGetCurrentChannelPopover } from "../../store/channelStoreActions";
+import { useGetAllChannels, useGetCurrentChannelPopover, useSetCurrentChannel, useGetCurrentChannel } from "../../store/channelStoreActions";
 
 export default function DeleteChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
-  const currentChannelPopoverChannel = channelStore((store) => store.currentChannelPopover);
-  const setCurrentChannel = channelStore((store) => store.setCurrentChannel);
-  const currentChanne = channelStore((store) => store.currentChannel);
+  const setCurrentChannel = useSetCurrentChannel();
+  const currentChanne = useGetCurrentChannel();
   const token = useGetToken();
   const currentChannelPopover = useGetCurrentChannelPopover();
   const allChannels = useGetAllChannels();
@@ -22,7 +20,7 @@ export default function DeleteChannel({ open, handleClose }: ChannelProps) {
       },
     });
     try {
-      if (currentChannelPopoverChannel.id === currentChanne.id) {
+      if (currentChannelPopover.id === currentChanne.id) {
         setCurrentChannel(allChannels[0]);
       }
     } catch (error) {
