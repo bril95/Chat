@@ -11,15 +11,15 @@ import { mainChatValidation, yupValidationError } from '../../internalization/va
 export default function RenameChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const token = useGetToken();
-  const currentChannelPopoverChannel = useGetCurrentChannelPopover();
+  const currentChannelPopover = useGetCurrentChannelPopover();
   const getAllChannels = useGetAllChannels();
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [currentError, setCurrentError] = useState('');
-  const [channelName, setChannelName] = useState(currentChannelPopoverChannel.name);
+  const [channelName, setChannelName] = useState(currentChannelPopover.name);
 
   useEffect(() => {
-    setChannelName(currentChannelPopoverChannel.name);
-  }, [currentChannelPopoverChannel]);
+    setChannelName(currentChannelPopover.name);
+  }, [currentChannelPopover]);
 
   const handleEventSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,7 +31,7 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
 
     try {
       await validationSchema.validate(getEditedChannel)
-      await axios.patch(`/api/v1/channels/${currentChannelPopoverChannel.id}`, getEditedChannel, {
+      await axios.patch(`/api/v1/channels/${currentChannelPopover.id}`, getEditedChannel, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -7,7 +7,7 @@ import { useGetAllMessages, useSetAllMessages } from "../../store/mesageStoreAct
 const MessageRender = ({ token }: { token: string }) => {
   const setAllMessages = useSetAllMessages();
   const getAllMessages = useGetAllMessages();
-  const currentChannelID = useGetCurrentChannel().id;
+  const currentChannelId = useGetCurrentChannel().id;
 
   useEffect(() => {
     const requestData = async () => {
@@ -38,7 +38,7 @@ const MessageRender = ({ token }: { token: string }) => {
           }}
         >
           {getAllMessages
-            .filter((el) => el.channelId === currentChannelID)
+            .filter((el) => el.channelId === currentChannelId)
             .map((el) => (
             <ListItemButton key={el.id}>
               <ListItemText primary={`${el.username}: ${el.body}`} />

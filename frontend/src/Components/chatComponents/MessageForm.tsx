@@ -11,12 +11,12 @@ const MessageForm = () => {
 
   const token = useGetToken();
   const username = useGetUsername();
-  const getCurrentChannel = useGetCurrentChannel();
+  const getCurrentChannelId = useGetCurrentChannel().id;
   const [message, setMessage] = useState('');
 
   const sendMessage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newMessage = { body: message, channelId: getCurrentChannel.id, username: username };
+    const newMessage = { body: message, channelId: getCurrentChannelId, username: username };
     axios.post('/api/v1/messages', newMessage, {
     headers: {
       Authorization: `Bearer ${token}`,
