@@ -2,18 +2,18 @@ const en = {
   translation: {
     headers: {
       hexletChat: 'Hexlet Chat',
+      exit: 'Logout',
     },
     loginPage: {
       enter: 'Login',
       username: 'Your nickname',
       password: 'Password',
-      withoutAccount: 'Don\'t have an account?',
+      withoutAccount: "Don't have an account?",
       registration: 'Sign Up',
       error: 'Invalid username or password',
       isLoading: 'Loading...',
     },
     chatMainPage: {
-      exit: 'Logout',
       channels: 'Channels',
       placeholderMessage: 'Enter a message...',
       toastError: 'Connection error',
@@ -48,6 +48,8 @@ const en = {
       addChannel: {
         addChannel: 'Add channel',
         channelName: 'Channel name',
+        emptyChannel: 'Channel name is required',
+        sameNameChannel: 'This channel name is already in use',
         toastAddName: 'Channel created',
         toastErrorAddName: 'Error creating channel',
       },
