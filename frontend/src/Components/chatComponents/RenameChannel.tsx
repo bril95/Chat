@@ -1,16 +1,14 @@
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
-import { useGetToken } from '../../store/userStoreActions';
 import { useState, useEffect } from 'react';
 import { ChannelProps } from '../../store/interface';
 import { useGetAllChannels, useGetCurrentChannelPopover } from "../../store/channelStoreActions";
 import SnackbarComponent from '../common/Snackbar';
 import { mainChatValidation, yupValidationError } from '../../internalization/validation';
+import { editedChannelResponse } from '../../services/api/channelApi';
 
 export default function RenameChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
-  const token = useGetToken();
   const currentChannelPopover = useGetCurrentChannelPopover();
   const getAllChannels = useGetAllChannels();
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -30,13 +28,8 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
     const validationSchema = mainChatValidation(t, allChannelsName);
 
     try {
-      await validationSchema.validate(getEditedChannel)
-      await axios.patch(`/api/v1/channels/${currentChannelPopover.id}`, getEditedChannel, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+      await validationSchema.validate(getEditedChannel);
+      await editedChannelResponse(currentChannelPopover.id, getEditedChannel)
       handleClose();
     } catch (error) {
       if (error instanceof yupValidationError) {

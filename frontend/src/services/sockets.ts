@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
-import channelStore from './store/channelStore';
-import messageStore from './store/messageStore';
+import channelStore from '../store/channelStore';
+import messageStore from '../store/messageStore';
 
 const socket = io();
 

@@ -1,32 +1,26 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
-import { useGetToken } from '../../store/userStoreActions';
 import { ChannelProps } from '../../store/interface';
 import { useGetCurrentChannelPopover, useSetCurrentChannel, useGetCurrentChannel, useGetDefaultChannel } from "../../store/channelStoreActions";
+import { deleteChannelResponse } from '../../services/api/channelApi';
 
 export default function DeleteChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
   const setCurrentChannel = useSetCurrentChannel();
   const currentChanneId = useGetCurrentChannel().id;
-  const token = useGetToken();
   const currentChannelPopoverId = useGetCurrentChannelPopover().id;
   const defaultChannel = useGetDefaultChannel();
 
-  const deleteChannel = () => {
-    axios.delete(`/api/v1/channels/${currentChannelPopoverId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const deleteChannel = async () => {
     try {
+      await deleteChannelResponse(currentChannelPopoverId)
       if (currentChannelPopoverId === currentChanneId) {
         setCurrentChannel(defaultChannel);
       }
+      handleClose();
     } catch (error) {
       console.error(error);
     }
-    handleClose();
   }
 
   return (

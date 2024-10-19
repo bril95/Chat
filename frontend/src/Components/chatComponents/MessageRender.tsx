@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useEffect } from "react";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import { useGetCurrentChannel } from "../../store/channelStoreActions";
 import { useGetAllMessages, useSetAllMessages } from "../../store/mesageStoreActions";
+import { getMessagesResponse } from "../../services/api/messageApi";
 
 const MessageRender = ({ token }: { token: string }) => {
   const setAllMessages = useSetAllMessages();
@@ -12,12 +12,8 @@ const MessageRender = ({ token }: { token: string }) => {
   useEffect(() => {
     const requestData = async () => {
       try {
-        const response = await axios.get('/api/v1/messages', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setAllMessages(response.data);
+        const response = await getMessagesResponse();
+        setAllMessages(response);
       } catch (error) {
         console.error(error);
       }

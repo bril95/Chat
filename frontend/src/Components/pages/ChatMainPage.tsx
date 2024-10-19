@@ -9,7 +9,7 @@ import ChannelsRender from '../chatComponents/ChannelsRender';
 import AddChannel from '../chatComponents/AddChannel';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import routes from '../../routes';
+import routes from '../../services/routes';
 import MessageRender from '../chatComponents/MessageRender';
 import { useGetAllMessages } from "../../store/mesageStoreActions";
 import { useGetCurrentChannel } from "../../store/channelStoreActions";

@@ -1,15 +1,14 @@
 import { Box, TextField, IconButton, InputAdornment } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import SendIcon from '@mui/icons-material/Send';
-import axios from 'axios';
-import { useGetToken, useGetUsername } from '../../store/userStoreActions';
+import { useGetUsername } from '../../store/userStoreActions';
 import { useGetCurrentChannel } from "../../store/channelStoreActions";
 import { useState } from 'react';
+import { postMessagesResponse } from '../../services/api/messageApi';
 
 const MessageForm = () => {
   const { t } = useTranslation();
 
-  const token = useGetToken();
   const username = useGetUsername();
   const getCurrentChannelId = useGetCurrentChannel().id;
   const [message, setMessage] = useState('');
@@ -17,14 +16,10 @@ const MessageForm = () => {
   const sendMessage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newMessage = { body: message, channelId: getCurrentChannelId, username: username };
-    axios.post('/api/v1/messages', newMessage, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+    postMessagesResponse(newMessage);
     setMessage('');
-    event.currentTarget.reset()
-  };
+    event.currentTarget.reset();
+  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(event.target.value);

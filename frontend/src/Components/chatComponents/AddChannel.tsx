@@ -1,16 +1,15 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ChannelProps } from '../../store/interface';
-import { useGetToken } from '../../store/userStoreActions';
 import SnackbarComponent from '../common/Snackbar';
 import { useGetAllChannels, useSetCurrentChannel } from '../../store/channelStoreActions';
 import { mainChatValidation, yupValidationError } from '../../internalization/validation';
+import { postChannelsResponse } from '../../services/api/channelApi';
 
 export default function AddChannel({ open, handleClose }: ChannelProps) {
   const { t } = useTranslation();
-  const token = useGetToken();
+
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [currentError, setCurrentError] = useState('');
   const getAllChannels = useGetAllChannels();
@@ -26,12 +25,8 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
 
     try {
       await validationSchema.validate(addNewChannel)
-      const resp = await axios.post('/api/v1/channels', addNewChannel, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setCurrentChannel(resp.data);
+      const response = await postChannelsResponse(addNewChannel);
+      setCurrentChannel(response);
       handleClose();
     } catch (error) {
       if (error instanceof yupValidationError) {

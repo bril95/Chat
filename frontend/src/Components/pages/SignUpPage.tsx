@@ -4,14 +4,13 @@ import { Button, Box, FormControl, InputLabel, OutlinedInput, FormHelperText, Ty
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom'; 
-import axios from 'axios';
-import routes from '../../routes';
+import routes from '../../services/routes';
 import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import { useSetToken, useSetUsername } from '../../store/userStoreActions';
 import { MyForm } from '../../store/interface';
+import { signupUserResponse } from '../../services/api/userApi';
 
 const SignUpPage = () => {
   const { t } = useTranslation();
@@ -35,14 +34,9 @@ const SignUpPage = () => {
 
   const [showSnackbar, setShowSnackbar] = useState(false);
 
-  const setUserToken = useSetToken();
-  const setUser = useSetUsername();
-
   const submit: SubmitHandler<MyForm> = async (data) => {
     try{
-      const response = await axios.post('/api/v1/signup', data);
-      setUserToken(response.data.token);
-      setUser(response.data.username);
+      await signupUserResponse(data);
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {

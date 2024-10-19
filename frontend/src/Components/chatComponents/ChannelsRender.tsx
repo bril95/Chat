@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { List, ListItemButton, ListItemText, IconButton, ListItem, Box } from "@mui/material";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -7,6 +6,7 @@ import RenameChannel from "./RenameChannel";
 import DeleteChannel from "./DeleteChannel";
 import { Channel } from "../../store/interface";
 import { useGetAllChannels, useSetCurrentChannel, useSetAllChannels, useSetCurrentChannelPopover, useGetCurrentChannel } from "../../store/channelStoreActions";
+import { getChannelsResponse } from "../../services/api/channelApi";
 
 const ChannelsRender = ({ token }: { token: string }) => {
   const setAllChannels = useSetAllChannels();
@@ -22,12 +22,8 @@ const ChannelsRender = ({ token }: { token: string }) => {
   useEffect(() => {
     const requestData = async () => {
       try {
-        const response = await axios.get('/api/v1/channels', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setAllChannels(response.data);
+        const response = await getChannelsResponse();
+        setAllChannels(response);
       } catch (error) {
         console.error(error);
       }
