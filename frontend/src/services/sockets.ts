@@ -1,6 +1,7 @@
 import { io } from 'socket.io-client';
 import channelStore from '../store/channelStore';
 import messageStore from '../store/messageStore';
+import { Channel, Message } from '../store/interface';
 
 const socket = io();
 
@@ -10,20 +11,20 @@ const handleSocketEvents = () => {
   const { setChannel, setAllChannels, setCurrentChannel } = channelStore.getState();
   const { setNewMessage, setMessages } = messageStore.getState();
 
-  socket.on('newChannel', (newChannel) => {
+  socket.on('newChannel', (newChannel: Channel) => {
     setChannel(newChannel);
   });
 
-  socket.on('removeChannel', (payload) => {
+  socket.on('removeChannel', (payload: Channel) => {
     const { allChannels } = channelStore.getState();
     const { allMessages } = messageStore.getState();
     const allNewChannels = removeItemsById(allChannels, 'id', payload.id);
-    const allNewMessages = removeItemsById(allMessages, 'channelId', payload.channelId);
+    const allNewMessages = removeItemsById(allMessages, 'channelId', payload.id);
     setMessages(allNewMessages);
     setAllChannels(allNewChannels);
   });
 
-  socket.on('renameChannel', (payload) => {
+  socket.on('renameChannel', (payload: Channel) => {
     const { currentChannel, allChannels } = channelStore.getState();
 
     if (currentChannel.id === payload.id) {
@@ -34,7 +35,7 @@ const handleSocketEvents = () => {
     setAllChannels(allNewChannels);
   });
 
-  socket.on('newMessage', (payload) => {
+  socket.on('newMessage', (payload: Message) => {
     setNewMessage(payload);
   });
 
