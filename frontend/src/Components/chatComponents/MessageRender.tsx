@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { List, ListItemButton, ListItemText } from '@mui/material';
+import { List, ListItem, ListItemText } from '@mui/material';
 import { useGetCurrentChannel } from '../../store/channelStoreActions';
 import {
   useGetAllMessages,
@@ -39,9 +39,9 @@ const MessageRender = ({ token }: { token: string }) => {
           {getAllMessages
             .filter((el) => el.channelId === currentChannelId)
             .map((el) => (
-              <ListItemButton key={el.id}>
+              <ListItem key={el.id}>
                 <ListItemText primary={`${el.username}: ${el.body}`} />
-              </ListItemButton>
+              </ListItem>
             ))}
         </List>
       )}
