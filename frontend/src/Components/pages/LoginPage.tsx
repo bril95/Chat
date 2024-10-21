@@ -35,7 +35,8 @@ const LoginPage = () => {
     });
   };
 
-  const [showSnackbar, setShowSnackbar] = useState(false)
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const submit: SubmitHandler<MyForm> = async (data) => {
     try {
@@ -43,7 +44,12 @@ const LoginPage = () => {
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {
-      console.error(error);
+      if (error.code === "ERR_BAD_REQUEST") {
+        setErrorMessage(t('loginPage.errorRequest'));
+      }
+      if (error.code === "ERR_NETWORK") {
+        setErrorMessage(t('loginPage.errorNetwork'))
+      }
       setShowSnackbar(true);
     }
   };
@@ -131,7 +137,7 @@ const LoginPage = () => {
         <Footer />
       </Box>
       <SnackbarComponent
-        message={t('loginPage.error')}
+        message={errorMessage}
         open={showSnackbar}
         onClose={() => setShowSnackbar(false)}
       />

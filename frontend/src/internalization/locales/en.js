@@ -10,7 +10,8 @@ const en = {
       password: 'Password',
       withoutAccount: "Don't have an account?",
       registration: 'Sign Up',
-      error: 'Invalid username or password',
+      errorRequest: 'Invalid username or password',
+      errorNetwork: 'An error occurred during login',
     },
     chatMainPage: {
       channels: 'Channels',

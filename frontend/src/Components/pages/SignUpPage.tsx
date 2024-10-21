@@ -33,6 +33,7 @@ const SignUpPage = () => {
   };
 
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const submit: SubmitHandler<MyForm> = async (data) => {
     try{
@@ -40,6 +41,12 @@ const SignUpPage = () => {
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {
+      if (error.code === "ERR_BAD_REQUEST") {
+        setErrorMessage(t('signUpPage.errorPassword'));
+      }
+      if (error.code === "ERR_NETWORK") {
+        setErrorMessage(t('signUpPage.errorRegistration'))
+      }
       console.error(error);
       setShowSnackbar(true);
     }
@@ -137,7 +144,7 @@ const SignUpPage = () => {
         <Footer />
       </Box>
       <SnackbarComponent
-        message={t('signUpPage.errorPassword')}
+        message={errorMessage}
         open={showSnackbar}
         onClose={() => setShowSnackbar(false)}
       />

@@ -11,7 +11,8 @@ const ru = {
       password: 'Пароль',
       withoutAccount: 'Нет аккаунта?',
       registration: 'Регистрация',
-      error: 'Неверные имя пользователя или пароль',
+      errorRequest: 'Неверные имя пользователя или пароль',
+      errorNetwork: 'Произошла ошибка при входе в аккаунт',
     },
     chatMainPage: {
       channels: 'Каналы',
