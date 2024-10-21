@@ -1,10 +1,23 @@
 import { useState } from 'react';
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ChannelProps } from '../../store/interface';
 import SnackbarComponent from '../common/Snackbar';
-import { useGetAllChannels, useSetCurrentChannel } from '../../store/channelStoreActions';
-import { mainChatValidation, yupValidationError } from '../../internalization/validation';
+import {
+  useGetAllChannels,
+  useSetCurrentChannel,
+} from '../../store/channelStoreActions';
+import {
+  mainChatValidation,
+  yupValidationError,
+} from '../../internalization/validation';
 import { postChannelsResponse } from '../../services/api/channelApi';
 
 export default function AddChannel({ open, handleClose }: ChannelProps) {
@@ -24,7 +37,7 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
     const validationSchema = mainChatValidation(t, allChannelsName);
 
     try {
-      await validationSchema.validate(addNewChannel)
+      await validationSchema.validate(addNewChannel);
       const response = await postChannelsResponse(addNewChannel);
       setCurrentChannel(response);
       handleClose();
@@ -39,32 +52,29 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
   };
 
   return (
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
-        <form onSubmit={openModal}>
-          <DialogTitle>{t('modalWindows.addChannel.addChannel')}</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              id="channelName"
-              name="channelName"
-              label={t('modalWindows.addChannel.channelName')}
-              type="text"
-              variant="standard"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>{t('modalWindows.cancel')}</Button>
-            <Button type="submit">{t('modalWindows.submit')}</Button>
-          </DialogActions>
-        </form>
-        <SnackbarComponent
+    <Dialog open={open} onClose={handleClose}>
+      <form onSubmit={openModal}>
+        <DialogTitle>{t('modalWindows.addChannel.addChannel')}</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            id="channelName"
+            name="channelName"
+            label={t('modalWindows.addChannel.channelName')}
+            type="text"
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>{t('modalWindows.cancel')}</Button>
+          <Button type="submit">{t('modalWindows.submit')}</Button>
+        </DialogActions>
+      </form>
+      <SnackbarComponent
         message={currentError}
         open={showSnackbar}
         onClose={() => setShowSnackbar(false)}
-        />
-      </Dialog>
+      />
+    </Dialog>
   );
 }

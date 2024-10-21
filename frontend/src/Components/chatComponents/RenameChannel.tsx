@@ -1,10 +1,23 @@
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import { ChannelProps } from '../../store/interface';
-import { useGetAllChannels, useGetCurrentChannelPopover } from "../../store/channelStoreActions";
+import {
+  useGetAllChannels,
+  useGetCurrentChannelPopover,
+} from '../../store/channelStoreActions';
 import SnackbarComponent from '../common/Snackbar';
-import { mainChatValidation, yupValidationError } from '../../internalization/validation';
+import {
+  mainChatValidation,
+  yupValidationError,
+} from '../../internalization/validation';
 import { editedChannelResponse } from '../../services/api/channelApi';
 
 export default function RenameChannel({ open, handleClose }: ChannelProps) {
@@ -29,7 +42,7 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
 
     try {
       await validationSchema.validate(getEditedChannel);
-      await editedChannelResponse(currentChannelPopover.id, getEditedChannel)
+      await editedChannelResponse(currentChannelPopover.id, getEditedChannel);
       handleClose();
     } catch (error) {
       if (error instanceof yupValidationError) {

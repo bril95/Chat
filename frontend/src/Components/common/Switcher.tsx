@@ -1,4 +1,10 @@
-import { FormGroup, FormControlLabel, Switch, Typography, Box } from '@mui/material';
+import {
+  FormGroup,
+  FormControlLabel,
+  Switch,
+  Typography,
+  Box,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useGetLang, useSetLang } from '../../store/userStoreActions';
 
@@ -31,10 +37,7 @@ export default function Switcher() {
             />
           }
           label={
-            <Typography
-              variant="body1"
-              style={{ cursor: 'pointer' }}
-            >
+            <Typography variant="body1" style={{ cursor: 'pointer' }}>
               English
             </Typography>
           }

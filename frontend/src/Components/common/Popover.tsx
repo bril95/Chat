@@ -1,8 +1,12 @@
-import { Popover, List, ListItemButton, ListItem } from "@mui/material";
+import { Popover, List, ListItemButton, ListItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { PopoverMenuProps, PopoverAction } from './../../store/interface';
 
-const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) => {
+const PopoverMenu = ({
+  open,
+  anchorEl,
+  handleClosePopover,
+}: PopoverMenuProps) => {
   const { t } = useTranslation();
 
   return (
@@ -20,13 +24,17 @@ const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps) =
       }}
     >
       <List>
-        <ListItem sx={{p: 0}}>
-        <ListItemButton onClick={() => handleClosePopover(PopoverAction.Rename)}>
+        <ListItem sx={{ p: 0 }}>
+          <ListItemButton
+            onClick={() => handleClosePopover(PopoverAction.Rename)}
+          >
             {t('modalWindows.renameChannel.rename')}
           </ListItemButton>
         </ListItem>
-        <ListItem sx={{p: 0}}>
-        <ListItemButton onClick={() => handleClosePopover(PopoverAction.Delete)}>
+        <ListItem sx={{ p: 0 }}>
+          <ListItemButton
+            onClick={() => handleClosePopover(PopoverAction.Delete)}
+          >
             {t('modalWindows.deleteChannel.delete')}
           </ListItemButton>
         </ListItem>

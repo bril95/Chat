@@ -29,8 +29,10 @@ const channelStore = create<Store>((set, get) => ({
       });
     }
   },
-    setChannel: (channel) => set({ allChannels: [...get().allChannels, channel] }),
-  setCurrentChannelPopover: (currentChannelPopover) => set({ currentChannelPopover }),
+  setChannel: (channel) =>
+    set({ allChannels: [...get().allChannels, channel] }),
+  setCurrentChannelPopover: (currentChannelPopover) =>
+    set({ currentChannelPopover }),
 }));
 
 export default channelStore;

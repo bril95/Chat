@@ -4,7 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import { ThemeProvider } from '@mui/material/styles';
 import i18n from './internalization/i18n';
 import App from './App';
-import customeTheme from './customeTheme'
+import customeTheme from './customeTheme';
 
 const rootElement = document.getElementById('app')!;
 const root = ReactDOM.createRoot(rootElement);

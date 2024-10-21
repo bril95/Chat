@@ -1,8 +1,11 @@
-import { useEffect } from "react";
-import { List, ListItemButton, ListItemText } from "@mui/material";
-import { useGetCurrentChannel } from "../../store/channelStoreActions";
-import { useGetAllMessages, useSetAllMessages } from "../../store/mesageStoreActions";
-import { getMessagesResponse } from "../../services/api/messageApi";
+import { useEffect } from 'react';
+import { List, ListItemButton, ListItemText } from '@mui/material';
+import { useGetCurrentChannel } from '../../store/channelStoreActions';
+import {
+  useGetAllMessages,
+  useSetAllMessages,
+} from '../../store/mesageStoreActions';
+import { getMessagesResponse } from '../../services/api/messageApi';
 
 const MessageRender = ({ token }: { token: string }) => {
   const setAllMessages = useSetAllMessages();
@@ -36,10 +39,10 @@ const MessageRender = ({ token }: { token: string }) => {
           {getAllMessages
             .filter((el) => el.channelId === currentChannelId)
             .map((el) => (
-            <ListItemButton key={el.id}>
-              <ListItemText primary={`${el.username}: ${el.body}`} />
-            </ListItemButton>
-          ))}
+              <ListItemButton key={el.id}>
+                <ListItemText primary={`${el.username}: ${el.body}`} />
+              </ListItemButton>
+            ))}
         </List>
       )}
     </>

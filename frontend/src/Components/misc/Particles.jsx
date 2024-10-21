@@ -7,7 +7,12 @@ const Particles = () => {
     }
   }, []);
 
-  return <div id="particles-js" style={{ width: '100%', height: '100vh', position: 'absolute' }} />;
+  return (
+    <div
+      id="particles-js"
+      style={{ width: '100%', height: '100vh', position: 'absolute' }}
+    />
+  );
 };
 
 export default Particles;

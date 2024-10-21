@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 import { SnackbarComponentProps } from '../../store/interface';
 
-export default function SnackbarComponent({ message, open, duration = 4000, onClose }: SnackbarComponentProps) {
+export default function SnackbarComponent({
+  message,
+  open,
+  duration = 4000,
+  onClose,
+}: SnackbarComponentProps) {
   const [openSnackbar, setOpenSnackbar] = useState(open);
 
   useEffect(() => {
@@ -15,19 +20,23 @@ export default function SnackbarComponent({ message, open, duration = 4000, onCl
   };
 
   return (
-    <Snackbar open={openSnackbar} autoHideDuration={duration} onClose={handleCloseSnackbar}>
-    <Alert
+    <Snackbar
+      open={openSnackbar}
+      autoHideDuration={duration}
       onClose={handleCloseSnackbar}
-      severity="warning"
-      variant="filled"
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0',
-      }}
     >
-      {message}
-    </Alert>
-  </Snackbar>
+      <Alert
+        onClose={handleCloseSnackbar}
+        severity="warning"
+        variant="filled"
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0',
+        }}
+      >
+        {message}
+      </Alert>
+    </Snackbar>
   );
 }

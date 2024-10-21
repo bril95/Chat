@@ -8,7 +8,7 @@ type Store = {
   setUsername: (username: string) => void;
   setToken: (token: string) => void;
   setCurrentLang: (lang: 'en' | 'ru') => void;
-}
+};
 
 const userStore = create<Store>()(
   persist(

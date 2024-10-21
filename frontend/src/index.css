@@ -65,7 +65,8 @@ svg {
   }
 }
 
-#left-top-leaf,#right-top-leaf {
+#left-top-leaf,
+#right-top-leaf {
   animation: swing 5s ease-in infinite alternate-reverse;
 }
 

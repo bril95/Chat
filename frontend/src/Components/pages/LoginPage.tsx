@@ -1,7 +1,18 @@
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { Button, FormHelperText, Box, Link, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
+import {
+  Button,
+  FormHelperText,
+  Box,
+  Link,
+  Typography,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import routes from '../../services/routes';
 import { loginValidation } from '../../internalization/validation';
@@ -15,12 +26,17 @@ import { loginUserResponse } from '../../services/api/userApi';
 
 const LoginPage = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const { control, handleSubmit, reset, formState: { errors } } = useForm<MyForm>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<MyForm>({
     defaultValues: {
       username: '',
       password: '',
@@ -44,11 +60,11 @@ const LoginPage = () => {
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {
-      if (error.code === "ERR_BAD_REQUEST") {
+      if (error.code === 'ERR_BAD_REQUEST') {
         setErrorMessage(t('loginPage.errorRequest'));
       }
-      if (error.code === "ERR_NETWORK") {
-        setErrorMessage(t('loginPage.errorNetwork'))
+      if (error.code === 'ERR_NETWORK') {
+        setErrorMessage(t('loginPage.errorNetwork'));
       }
       setShowSnackbar(true);
     }
@@ -56,44 +72,55 @@ const LoginPage = () => {
 
   return (
     <>
-      <Box sx={{
+      <Box
+        sx={{
           display: 'flex',
           flexDirection: 'column',
           minHeight: '100vh',
-      }}>
+        }}
+      >
         <HeaderNavbar />
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexGrow: 1,
-          }}>
-          <Typography variant="h3">{t('loginPage.enter')}</Typography>
-          <Box component="form" onSubmit={handleSubmit(submit)} 
+        <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '25ch',
-            m: 1,
-          }}>
+            flexGrow: 1,
+          }}
+        >
+          <Typography variant="h3">{t('loginPage.enter')}</Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit(submit)}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '25ch',
+              m: 1,
+            }}
+          >
             <Box>
               <Controller
                 name="username"
                 control={control}
                 render={({ field }) => (
                   <FormControl sx={{ mb: 1, mt: 1 }} variant="outlined">
-                    <InputLabel htmlFor='username'>{t('loginPage.username')}</InputLabel>
+                    <InputLabel htmlFor="username">
+                      {t('loginPage.username')}
+                    </InputLabel>
                     <OutlinedInput
-                      id='username'
+                      id="username"
                       {...field}
                       error={!!errors.username}
                       label={t('loginPage.username')}
                     />
                     {errors.username && (
-                      <FormHelperText error>{errors.username.message}</FormHelperText>
+                      <FormHelperText error>
+                        {errors.username.message}
+                      </FormHelperText>
                     )}
                   </FormControl>
                 )}
@@ -103,7 +130,9 @@ const LoginPage = () => {
                 control={control}
                 render={({ field }) => (
                   <FormControl sx={{ mb: 1, mt: 1 }} variant="outlined">
-                    <InputLabel htmlFor="password">{t('loginPage.password')}</InputLabel>
+                    <InputLabel htmlFor="password">
+                      {t('loginPage.password')}
+                    </InputLabel>
                     <OutlinedInput
                       id="password"
                       {...field}
@@ -123,16 +152,31 @@ const LoginPage = () => {
                       label={t('loginPage.password')}
                     />
                     {errors.password && (
-                      <FormHelperText error>{errors.password.message}</FormHelperText>
+                      <FormHelperText error>
+                        {errors.password.message}
+                      </FormHelperText>
                     )}
                   </FormControl>
                 )}
               />
             </Box>
-            <Button sx={{ m: 1, p: 1, width: '100%', boxSizing: 'border-box'}} color="primary" variant="contained" type="submit">{t('loginPage.enter')}</Button>
+            <Button
+              sx={{ m: 1, p: 1, width: '100%', boxSizing: 'border-box' }}
+              color="primary"
+              variant="contained"
+              type="submit"
+            >
+              {t('loginPage.enter')}
+            </Button>
           </Box>
           <Typography>{t('loginPage.withoutAccount')}</Typography>
-          <Link href={routes.pages.signUpPage()} underline="hover" sx={{m: 1}}>{t('loginPage.registration')}</Link>
+          <Link
+            href={routes.pages.signUpPage()}
+            underline="hover"
+            sx={{ m: 1 }}
+          >
+            {t('loginPage.registration')}
+          </Link>
         </Box>
         <Footer />
       </Box>

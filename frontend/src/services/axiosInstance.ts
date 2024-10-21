@@ -30,7 +30,11 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => {
     const url = response.config.url;
-    if (url && (url.includes(routes.path.loginPath()) || url.includes(routes.path.signUpPath()))) {
+    if (
+      url &&
+      (url.includes(routes.path.loginPath()) ||
+        url.includes(routes.path.signUpPath()))
+    ) {
       const { setToken, setUsername } = userStore.getState();
       const { token, username } = response.data;
       if (token && username) {

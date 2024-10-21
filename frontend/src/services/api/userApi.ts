@@ -1,10 +1,10 @@
-import axiosInstance from "../axiosInstance";
-import routes from "../routes";
+import axiosInstance from '../axiosInstance';
+import routes from '../routes';
 
 interface UserProfile {
-  password: string,
-  username: string,
-};
+  password: string;
+  username: string;
+}
 
 export const loginUserResponse = async (data: UserProfile) => {
   try {

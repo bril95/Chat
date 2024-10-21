@@ -1,11 +1,11 @@
-import axiosInstance from "../axiosInstance";
-import routes from "../routes";
+import axiosInstance from '../axiosInstance';
+import routes from '../routes';
 
 interface Message {
   body: FormDataEntryValue | null;
   channelId: string;
   username: string;
-};
+}
 
 export const getMessagesResponse = async () => {
   try {
@@ -18,7 +18,10 @@ export const getMessagesResponse = async () => {
 
 export const postMessagesResponse = async (message: Message) => {
   try {
-    const response = await axiosInstance.post(routes.path.messagesPath(), message);
+    const response = await axiosInstance.post(
+      routes.path.messagesPath(),
+      message
+    );
     return response.data;
   } catch (error) {
     throw error;

@@ -1,4 +1,4 @@
-import channelStore from "./channelStore";
+import channelStore from './channelStore';
 
 export const useGetAllChannels = () => {
   return channelStore((state) => state.allChannels);

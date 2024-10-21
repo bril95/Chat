@@ -18,7 +18,7 @@ interface ChannelProps {
 
 enum PopoverAction {
   Rename = 'openRename',
-  Delete = 'openDelete'
+  Delete = 'openDelete',
 }
 
 interface PopoverMenuProps {
@@ -38,6 +38,14 @@ interface SnackbarComponentProps {
   open: boolean;
   duration?: number;
   onClose: () => void;
-};
+}
 
-export { Channel, Message, ChannelProps, PopoverMenuProps, MyForm, SnackbarComponentProps, PopoverAction }
+export {
+  Channel,
+  Message,
+  ChannelProps,
+  PopoverMenuProps,
+  MyForm,
+  SnackbarComponentProps,
+  PopoverAction,
+};

@@ -1,4 +1,3 @@
-
 const ru = {
   translation: {
     headers: {

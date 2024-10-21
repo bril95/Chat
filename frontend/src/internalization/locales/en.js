@@ -1,7 +1,7 @@
 const en = {
   translation: {
     headers: {
-      hexletChat: 'Hexlet Chat',
+      hexletChat: 'Chat',
       exit: 'Logout',
     },
     loginPage: {

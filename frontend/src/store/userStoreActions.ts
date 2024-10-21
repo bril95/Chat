@@ -1,4 +1,4 @@
-import userStore from "./userStore";
+import userStore from './userStore';
 
 export const useGetUsername = () => {
   return userStore((state) => state.username);

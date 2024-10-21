@@ -1,7 +1,7 @@
-import { Button, Link, Toolbar, AppBar, Typography} from '@mui/material';
+import { Button, Link, Toolbar, AppBar, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import routes from '../../services/routes'
+import routes from '../../services/routes';
 
 export default function HeaderNavbar() {
   const { t } = useTranslation();
@@ -10,17 +10,29 @@ export default function HeaderNavbar() {
   const handleBackToMain = () => {
     sessionStorage.clear();
     navigate(routes.pages.loginPage());
-  }
+  };
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}>
-        <Typography color='#FFF' variant='h5' sx={{m: 1}}>{t('headers.chat')}</Typography>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Typography color="#FFF" variant="h5" sx={{ m: 1 }}>
+          {t('headers.chat')}
+        </Typography>
         <Button>
-          <Link onClick={handleBackToMain} underline="none" color='#FFF' variant='h5' sx={{m: 1}}>{t('headers.exit')}</Link>
+          <Link
+            onClick={handleBackToMain}
+            underline="none"
+            color="#FFF"
+            variant="h5"
+            sx={{ m: 1 }}
+          >
+            {t('headers.exit')}
+          </Link>
         </Button>
       </Toolbar>
     </AppBar>

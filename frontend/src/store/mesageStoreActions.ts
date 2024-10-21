@@ -1,4 +1,4 @@
-import messageStore from "./messageStore";
+import messageStore from './messageStore';
 
 export const useGetAllMessages = () => {
   return messageStore((state) => state.allMessages);

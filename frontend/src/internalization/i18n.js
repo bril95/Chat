@@ -5,7 +5,8 @@ import ru from './locales/ru';
 import en from './locales/en';
 
 const resources = {
-  ru, en
+  ru,
+  en,
 };
 const i18n = i18next.createInstance();
 
