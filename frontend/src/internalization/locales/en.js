@@ -11,12 +11,10 @@ const en = {
       withoutAccount: "Don't have an account?",
       registration: 'Sign Up',
       error: 'Invalid username or password',
-      isLoading: 'Loading...',
     },
     chatMainPage: {
       channels: 'Channels',
       placeholderMessage: 'Enter a message...',
-      toastError: 'Connection error',
       messages: {
         key_zero: '{{count}} messages',
         key_one: '{{count}} message',
@@ -49,21 +47,16 @@ const en = {
         channelName: 'Channel name',
         emptyChannel: 'Channel name is required',
         sameNameChannel: 'This channel name is already in use',
-        toastAddName: 'Channel created',
-        toastErrorAddName: 'Error creating channel',
       },
       renameChannel: {
         rename: 'Rename',
         renameChannel: 'Rename channel',
         newName: 'New channel name',
-        toastRenameChannel: 'Channel renamed',
       },
       deleteChannel: {
         deleteChannel: 'Delete channel',
         confirmation: 'Are you sure?',
         delete: 'Delete',
-        toastDeleteChannel: 'Channel deleted',
-        toastErrorAddName: 'Error deleting channel',
       },
     },
     schema: {
@@ -72,7 +65,6 @@ const en = {
       min6: 'At least 6 characters',
       samePassword: 'Passwords must match',
       sameNameChannel: 'This channel name is already in use',
-      enterNewName: 'Enter a new channel name',
     },
   },
 };

@@ -12,12 +12,10 @@ const ru = {
       withoutAccount: 'Нет аккаунта?',
       registration: 'Регистрация',
       error: 'Неверные имя пользователя или пароль',
-      isLoading: 'В процессе...',
     },
     chatMainPage: {
       channels: 'Каналы',
       placeholderMessage: 'Введите сообщение...',
-      toastError: 'Ошибка соединения',
       messages: {
         key_zero: '{{count}} сообщений',
         key_one: '{{count}} сообщение',
@@ -53,14 +51,11 @@ const ru = {
         rename: 'Переименовать',
         renameChannel: 'Переименовать канал',
         newName: 'Имя канала',
-        toastRenameChannel: 'Канал переименован',
       },
       deleteChannel: {
         deleteChannel: 'Удалить канал',
         confirmation: 'Уверены?',
         delete: 'Удалить',
-        toastDeleteChannel: 'Канал удалён',
-        toastErrorAddName: 'Ошибка при удалении канала',
       },
     },
     schema: {
