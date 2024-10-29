@@ -4,10 +4,10 @@
   "description": "",
   "main": "src/index.tsx",
   "scripts": {
-    "build": "npm install vite && vite build",
+    "build": "vite build",
     "start": "vite",
     "serve": "vite preview",
-    "start-frontend": "vite --port $PORT",
+    "start-frontend": "vite",
     "start-backend": "npx start-server -s ./frontend/dist",
     "run": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "lint": "eslint 'frontend/src/**/*.{ts,tsx}' --max-warnings 0 --fix",
