@@ -14,7 +14,8 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "outDir": "./frontend/dist",
-    "rootDir": "./frontend/src"
+    "rootDir": "./frontend/src",
+    "types": ["node"]
   },
   "include": ["frontend/src/**/*", "frontend/src/global.d.ts"],
   "exclude": ["node_modules"]
