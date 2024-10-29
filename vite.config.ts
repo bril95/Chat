@@ -10,7 +10,7 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
-    port: 5000,
+    port: Number(process.env.PORT) || 5000,
     host: true,
     proxy: {
       '/api': {
