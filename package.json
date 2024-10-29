@@ -11,8 +11,8 @@
     "start-backend": "npx start-server -s ./frontend/dist",
     "run": "npm-run-all --parallel start-backend start-frontend",
     "lint": "eslint 'frontend/src/**/*.{ts,tsx}' --max-warnings 0 --fix",
-    "format": "prettier --write .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "react-scripts test",
+    "prettier": "prettier --write 'frontend/src/**/*.{js,jsx,ts,tsx,css,md,json}'"
   },
   "author": "",
   "license": "ISC",
