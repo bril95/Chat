@@ -13,10 +13,13 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "outDir": "./frontend/dist",
+    "outDir": "./dist",
     "rootDir": "./frontend/src",
     "types": ["node"]
   },
-  "include": ["frontend/src/**/*", "frontend/src/global.d.ts"],
+  "include": [
+    "frontend/src/**/*",
+    "frontend/src/global.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

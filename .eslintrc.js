@@ -69,5 +69,5 @@ module.exports = {
           printWidth: 100
       }]
   },
-  ignorePatterns: ['.eslintrc.js', 'node_modules/', 'dist/']
+  ignorePatterns: ['.eslintrc.js', 'node_modules/', 'dist/', 'vite.config.ts']
 };
