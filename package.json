@@ -7,7 +7,7 @@
     "build": "npm install vite && vite build",
     "start": "vite",
     "serve": "vite preview",
-    "start-frontend": "vite",
+    "start-frontend": "vite --port $PORT",
     "start-backend": "npx start-server -s ./frontend/dist",
     "run": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "lint": "eslint 'frontend/src/**/*.{ts,tsx}' --max-warnings 0 --fix",
