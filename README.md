@@ -1,6 +1,6 @@
 # Chat Application
 
-[Link to Project](https://chat-kbut.onrender.com)
+[Link to Project](https://chat-iv5i.onrender.com/)
 
 ## This is a chat application with real-time messaging support
 
