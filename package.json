@@ -9,7 +9,7 @@
     "serve": "vite preview",
     "start-frontend": "vite",
     "start-backend": "npx start-server -s ./frontend/dist",
-    "run": "npm-run-all --parallel start-backend start-frontend",
+    "run": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "lint": "eslint 'frontend/src/**/*.{ts,tsx}' --max-warnings 0 --fix",
     "test": "react-scripts test",
     "prettier": "prettier --write 'frontend/src/**/*.{js,jsx,ts,tsx,css,md,json}'"
@@ -46,6 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.0.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
