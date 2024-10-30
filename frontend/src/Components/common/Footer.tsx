@@ -2,7 +2,7 @@ import { IconButton, Toolbar, Typography, AppBar, Box } from '@mui/material';
 import { Telegram, LinkedIn } from '@mui/icons-material';
 import Switcher from './Switcher';
 
-export default function Footer() {
+export default function Footer(): JSX.Element {
   return (
     <AppBar
       position="static"

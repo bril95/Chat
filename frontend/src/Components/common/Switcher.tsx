@@ -2,15 +2,17 @@ import { FormGroup, FormControlLabel, Switch, Typography, Box } from '@mui/mater
 import { useTranslation } from 'react-i18next';
 import { useGetLang, useSetLang } from '../../store/userStoreActions';
 
-export default function Switcher() {
+export default function Switcher(): JSX.Element {
   const { i18n } = useTranslation();
   const currentLang = useGetLang();
   const setCurrnetLang = useSetLang();
 
-  const handleLanguageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLanguageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> => {
     const newLang = event.target.checked ? 'en' : 'ru';
     setCurrnetLang(newLang);
-    i18n.changeLanguage(newLang);
+    await i18n.changeLanguage(newLang);
   };
 
   return (
@@ -24,7 +26,9 @@ export default function Switcher() {
             <Switch
               color="default"
               checked={currentLang === 'en'}
-              onChange={handleLanguageChange}
+              onChange={(event) => {
+                void handleLanguageChange(event);
+              }}
             />
           }
           label={

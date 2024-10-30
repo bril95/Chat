@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../services/routes';
 
-export default function HeaderNavbar() {
+export default function HeaderNavbar(): JSX.Element {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const handleBackToMain = () => {
+  const handleBackToMain = (): void => {
     sessionStorage.clear();
     navigate(routes.pages.loginPage());
   };

@@ -7,14 +7,14 @@ export default function SnackbarComponent({
   open,
   duration = 4000,
   onClose,
-}: SnackbarComponentProps) {
+}: SnackbarComponentProps): JSX.Element {
   const [openSnackbar, setOpenSnackbar] = useState(open);
 
   useEffect(() => {
     setOpenSnackbar(open);
   }, [open]);
 
-  const handleCloseSnackbar = () => {
+  const handleCloseSnackbar = (): void => {
     setOpenSnackbar(false);
     onClose();
   };
