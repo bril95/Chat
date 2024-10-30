@@ -7,7 +7,7 @@ import {
   DialogContentText,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { ChannelProps } from '../../store/interface';
+import { type ChannelProps } from '../../store/interface';
 import {
   useGetCurrentChannelPopover,
   useSetCurrentChannel,
@@ -45,9 +45,7 @@ export default function DeleteChannel({ open, handleClose }: ChannelProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>{t('modalWindows.cancel')}</Button>
-        <Button onClick={deleteChannel}>
-          {t('modalWindows.deleteChannel.delete')}
-        </Button>
+        <Button onClick={deleteChannel}>{t('modalWindows.deleteChannel.delete')}</Button>
       </DialogActions>
     </Dialog>
   );

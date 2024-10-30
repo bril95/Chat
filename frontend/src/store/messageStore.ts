@@ -1,11 +1,11 @@
 import { create } from 'zustand';
-import { Message } from './interface';
+import { type Message } from './interface';
 
-type Store = {
+interface Store {
   allMessages: Message[];
   setMessages: (messages: Message[]) => void;
   setNewMessage: (newMessage: Message) => void;
-};
+}
 
 const messageStore = create<Store>()((set, get) => ({
   allMessages: [],

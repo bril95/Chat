@@ -24,13 +24,7 @@ export default function HeaderNavbar() {
           {t('headers.chat')}
         </Typography>
         <Button>
-          <Link
-            onClick={handleBackToMain}
-            underline="none"
-            color="#FFF"
-            variant="h5"
-            sx={{ m: 1 }}
-          >
+          <Link onClick={handleBackToMain} underline="none" color="#FFF" variant="h5" sx={{ m: 1 }}>
             {t('headers.exit')}
           </Link>
         </Button>

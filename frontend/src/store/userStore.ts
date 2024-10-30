@@ -1,14 +1,14 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
-type Store = {
+interface Store {
   username: string;
   token: string;
   currentLang: 'en' | 'ru';
   setUsername: (username: string) => void;
   setToken: (token: string) => void;
   setCurrentLang: (lang: 'en' | 'ru') => void;
-};
+}
 
 const userStore = create<Store>()(
   persist(
@@ -16,9 +16,15 @@ const userStore = create<Store>()(
       username: '',
       token: '',
       currentLang: 'ru',
-      setUsername: (username) => set({ username }),
-      setToken: (token) => set({ token }),
-      setCurrentLang: (currentLang) => set({ currentLang }),
+      setUsername: (username) => {
+        set({ username });
+      },
+      setToken: (token) => {
+        set({ token });
+      },
+      setCurrentLang: (currentLang) => {
+        set({ currentLang });
+      },
     }),
     {
       name: 'user-storage',

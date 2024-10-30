@@ -23,11 +23,7 @@ export default function Footer() {
       >
         <Toolbar>
           <Typography sx={{ mr: '20px' }}>Bril Vadim</Typography>
-          <IconButton
-            sx={{ m: 0, p: 0 }}
-            color="info"
-            href={'https://t.me/just_brill'}
-          >
+          <IconButton sx={{ m: 0, p: 0 }} color="info" href={'https://t.me/just_brill'}>
             <Telegram />
           </IconButton>
           <IconButton

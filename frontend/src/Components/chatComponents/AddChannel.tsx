@@ -8,16 +8,10 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { ChannelProps } from '../../store/interface';
+import { type ChannelProps } from '../../store/interface';
 import SnackbarComponent from '../common/Snackbar';
-import {
-  useGetAllChannels,
-  useSetCurrentChannel,
-} from '../../store/channelStoreActions';
-import {
-  mainChatValidation,
-  yupValidationError,
-} from '../../internalization/validation';
+import { useGetAllChannels, useSetCurrentChannel } from '../../store/channelStoreActions';
+import { mainChatValidation, yupValidationError } from '../../internalization/validation';
 import { postChannelsResponse } from '../../services/api/channelApi';
 
 export default function AddChannel({ open, handleClose }: ChannelProps) {
@@ -73,7 +67,9 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
       <SnackbarComponent
         message={currentError}
         open={showSnackbar}
-        onClose={() => setShowSnackbar(false)}
+        onClose={() => {
+          setShowSnackbar(false);
+        }}
       />
     </Dialog>
   );

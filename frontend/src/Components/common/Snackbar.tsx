@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Snackbar, Alert } from '@mui/material';
-import { SnackbarComponentProps } from '../../store/interface';
+import { type SnackbarComponentProps } from '../../store/interface';
 
 export default function SnackbarComponent({
   message,
@@ -20,11 +20,7 @@ export default function SnackbarComponent({
   };
 
   return (
-    <Snackbar
-      open={openSnackbar}
-      autoHideDuration={duration}
-      onClose={handleCloseSnackbar}
-    >
+    <Snackbar open={openSnackbar} autoHideDuration={duration} onClose={handleCloseSnackbar}>
       <Alert
         onClose={handleCloseSnackbar}
         severity="warning"

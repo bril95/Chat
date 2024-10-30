@@ -18,7 +18,7 @@ const MessageForm = () => {
     const newMessage = {
       body: message,
       channelId: getCurrentChannelId,
-      username: username,
+      username,
     };
     postMessagesResponse(newMessage);
     setMessage('');

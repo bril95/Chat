@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { Channel } from './interface';
+import { type Channel } from './interface';
 
-type Store = {
+interface Store {
   allChannels: Channel[];
   currentChannel: Channel;
   currentChannelPopover: Channel;
@@ -10,7 +10,7 @@ type Store = {
   setAllChannels: (channels: Channel[]) => void;
   setChannel: (channel: Channel) => void;
   setCurrentChannelPopover: (channel: Channel) => void;
-};
+}
 
 const emptyChannel: Channel = { id: '', name: '', removable: true };
 
@@ -19,7 +19,9 @@ const channelStore = create<Store>((set, get) => ({
   currentChannel: emptyChannel,
   currentChannelPopover: emptyChannel,
   defaultChannel: emptyChannel,
-  setCurrentChannel: (currentChannel) => set({ currentChannel }),
+  setCurrentChannel: (currentChannel) => {
+    set({ currentChannel });
+  },
   setAllChannels: (allChannels) => {
     set({ allChannels });
     if (allChannels.length > 0 && get().currentChannel.id === '') {
@@ -29,10 +31,12 @@ const channelStore = create<Store>((set, get) => ({
       });
     }
   },
-  setChannel: (channel) =>
-    set({ allChannels: [...get().allChannels, channel] }),
-  setCurrentChannelPopover: (currentChannelPopover) =>
-    set({ currentChannelPopover }),
+  setChannel: (channel) => {
+    set({ allChannels: [...get().allChannels, channel] });
+  },
+  setCurrentChannelPopover: (currentChannelPopover) => {
+    set({ currentChannelPopover });
+  },
 }));
 
 export default channelStore;

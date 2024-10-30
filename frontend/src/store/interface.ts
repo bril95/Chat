@@ -41,11 +41,11 @@ interface SnackbarComponentProps {
 }
 
 export {
-  Channel,
-  Message,
-  ChannelProps,
-  PopoverMenuProps,
-  MyForm,
-  SnackbarComponentProps,
+  type Channel,
+  type Message,
+  type ChannelProps,
+  type PopoverMenuProps,
+  type MyForm,
+  type SnackbarComponentProps,
   PopoverAction,
 };

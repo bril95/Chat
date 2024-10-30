@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm, Controller } from 'react-hook-form';
+import { type SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -21,7 +21,7 @@ import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import { MyForm } from '../../store/interface';
+import { type MyForm } from '../../store/interface';
 import { loginUserResponse } from '../../services/api/userApi';
 
 const LoginPage = () => {
@@ -29,7 +29,9 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowPassword = () => {
+    setShowPassword((show) => !show);
+  };
 
   const {
     control,
@@ -108,9 +110,7 @@ const LoginPage = () => {
                 control={control}
                 render={({ field }) => (
                   <FormControl sx={{ mb: 1, mt: 1 }} variant="outlined">
-                    <InputLabel htmlFor="username">
-                      {t('loginPage.username')}
-                    </InputLabel>
+                    <InputLabel htmlFor="username">{t('loginPage.username')}</InputLabel>
                     <OutlinedInput
                       id="username"
                       {...field}
@@ -118,9 +118,7 @@ const LoginPage = () => {
                       label={t('loginPage.username')}
                     />
                     {errors.username && (
-                      <FormHelperText error>
-                        {errors.username.message}
-                      </FormHelperText>
+                      <FormHelperText error>{errors.username.message}</FormHelperText>
                     )}
                   </FormControl>
                 )}
@@ -130,9 +128,7 @@ const LoginPage = () => {
                 control={control}
                 render={({ field }) => (
                   <FormControl sx={{ mb: 1, mt: 1 }} variant="outlined">
-                    <InputLabel htmlFor="password">
-                      {t('loginPage.password')}
-                    </InputLabel>
+                    <InputLabel htmlFor="password">{t('loginPage.password')}</InputLabel>
                     <OutlinedInput
                       id="password"
                       {...field}
@@ -152,9 +148,7 @@ const LoginPage = () => {
                       label={t('loginPage.password')}
                     />
                     {errors.password && (
-                      <FormHelperText error>
-                        {errors.password.message}
-                      </FormHelperText>
+                      <FormHelperText error>{errors.password.message}</FormHelperText>
                     )}
                   </FormControl>
                 )}
@@ -170,11 +164,7 @@ const LoginPage = () => {
             </Button>
           </Box>
           <Typography>{t('loginPage.withoutAccount')}</Typography>
-          <Link
-            href={routes.pages.signUpPage()}
-            underline="hover"
-            sx={{ m: 1 }}
-          >
+          <Link href={routes.pages.signUpPage()} underline="hover" sx={{ m: 1 }}>
             {t('loginPage.registration')}
           </Link>
         </Box>
@@ -183,7 +173,9 @@ const LoginPage = () => {
       <SnackbarComponent
         message={errorMessage}
         open={showSnackbar}
-        onClose={() => setShowSnackbar(false)}
+        onClose={() => {
+          setShowSnackbar(false);
+        }}
       />
     </>
   );

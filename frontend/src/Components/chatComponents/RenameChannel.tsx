@@ -8,19 +8,13 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import { ChannelProps } from '../../store/interface';
-import {
-  useGetAllChannels,
-  useGetCurrentChannelPopover,
-} from '../../store/channelStoreActions';
+import { type ChannelProps } from '../../store/interface';
+import { useGetAllChannels, useGetCurrentChannelPopover } from '../../store/channelStoreActions';
 import SnackbarComponent from '../common/Snackbar';
-import {
-  mainChatValidation,
-  yupValidationError,
-} from '../../internalization/validation';
+import { mainChatValidation, yupValidationError } from '../../internalization/validation';
 import { editedChannelResponse } from '../../services/api/channelApi';
 
-export default function RenameChannel({ open, handleClose }: ChannelProps) {
+export default function RenameChannel({ open, handleClose }: ChannelProps): JSX.Element {
   const { t } = useTranslation();
   const currentChannelPopover = useGetCurrentChannelPopover();
   const getAllChannels = useGetAllChannels();
@@ -32,7 +26,7 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
     setChannelName(currentChannelPopover.name);
   }, [currentChannelPopover]);
 
-  const handleEventSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleEventSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const editedChannel = formData.get('renameChannel');
@@ -73,7 +67,9 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
           type="text"
           variant="standard"
           value={channelName}
-          onChange={(e) => setChannelName(e.target.value)}
+          onChange={(e) => {
+            setChannelName(e.target.value);
+          }}
         />
       </DialogContent>
       <DialogActions>
@@ -83,7 +79,9 @@ export default function RenameChannel({ open, handleClose }: ChannelProps) {
       <SnackbarComponent
         message={currentError}
         open={showSnackbar}
-        onClose={() => setShowSnackbar(false)}
+        onClose={() => {
+          setShowSnackbar(false);
+        }}
       />
     </Dialog>
   );

@@ -46,10 +46,7 @@ const ChatMainPage = () => {
       >
         <HeaderNavbar />
         <Grid2 container spacing={0} sx={{ flexGrow: 1 }}>
-          <Grid2
-            size={{ xs: 4, md: 2 }}
-            sx={{ p: 2, backgroundColor: 'lightgray' }}
-          >
+          <Grid2 size={{ xs: 4, md: 2 }} sx={{ p: 2, backgroundColor: 'lightgray' }}>
             <Box
               sx={{
                 display: 'flex',
@@ -58,16 +55,14 @@ const ChatMainPage = () => {
               }}
             >
               <Typography variant="h5">{t('chatMainPage.channels')}</Typography>
-              <IconButton
-                sx={{ m: 0, p: 0 }}
-                color="info"
-                onClick={handleOpenAddChannel}
-              >
+              <IconButton sx={{ m: 0, p: 0 }} color="info" onClick={handleOpenAddChannel}>
                 <AddCircleOutlineIcon aria-hidden="false" sx={{ p: 0 }} />
               </IconButton>
               <AddChannel
                 open={open}
-                handleClose={() => handleCloseAddChannel()}
+                handleClose={() => {
+                  handleCloseAddChannel();
+                }}
               />
             </Box>
             <ChannelsRender token={token} />
@@ -90,9 +85,7 @@ const ChatMainPage = () => {
               <Typography variant="body1">{currentChannel.name}</Typography>
               <Typography variant="body1">
                 {t('chatMainPage.messages.key', {
-                  count: getAllMessages.filter(
-                    (el) => el.channelId === currentChannel.id
-                  ).length,
+                  count: getAllMessages.filter((el) => el.channelId === currentChannel.id).length,
                 })}
               </Typography>
             </Box>

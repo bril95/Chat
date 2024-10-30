@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm, Controller } from 'react-hook-form';
+import { type SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { useState } from 'react';
 import {
   Button,
@@ -17,7 +17,7 @@ import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import { MyForm } from '../../store/interface';
+import { type MyForm } from '../../store/interface';
 import { signupUserResponse } from '../../services/api/userApi';
 
 const SignUpPage = () => {
@@ -108,9 +108,7 @@ const SignUpPage = () => {
                 control={control}
                 render={({ field }) => (
                   <FormControl sx={{ mb: 1, mt: 1 }} variant="outlined">
-                    <InputLabel htmlFor="username">
-                      {t('signUpPage.username')}
-                    </InputLabel>
+                    <InputLabel htmlFor="username">{t('signUpPage.username')}</InputLabel>
                     <OutlinedInput
                       id="username"
                       {...field}
@@ -118,9 +116,7 @@ const SignUpPage = () => {
                       label={t('signUpPage.username')}
                     />
                     {errors.username && (
-                      <FormHelperText error>
-                        {errors.username.message}
-                      </FormHelperText>
+                      <FormHelperText error>{errors.username.message}</FormHelperText>
                     )}
                   </FormControl>
                 )}
@@ -130,9 +126,7 @@ const SignUpPage = () => {
                 control={control}
                 render={({ field }) => (
                   <FormControl sx={{ mb: 1, mt: 1 }} variant="outlined">
-                    <InputLabel htmlFor="password">
-                      {t('signUpPage.password')}
-                    </InputLabel>
+                    <InputLabel htmlFor="password">{t('signUpPage.password')}</InputLabel>
                     <OutlinedInput
                       id="password"
                       {...field}
@@ -140,9 +134,7 @@ const SignUpPage = () => {
                       label={t('signUpPage.password')}
                     />
                     {errors.password && (
-                      <FormHelperText error>
-                        {errors.password.message}
-                      </FormHelperText>
+                      <FormHelperText error>{errors.password.message}</FormHelperText>
                     )}
                   </FormControl>
                 )}
@@ -162,9 +154,7 @@ const SignUpPage = () => {
                       label={t('signUpPage.confirmPassword')}
                     />
                     {errors.confirmPassword && (
-                      <FormHelperText error>
-                        {errors.confirmPassword.message}
-                      </FormHelperText>
+                      <FormHelperText error>{errors.confirmPassword.message}</FormHelperText>
                     )}
                   </FormControl>
                 )}
@@ -185,7 +175,9 @@ const SignUpPage = () => {
       <SnackbarComponent
         message={errorMessage}
         open={showSnackbar}
-        onClose={() => setShowSnackbar(false)}
+        onClose={() => {
+          setShowSnackbar(false);
+        }}
       />
     </>
   );

@@ -18,10 +18,7 @@ export const getMessagesResponse = async () => {
 
 export const postMessagesResponse = async (message: Message) => {
   try {
-    const response = await axiosInstance.post(
-      routes.path.messagesPath(),
-      message
-    );
+    const response = await axiosInstance.post(routes.path.messagesPath(), message);
     return response.data;
   } catch (error) {
     throw error;

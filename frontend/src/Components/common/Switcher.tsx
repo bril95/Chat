@@ -1,10 +1,4 @@
-import {
-  FormGroup,
-  FormControlLabel,
-  Switch,
-  Typography,
-  Box,
-} from '@mui/material';
+import { FormGroup, FormControlLabel, Switch, Typography, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useGetLang, useSetLang } from '../../store/userStoreActions';
 
@@ -22,10 +16,7 @@ export default function Switcher() {
   return (
     <FormGroup sx={{ ml: 3 }}>
       <Box display="flex" alignItems="center">
-        <Typography
-          variant="body1"
-          style={{ marginRight: '12px', cursor: 'pointer' }}
-        >
+        <Typography variant="body1" style={{ marginRight: '12px', cursor: 'pointer' }}>
           Русский
         </Typography>
         <FormControlLabel

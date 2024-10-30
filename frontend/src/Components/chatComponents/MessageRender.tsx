@@ -1,10 +1,7 @@
 import { useEffect } from 'react';
 import { List, ListItem, ListItemText } from '@mui/material';
 import { useGetCurrentChannel } from '../../store/channelStoreActions';
-import {
-  useGetAllMessages,
-  useSetAllMessages,
-} from '../../store/mesageStoreActions';
+import { useGetAllMessages, useSetAllMessages } from '../../store/mesageStoreActions';
 import { getMessagesResponse } from '../../services/api/messageApi';
 
 const MessageRender = ({ token }: { token: string }) => {
