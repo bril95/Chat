@@ -14,19 +14,19 @@ import {
 } from '../../store/channelStoreActions';
 import { getChannelsResponse } from '../../services/api/channelApi';
 
-const ChannelsRender = ({ token }: { token: string }) => {
+const ChannelsRender = ({ token }: { token: string }): JSX.Element => {
   const setAllChannels = useSetAllChannels();
   const getAllChannels = useGetAllChannels();
   const setCurrentChannel = useSetCurrentChannel();
   const setCurrentChannelPopover = useSetCurrentChannelPopover();
   const getCurrentChannel = useGetCurrentChannel();
 
-  const handleClickChannel = (el: Channel) => {
+  const handleClickChannel = (el: Channel): void => {
     setCurrentChannel(el);
   };
 
   useEffect(() => {
-    const requestData = async () => {
+    const requestData = async (): Promise<void> => {
       try {
         const response = await getChannelsResponse();
         setAllChannels(response);
@@ -34,12 +34,12 @@ const ChannelsRender = ({ token }: { token: string }) => {
         console.error(error);
       }
     };
-    requestData();
+    void requestData();
   }, [token, setAllChannels]);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleOpenPopover = (event: React.MouseEvent<HTMLElement>, el: Channel) => {
+  const handleOpenPopover = (event: React.MouseEvent<HTMLElement>, el: Channel): void => {
     setAnchorEl(event.currentTarget);
     setCurrentChannelPopover(el);
   };
@@ -49,7 +49,7 @@ const ChannelsRender = ({ token }: { token: string }) => {
   const [openRenameChannel, setOpenRenameChannel] = useState(false);
   const [openDeleteChannel, setOpenDeleteChannel] = useState(false);
 
-  const handleClosePopover = (action: string | null) => {
+  const handleClosePopover = (action: string | null): void => {
     if (action === 'openRename') {
       setOpenRenameChannel(true);
     }
@@ -58,10 +58,10 @@ const ChannelsRender = ({ token }: { token: string }) => {
     }
     setAnchorEl(null);
   };
-  const handleCloseRenameChannel = () => {
+  const handleCloseRenameChannel = (): void => {
     setOpenRenameChannel(false);
   };
-  const handleCloseDeleteChannel = () => {
+  const handleCloseDeleteChannel = (): void => {
     setOpenDeleteChannel(false);
   };
 

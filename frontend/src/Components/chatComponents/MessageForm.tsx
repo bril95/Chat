@@ -6,26 +6,30 @@ import { useGetCurrentChannel } from '../../store/channelStoreActions';
 import { useState } from 'react';
 import { postMessagesResponse } from '../../services/api/messageApi';
 
-const MessageForm = () => {
+const MessageForm = (): JSX.Element => {
   const { t } = useTranslation();
 
   const username = useGetUsername();
   const getCurrentChannelId = useGetCurrentChannel().id;
   const [message, setMessage] = useState('');
 
-  const sendMessage = (event: React.FormEvent<HTMLFormElement>) => {
+  const sendMessage = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const newMessage = {
       body: message,
       channelId: getCurrentChannelId,
       username,
     };
-    postMessagesResponse(newMessage);
-    setMessage('');
-    event.currentTarget.reset();
+    try {
+      await postMessagesResponse(newMessage);
+      setMessage('');
+      event.currentTarget.reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setMessage(event.target.value);
   };
 
@@ -46,7 +50,7 @@ const MessageForm = () => {
                   sx={{ m: 0, p: 0 }}
                   color="info"
                   type="submit"
-                  disabled={!message.trim()}
+                  disabled={message.trim() === ''}
                 >
                   <SendIcon sx={{ p: 0 }} />
                 </IconButton>

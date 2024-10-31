@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import handleSocketEvents from './services/sockets';
 import routes from './services/routes';
 
-function App() {
+function App(): JSX.Element {
   useEffect(() => {
     const socketsEvents = handleSocketEvents();
     return () => {

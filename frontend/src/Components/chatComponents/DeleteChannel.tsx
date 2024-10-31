@@ -16,14 +16,14 @@ import {
 } from '../../store/channelStoreActions';
 import { deleteChannelResponse } from '../../services/api/channelApi';
 
-export default function DeleteChannel({ open, handleClose }: ChannelProps) {
+export default function DeleteChannel({ open, handleClose }: ChannelProps): JSX.Element {
   const { t } = useTranslation();
   const setCurrentChannel = useSetCurrentChannel();
   const currentChanneId = useGetCurrentChannel().id;
   const currentChannelPopoverId = useGetCurrentChannelPopover().id;
   const defaultChannel = useGetDefaultChannel();
 
-  const deleteChannel = async () => {
+  const deleteChannel = async (): Promise<void> => {
     try {
       await deleteChannelResponse(currentChannelPopoverId);
       if (currentChannelPopoverId === currentChanneId) {

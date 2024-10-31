@@ -14,7 +14,7 @@ import { useGetAllChannels, useSetCurrentChannel } from '../../store/channelStor
 import { mainChatValidation, yupValidationError } from '../../internalization/validation';
 import { postChannelsResponse } from '../../services/api/channelApi';
 
-export default function AddChannel({ open, handleClose }: ChannelProps) {
+export default function AddChannel({ open, handleClose }: ChannelProps): JSX.Element {
   const { t } = useTranslation();
 
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -22,7 +22,7 @@ export default function AddChannel({ open, handleClose }: ChannelProps) {
   const getAllChannels = useGetAllChannels();
   const setCurrentChannel = useSetCurrentChannel();
 
-  const openModal = async (event: React.FormEvent<HTMLFormElement>) => {
+  const openModal = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newChannel = formData.get('channelName');

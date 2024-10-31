@@ -5,15 +5,15 @@ export const useGetAllChannels = (): Channel[] => {
   return channelStore((state: ChannelStore) => state.allChannels);
 };
 
-export const useGetCurrentChannel = (): Channel | null => {
+export const useGetCurrentChannel = (): Channel => {
   return channelStore((state: ChannelStore) => state.currentChannel);
 };
 
-export const useGetCurrentChannelPopover = (): Channel | null => {
+export const useGetCurrentChannelPopover = (): Channel => {
   return channelStore((state: ChannelStore) => state.currentChannelPopover);
 };
 
-export const useGetDefaultChannel = (): Channel | null => {
+export const useGetDefaultChannel = (): Channel => {
   return channelStore((state: ChannelStore) => state.defaultChannel);
 };
 
