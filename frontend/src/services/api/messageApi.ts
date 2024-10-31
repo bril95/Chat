@@ -1,6 +1,7 @@
 import axiosInstance from '../axiosInstance';
 import routes from '../routes';
-import { type MessageResponse, type Message } from '../../store/interface';
+import { type MessageResponse } from '../../store/interfaces/ResponseInterface';
+import { type Message } from '../../store/interfaces/ChatInterface';
 
 export const getMessagesResponse = async (): Promise<Message[]> => {
   try {

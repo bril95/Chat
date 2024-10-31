@@ -1,6 +1,7 @@
 import axiosInstance from '../axiosInstance';
 import routes from '../routes';
-import { type ChannelResponse, type Channel } from '../../store/interface';
+import { type ChannelResponse } from '../../store/interfaces/ResponseInterface';
+import { type Channel } from '../../store/interfaces/ChatInterface';
 
 export const getChannelsResponse = async (): Promise<Channel[]> => {
   try {

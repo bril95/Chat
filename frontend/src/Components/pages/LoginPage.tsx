@@ -21,7 +21,7 @@ import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import { type MyFormLogin } from '../../store/interface';
+import { type LoginForm } from '../../store/interfaces/FormInterface';
 import { loginUserResponse } from '../../services/api/userApi';
 
 const LoginPage = (): JSX.Element => {
@@ -39,7 +39,7 @@ const LoginPage = (): JSX.Element => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<MyFormLogin>({
+  } = useForm<LoginForm>({
     defaultValues: {
       username: '',
       password: '',
@@ -57,7 +57,7 @@ const LoginPage = (): JSX.Element => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const submit: SubmitHandler<MyFormLogin> = async (data) => {
+  const submit: SubmitHandler<LoginForm> = async (data) => {
     try {
       await loginUserResponse(data);
       navigate(routes.pages.chatMainPage());

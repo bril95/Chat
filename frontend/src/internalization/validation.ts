@@ -1,7 +1,11 @@
 import * as Yup from 'yup';
-import { type MyFormSignUp, type MyFormLogin, type MainChatForm } from '../store/interface';
+import {
+  type SignUpForm,
+  type LoginForm,
+  type MainChatForm,
+} from '../store/interfaces/FormInterface';
 
-const signUpValidation = (t: (key: string) => string): Yup.ObjectSchema<MyFormSignUp> =>
+const signUpValidation = (t: (key: string) => string): Yup.ObjectSchema<SignUpForm> =>
   Yup.object({
     username: Yup.string()
       .required(t('schema.requiredField'))
@@ -13,7 +17,7 @@ const signUpValidation = (t: (key: string) => string): Yup.ObjectSchema<MyFormSi
       .required(t('schema.requiredField')),
   });
 
-const loginValidation = (t: (key: string) => string): Yup.ObjectSchema<MyFormLogin> =>
+const loginValidation = (t: (key: string) => string): Yup.ObjectSchema<LoginForm> =>
   Yup.object({
     username: Yup.string().required(t('schema.requiredField')),
     password: Yup.string().required(t('schema.requiredField')),

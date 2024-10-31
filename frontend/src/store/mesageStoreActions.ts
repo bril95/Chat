@@ -1,5 +1,6 @@
 import messageStore from './messageStore';
-import { type MessageStore, type Message } from './interface';
+import { type Message } from './interfaces/ChatInterface';
+import { type MessageStore } from './interfaces/StoreInterface';
 
 export const useGetAllMessages = (): Message[] => {
   return messageStore((state: MessageStore) => state.allMessages);

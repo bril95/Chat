@@ -1,8 +1,8 @@
 import axiosInstance from '../axiosInstance';
 import routes from '../routes';
-import { type MyFormLogin } from '../../store/interface';
+import { type LoginForm } from '../../store/interfaces/FormInterface';
 
-export const loginUserResponse = async (data: MyFormLogin): Promise<void> => {
+export const loginUserResponse = async (data: LoginForm): Promise<void> => {
   try {
     await axiosInstance.post(routes.path.loginPath(), data);
   } catch (error) {
@@ -10,7 +10,7 @@ export const loginUserResponse = async (data: MyFormLogin): Promise<void> => {
   }
 };
 
-export const signupUserResponse = async (data: MyFormLogin): Promise<void> => {
+export const signupUserResponse = async (data: LoginForm): Promise<void> => {
   try {
     await axiosInstance.post(routes.path.signUpPath(), data);
   } catch (error) {

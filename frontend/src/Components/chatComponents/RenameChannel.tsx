@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import { type ChannelProps } from '../../store/interface';
+import { type ChannelProps } from '../../store/interfaces/PropsInterface';
 import { useGetAllChannels, useGetCurrentChannelPopover } from '../../store/channelStoreActions';
 import SnackbarComponent from '../common/Snackbar';
 import { mainChatValidation, yupValidationError } from '../../internalization/validation';

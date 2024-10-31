@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 import channelStore from '../store/channelStore';
 import messageStore from '../store/messageStore';
-import { type Channel, type Message } from '../store/interface';
+import { type Channel, type Message } from '../store/interfaces/ChatInterface';
 
 const socket = io();
 

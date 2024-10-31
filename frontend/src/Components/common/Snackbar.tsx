@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Snackbar, Alert } from '@mui/material';
-import { type SnackbarComponentProps } from '../../store/interface';
+import { type SnackbarComponentProps } from '../../store/interfaces/PropsInterface';
 
 export default function SnackbarComponent({
   message,

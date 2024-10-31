@@ -1,6 +1,6 @@
 import { Popover, List, ListItemButton, ListItem } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { type PopoverMenuProps, PopoverAction } from './../../store/interface';
+import { type PopoverMenuProps, PopoverAction } from '../../store/interfaces/ChatInterface';
 
 const PopoverMenu = ({ open, anchorEl, handleClosePopover }: PopoverMenuProps): JSX.Element => {
   const { t } = useTranslation();

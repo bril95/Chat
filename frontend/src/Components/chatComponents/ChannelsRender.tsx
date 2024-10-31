@@ -4,7 +4,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import PopoverMenu from '../common/Popover';
 import RenameChannel from './RenameChannel';
 import DeleteChannel from './DeleteChannel';
-import { type Channel } from '../../store/interface';
+import { type Channel } from '../../store/interfaces/ChatInterface';
 import {
   useGetAllChannels,
   useSetCurrentChannel,

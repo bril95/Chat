@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { type MessageStore } from './interface';
+import { type MessageStore } from './interfaces/StoreInterface';
 
 const messageStore = create<MessageStore>()((set, get) => ({
   allMessages: [],

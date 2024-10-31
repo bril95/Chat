@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { type UserStore } from './interface';
+import { type UserStore } from './interfaces/StoreInterface';
 
 const userStore = create<UserStore>()(
   persist(

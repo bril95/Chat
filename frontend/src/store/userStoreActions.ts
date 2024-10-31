@@ -1,5 +1,5 @@
 import userStore from './userStore';
-import { type UserStore, type Language } from './interface';
+import { type UserStore, type Language } from './interfaces/StoreInterface';
 
 export const useGetUsername = (): string => {
   return userStore((state: UserStore) => state.username);

@@ -17,7 +17,7 @@ import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import { type MyFormSignUp } from '../../store/interface';
+import { type SignUpForm } from '../../store/interfaces/FormInterface';
 import { signupUserResponse } from '../../services/api/userApi';
 
 const SignUpPage = (): JSX.Element => {
@@ -28,7 +28,7 @@ const SignUpPage = (): JSX.Element => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<MyFormSignUp>({
+  } = useForm<SignUpForm>({
     defaultValues: {
       username: '',
       password: '',
@@ -48,7 +48,7 @@ const SignUpPage = (): JSX.Element => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const submit: SubmitHandler<MyFormSignUp> = async (data) => {
+  const submit: SubmitHandler<SignUpForm> = async (data) => {
     try {
       await signupUserResponse(data);
       navigate(routes.pages.chatMainPage());

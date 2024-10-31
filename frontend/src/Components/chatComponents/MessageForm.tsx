@@ -23,7 +23,9 @@ const MessageForm = (): JSX.Element => {
     try {
       await postMessagesResponse(newMessage);
       setMessage('');
-      event.currentTarget.reset();
+      if (event.currentTarget !== null) {
+        event.currentTarget.reset();
+      }
     } catch (error) {
       console.error(error);
     }

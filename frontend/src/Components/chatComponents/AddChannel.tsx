@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { type ChannelProps } from '../../store/interface';
+import { type ChannelProps } from '../../store/interfaces/PropsInterface';
 import SnackbarComponent from '../common/Snackbar';
 import { useGetAllChannels, useSetCurrentChannel } from '../../store/channelStoreActions';
 import { mainChatValidation, yupValidationError } from '../../internalization/validation';

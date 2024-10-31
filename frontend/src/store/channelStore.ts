@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { type Channel, type ChannelStore } from './interface';
+import { type Channel } from './interfaces/ChatInterface';
+import { type ChannelStore } from './interfaces/StoreInterface';
 
 const emptyChannel: Channel = { id: '', name: '', removable: true };
 

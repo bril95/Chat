@@ -1,5 +1,6 @@
 import channelStore from './channelStore';
-import { type ChannelStore, type Channel } from './interface';
+import { type Channel } from './interfaces/ChatInterface';
+import { type ChannelStore } from './interfaces/StoreInterface';
 
 export const useGetAllChannels = (): Channel[] => {
   return channelStore((state: ChannelStore) => state.allChannels);

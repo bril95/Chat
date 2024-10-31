@@ -7,7 +7,7 @@ import {
   DialogContentText,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { type ChannelProps } from '../../store/interface';
+import { type ChannelProps } from '../../store/interfaces/PropsInterface';
 import {
   useGetCurrentChannelPopover,
   useSetCurrentChannel,
