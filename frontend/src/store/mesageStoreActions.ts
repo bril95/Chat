@@ -1,13 +1,14 @@
 import messageStore from './messageStore';
+import { type MessageStore, type Message } from './interface';
 
-export const useGetAllMessages = () => {
-  return messageStore((state) => state.allMessages);
+export const useGetAllMessages = (): Message[] => {
+  return messageStore((state: MessageStore) => state.allMessages);
 };
 
-export const useSetAllMessages = () => {
-  return messageStore((state) => state.setMessages);
+export const useSetAllMessages = (): ((messages: Message[]) => void) => {
+  return messageStore((state: MessageStore) => state.setMessages);
 };
 
-export const useSetNewMessage = () => {
-  return messageStore((state) => state.setNewMessage);
+export const useSetNewMessage = (): ((newMessage: Message) => void) => {
+  return messageStore((state: MessageStore) => state.setNewMessage);
 };

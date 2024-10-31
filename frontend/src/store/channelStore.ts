@@ -1,20 +1,9 @@
 import { create } from 'zustand';
-import { type Channel } from './interface';
-
-interface Store {
-  allChannels: Channel[];
-  currentChannel: Channel;
-  currentChannelPopover: Channel;
-  defaultChannel: Channel;
-  setCurrentChannel: (channel: Channel) => void;
-  setAllChannels: (channels: Channel[]) => void;
-  setChannel: (channel: Channel) => void;
-  setCurrentChannelPopover: (channel: Channel) => void;
-}
+import { type Channel, type ChannelStore } from './interface';
 
 const emptyChannel: Channel = { id: '', name: '', removable: true };
 
-const channelStore = create<Store>((set, get) => ({
+const channelStore = create<ChannelStore>((set, get) => ({
   allChannels: [],
   currentChannel: emptyChannel,
   currentChannelPopover: emptyChannel,

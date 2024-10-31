@@ -1,25 +1,28 @@
 import userStore from './userStore';
+import { type UserStore, type Language } from './interface';
 
-export const useGetUsername = () => {
-  return userStore((state) => state.username);
+export const useGetUsername = (): string => {
+  return userStore((state: UserStore) => state.username);
 };
 
-export const useGetToken = () => {
-  return userStore((state) => state.token);
+export const useGetToken = (): string => {
+  // string
+  return userStore((state: UserStore) => state.token);
 };
 
-export const useGetLang = () => {
-  return userStore((state) => state.currentLang);
+export const useGetLang = (): string => {
+  return userStore((state: UserStore) => state.currentLang);
 };
 
-export const useSetUsername = () => {
-  return userStore((state) => state.setUsername);
+export const useSetUsername = (): ((username: string) => void) => {
+  return userStore((state: UserStore) => state.setUsername);
 };
 
-export const useSetToken = () => {
-  return userStore((state) => state.setToken);
+export const useSetToken = (): ((token: string) => void) => {
+  // (token: string | null)
+  return userStore((state: UserStore) => state.setToken);
 };
 
-export const useSetLang = () => {
-  return userStore((state) => state.setCurrentLang);
+export const useSetLang = (): ((lang: Language) => void) => {
+  return userStore((state: UserStore) => state.setCurrentLang);
 };

@@ -1,16 +1,8 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { type UserStore } from './interface';
 
-interface Store {
-  username: string;
-  token: string;
-  currentLang: 'en' | 'ru';
-  setUsername: (username: string) => void;
-  setToken: (token: string) => void;
-  setCurrentLang: (lang: 'en' | 'ru') => void;
-}
-
-const userStore = create<Store>()(
+const userStore = create<UserStore>()(
   persist(
     (set) => ({
       username: '',

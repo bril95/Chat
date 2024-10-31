@@ -1,13 +1,7 @@
 import { create } from 'zustand';
-import { type Message } from './interface';
+import { type MessageStore } from './interface';
 
-interface Store {
-  allMessages: Message[];
-  setMessages: (messages: Message[]) => void;
-  setNewMessage: (newMessage: Message) => void;
-}
-
-const messageStore = create<Store>()((set, get) => ({
+const messageStore = create<MessageStore>()((set, get) => ({
   allMessages: [],
   setMessages: (messages) => {
     set({ allMessages: messages });
