@@ -47,6 +47,16 @@ interface MainChatForm {
   name: string;
 }
 
+interface ChannelResponse {
+  name: FormDataEntryValue | null;
+}
+
+interface MessageResponse {
+  body: FormDataEntryValue | null;
+  channelId: string;
+  username: string;
+}
+
 export {
   type Channel,
   type Message,
@@ -57,4 +67,6 @@ export {
   PopoverAction,
   type MyFormSignUp,
   type MainChatForm,
+  type ChannelResponse,
+  type MessageResponse,
 };

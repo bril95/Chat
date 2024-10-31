@@ -1,24 +1,18 @@
 import axiosInstance from '../axiosInstance';
 import routes from '../routes';
+import { type MyFormLogin } from '../../store/interface';
 
-interface UserProfile {
-  password: string;
-  username: string;
-}
-
-export const loginUserResponse = async (data: UserProfile) => {
+export const loginUserResponse = async (data: MyFormLogin): Promise<void> => {
   try {
-    const response = await axiosInstance.post(routes.path.loginPath(), data);
-    return response;
+    await axiosInstance.post(routes.path.loginPath(), data);
   } catch (error) {
     throw error;
   }
 };
 
-export const signupUserResponse = async (data: UserProfile) => {
+export const signupUserResponse = async (data: MyFormLogin): Promise<void> => {
   try {
-    const response = await axiosInstance.post(routes.path.signUpPath(), data);
-    return response.data;
+    await axiosInstance.post(routes.path.signUpPath(), data);
   } catch (error) {
     throw error;
   }
