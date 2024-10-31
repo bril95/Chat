@@ -38,6 +38,7 @@ module.exports = {
       'no-debugger': 'error',
       'no-unused-vars': 'off',
       'no-useless-catch': 'off',
+      "no-console": "off",
 
       // TypeScript правила
       '@typescript-eslint/no-unused-vars': ['error', {

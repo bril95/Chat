@@ -30,7 +30,10 @@ interface PopoverMenuProps {
 interface MyForm {
   username: string;
   password: string;
-  confirmPassword?: string;
+}
+
+interface MyFormSignUp extends MyForm {
+  confirmPassword: string;
 }
 
 interface SnackbarComponentProps {
@@ -48,4 +51,5 @@ export {
   type MyForm,
   type SnackbarComponentProps,
   PopoverAction,
+  type MyFormSignUp,
 };

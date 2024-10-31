@@ -17,10 +17,10 @@ import { signUpValidation } from '../../internalization/validation';
 import HeaderNavbar from '../common/HeaderNavbar';
 import Footer from '../common/Footer';
 import SnackbarComponent from '../common/Snackbar';
-import { type MyForm } from '../../store/interface';
+import { type MyFormSignUp } from '../../store/interface';
 import { signupUserResponse } from '../../services/api/userApi';
 
-const SignUpPage = () => {
+const SignUpPage = (): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const {
@@ -28,7 +28,7 @@ const SignUpPage = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<MyForm>({
+  } = useForm<MyFormSignUp>({
     defaultValues: {
       username: '',
       password: '',
@@ -37,7 +37,7 @@ const SignUpPage = () => {
     resolver: yupResolver(signUpValidation(t)),
   });
 
-  const resetForm = () => {
+  const resetForm = (): void => {
     reset({
       username: '',
       password: '',
@@ -48,16 +48,17 @@ const SignUpPage = () => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const submit: SubmitHandler<MyForm> = async (data) => {
+  const submit: SubmitHandler<MyFormSignUp> = async (data) => {
     try {
       await signupUserResponse(data);
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {
-      if (error.code === 'ERR_BAD_REQUEST') {
+      const typedError = error as { code?: string };
+      if (typedError.code === 'ERR_BAD_REQUEST') {
         setErrorMessage(t('signUpPage.errorPassword'));
       }
-      if (error.code === 'ERR_NETWORK') {
+      if (typedError.code === 'ERR_NETWORK') {
         setErrorMessage(t('signUpPage.errorRegistration'));
       }
       console.error(error);
@@ -112,10 +113,10 @@ const SignUpPage = () => {
                     <OutlinedInput
                       id="username"
                       {...field}
-                      error={!!errors.username}
+                      error={Boolean(errors.username)}
                       label={t('signUpPage.username')}
                     />
-                    {errors.username && (
+                    {errors.username != null && (
                       <FormHelperText error>{errors.username.message}</FormHelperText>
                     )}
                   </FormControl>
@@ -130,10 +131,10 @@ const SignUpPage = () => {
                     <OutlinedInput
                       id="password"
                       {...field}
-                      error={!!errors.password}
+                      error={Boolean(errors.password)}
                       label={t('signUpPage.password')}
                     />
-                    {errors.password && (
+                    {errors.password != null && (
                       <FormHelperText error>{errors.password.message}</FormHelperText>
                     )}
                   </FormControl>
@@ -150,10 +151,10 @@ const SignUpPage = () => {
                     <OutlinedInput
                       id="confirmPassword"
                       {...field}
-                      error={!!errors.confirmPassword}
+                      error={Boolean(errors.confirmPassword)}
                       label={t('signUpPage.confirmPassword')}
                     />
-                    {errors.confirmPassword && (
+                    {errors.confirmPassword != null && (
                       <FormHelperText error>{errors.confirmPassword.message}</FormHelperText>
                     )}
                   </FormControl>

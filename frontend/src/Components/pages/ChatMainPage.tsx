@@ -14,7 +14,7 @@ import MessageRender from '../chatComponents/MessageRender';
 import { useGetAllMessages } from '../../store/mesageStoreActions';
 import { useGetCurrentChannel } from '../../store/channelStoreActions';
 
-const ChatMainPage = () => {
+const ChatMainPage = (): JSX.Element => {
   const { t } = useTranslation();
   const token = useGetToken();
 
@@ -22,12 +22,12 @@ const ChatMainPage = () => {
   const getAllMessages = useGetAllMessages();
 
   const [open, setOpen] = useState(false);
-  const handleOpenAddChannel = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenAddChannel = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.currentTarget.blur();
     setOpen(true);
   };
 
-  const handleCloseAddChannel = () => {
+  const handleCloseAddChannel = (): void => {
     setOpen(false);
   };
 

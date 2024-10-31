@@ -1,7 +1,7 @@
 import Particles from '../misc/Particles';
 // import { ReactComponent as NotFoundSvg } from '../../images/404.svg';
 
-const NotFound = () => {
+const NotFound = (): JSX.Element => {
   return (
     <>
       <div className="not-found-page">

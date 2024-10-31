@@ -24,12 +24,13 @@ import SnackbarComponent from '../common/Snackbar';
 import { type MyForm } from '../../store/interface';
 import { loginUserResponse } from '../../services/api/userApi';
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => {
+
+  const handleClickShowPassword = (): void => {
     setShowPassword((show) => !show);
   };
 
@@ -46,7 +47,7 @@ const LoginPage = () => {
     resolver: yupResolver(loginValidation(t)),
   });
 
-  const resetForm = () => {
+  const resetForm = (): void => {
     reset({
       username: '',
       password: '',
@@ -62,10 +63,11 @@ const LoginPage = () => {
       navigate(routes.pages.chatMainPage());
       resetForm();
     } catch (error) {
-      if (error.code === 'ERR_BAD_REQUEST') {
+      const typedError = error as { code?: string };
+      if (typedError.code === 'ERR_BAD_REQUEST') {
         setErrorMessage(t('loginPage.errorRequest'));
       }
-      if (error.code === 'ERR_NETWORK') {
+      if (typedError.code === 'ERR_NETWORK') {
         setErrorMessage(t('loginPage.errorNetwork'));
       }
       setShowSnackbar(true);
@@ -114,10 +116,10 @@ const LoginPage = () => {
                     <OutlinedInput
                       id="username"
                       {...field}
-                      error={!!errors.username}
+                      error={Boolean(errors.username)}
                       label={t('loginPage.username')}
                     />
-                    {errors.username && (
+                    {errors.username != null && (
                       <FormHelperText error>{errors.username.message}</FormHelperText>
                     )}
                   </FormControl>
@@ -132,7 +134,7 @@ const LoginPage = () => {
                     <OutlinedInput
                       id="password"
                       {...field}
-                      error={!!errors.password}
+                      error={Boolean(errors.password)}
                       type={showPassword ? 'text' : 'password'}
                       endAdornment={
                         <InputAdornment position="end">
@@ -147,7 +149,7 @@ const LoginPage = () => {
                       }
                       label={t('loginPage.password')}
                     />
-                    {errors.password && (
+                    {errors.password != null && (
                       <FormHelperText error>{errors.password.message}</FormHelperText>
                     )}
                   </FormControl>
