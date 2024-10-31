@@ -6,15 +6,20 @@ import i18n from './internalization/i18n';
 import App from './App';
 import customeTheme from './customeTheme';
 
-const rootElement = document.getElementById('app')!;
-const root = ReactDOM.createRoot(rootElement);
+const rootElement = document.getElementById('app');
 
-root.render(
-  <ThemeProvider theme={customeTheme}>
-    <I18nextProvider i18n={i18n}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </I18nextProvider>
-  </ThemeProvider>
-);
+if (rootElement !== null) {
+  const root = ReactDOM.createRoot(rootElement);
+
+  root.render(
+    <ThemeProvider theme={customeTheme}>
+      <I18nextProvider i18n={i18n}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </I18nextProvider>
+    </ThemeProvider>
+  );
+} else {
+  console.error('Ошибка в rootElement');
+}
