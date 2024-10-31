@@ -5,10 +5,10 @@ import { type Channel, type Message } from '../store/interfaces/ChatInterface';
 
 const socket = io();
 
-const removeItemsById = <T>(items: T[], field: keyof T, value: string) =>
+const removeItemsById = <T>(items: T[], field: keyof T, value: string): T[] =>
   items.filter((item) => item[field] !== value);
 
-const handleSocketEvents = () => {
+const handleSocketEvents = (): (() => void) => {
   const { setChannel, setAllChannels, setCurrentChannel } = channelStore.getState();
   const { setNewMessage, setMessages } = messageStore.getState();
 
