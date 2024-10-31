@@ -31,7 +31,7 @@ const ChatMainPage = (): JSX.Element => {
     setOpen(false);
   };
 
-  if (!token) {
+  if (token === '') {
     return <Navigate to={routes.pages.loginPage()} replace />;
   }
 
