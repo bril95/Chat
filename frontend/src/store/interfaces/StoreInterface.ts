@@ -2,9 +2,18 @@ import { type Message, type Channel } from './ChatInterface';
 
 type Language = 'ru' | 'en';
 
-interface UserStore {
-  username: string;
+interface AuthResponse {
   token: string;
+  username: string;
+}
+
+interface StorageItem {
+  state: {
+    token: string;
+  };
+}
+
+interface UserStore extends AuthResponse {
   currentLang: Language;
   setUsername: (username: string) => void;
   setToken: (token: string) => void;
@@ -28,4 +37,11 @@ interface ChannelStore {
   setCurrentChannelPopover: (channel: Channel) => void;
 }
 
-export { type UserStore, type MessageStore, type ChannelStore, type Language };
+export {
+  type UserStore,
+  type MessageStore,
+  type ChannelStore,
+  type Language,
+  type AuthResponse,
+  type StorageItem,
+};
