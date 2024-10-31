@@ -27,12 +27,12 @@ interface PopoverMenuProps {
   handleClosePopover: (action: PopoverAction | null) => void;
 }
 
-interface MyForm {
+interface MyFormLogin {
   username: string;
   password: string;
 }
 
-interface MyFormSignUp extends MyForm {
+interface MyFormSignUp extends MyFormLogin {
   confirmPassword: string;
 }
 
@@ -43,13 +43,18 @@ interface SnackbarComponentProps {
   onClose: () => void;
 }
 
+interface MainChatForm {
+  name: string;
+}
+
 export {
   type Channel,
   type Message,
   type ChannelProps,
   type PopoverMenuProps,
-  type MyForm,
+  type MyFormLogin,
   type SnackbarComponentProps,
   PopoverAction,
   type MyFormSignUp,
+  type MainChatForm,
 };
