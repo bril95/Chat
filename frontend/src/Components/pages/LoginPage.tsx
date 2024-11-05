@@ -96,7 +96,9 @@ const LoginPage = (): JSX.Element => {
           <Typography variant="h3">{t('loginPage.enter')}</Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit(submit)}
+            onSubmit={(event) => {
+              void handleSubmit(submit)(event);
+            }}
             sx={{
               display: 'flex',
               flexDirection: 'column',

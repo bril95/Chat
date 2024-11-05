@@ -45,7 +45,13 @@ export default function DeleteChannel({ open, handleClose }: ChannelProps): JSX.
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>{t('modalWindows.cancel')}</Button>
-        <Button onClick={deleteChannel}>{t('modalWindows.deleteChannel.delete')}</Button>
+        <Button
+          onClick={() => {
+            void deleteChannel();
+          }}
+        >
+          {t('modalWindows.deleteChannel.delete')}
+        </Button>
       </DialogActions>
     </Dialog>
   );

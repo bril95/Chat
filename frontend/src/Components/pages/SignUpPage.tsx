@@ -88,7 +88,9 @@ const SignUpPage = (): JSX.Element => {
           <Typography variant="h3">{t('signUpPage.registration')}</Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit(submit)}
+            onSubmit={(event) => {
+              void handleSubmit(submit)(event);
+            }}
             sx={{
               display: 'flex',
               flexDirection: 'column',

@@ -47,7 +47,11 @@ export default function AddChannel({ open, handleClose }: ChannelProps): JSX.Ele
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <form onSubmit={openModal}>
+      <form
+        onSubmit={(event) => {
+          void openModal(event);
+        }}
+      >
         <DialogTitle>{t('modalWindows.addChannel.addChannel')}</DialogTitle>
         <DialogContent>
           <TextField

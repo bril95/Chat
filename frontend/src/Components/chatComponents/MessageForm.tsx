@@ -36,7 +36,13 @@ const MessageForm = (): JSX.Element => {
   };
 
   return (
-    <Box component="form" onSubmit={sendMessage} sx={{ display: 'flex' }}>
+    <Box
+      component="form"
+      onSubmit={(event) => {
+        void sendMessage(event);
+      }}
+      sx={{ display: 'flex' }}
+    >
       <TextField
         fullWidth
         placeholder={t('chatMainPage.placeholderMessage')}
