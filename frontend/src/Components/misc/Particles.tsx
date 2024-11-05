@@ -1,8 +1,16 @@
 import { useEffect } from 'react';
 
+declare global {
+  interface Window {
+    particlesJS: {
+      load: (id: string, path: string, callback?: () => void) => void;
+    };
+  }
+}
+
 const Particles = (): JSX.Element => {
   useEffect(() => {
-    if (window.particlesJS) {
+    if (typeof window.particlesJS !== 'undefined') {
       window.particlesJS.load('particles-js', '/particles-config.json');
     }
   }, []);
