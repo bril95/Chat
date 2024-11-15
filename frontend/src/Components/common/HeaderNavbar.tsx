@@ -20,11 +20,27 @@ export default function HeaderNavbar(): JSX.Element {
           justifyContent: 'space-between',
         }}
       >
-        <Typography color="#FFF" variant="h5" sx={{ m: 1 }}>
+        <Typography
+          color="#FFF"
+          variant="h5"
+          sx={{
+            m: 1,
+            fontSize: { xs: '1rem', sm: '1.5rem' },
+          }}
+        >
           {t('headers.chat')}
         </Typography>
         <Button>
-          <Link onClick={handleBackToMain} underline="none" color="#FFF" variant="h5" sx={{ m: 1 }}>
+          <Link
+            onClick={handleBackToMain}
+            underline="none"
+            color="#FFF"
+            variant="h5"
+            sx={{
+              m: 1,
+              fontSize: { xs: '1rem', sm: '1.5rem' },
+            }}
+          >
             {t('headers.exit')}
           </Link>
         </Button>

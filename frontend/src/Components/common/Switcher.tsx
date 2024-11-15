@@ -18,7 +18,13 @@ export default function Switcher(): JSX.Element {
   return (
     <FormGroup sx={{ ml: 3 }}>
       <Box display="flex" alignItems="center">
-        <Typography variant="body1" style={{ marginRight: '12px', cursor: 'pointer' }}>
+        <Typography
+          variant="body1"
+          style={{ marginRight: '12px', cursor: 'pointer' }}
+          sx={{
+            fontSize: { xs: '0.75rem', sm: '1rem' },
+          }}
+        >
           Русский
         </Typography>
         <FormControlLabel
@@ -32,7 +38,13 @@ export default function Switcher(): JSX.Element {
             />
           }
           label={
-            <Typography variant="body1" style={{ cursor: 'pointer' }}>
+            <Typography
+              variant="body1"
+              style={{ cursor: 'pointer' }}
+              sx={{
+                fontSize: { xs: '0.75rem', sm: '1rem' },
+              }}
+            >
               English
             </Typography>
           }
