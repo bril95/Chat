@@ -67,6 +67,11 @@ const en = {
       samePassword: 'Passwords must match',
       sameNameChannel: 'This channel name is already in use',
     },
+    footer: {
+      langRu: 'Русский',
+      langEn: 'English',
+      author: 'Bril Vadim',
+    },
   },
 };
 

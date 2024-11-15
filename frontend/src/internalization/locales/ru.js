@@ -65,6 +65,11 @@ const ru = {
       min6: 'Не менее 6 символов',
       samePassword: 'Пароли должны совпадать',
     },
+    footer: {
+      langRu: 'Русский',
+      langEn: 'English',
+      author: 'Бриль Вадим',
+    },
   },
 };
 

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetLang, useSetLang } from '../../store/userStoreActions';
 
 export default function Switcher(): JSX.Element {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const currentLang = useGetLang();
   const setCurrnetLang = useSetLang();
 
@@ -25,7 +25,7 @@ export default function Switcher(): JSX.Element {
             fontSize: { xs: '0.75rem', sm: '1rem' },
           }}
         >
-          Русский
+          {t('footer.langRu')}
         </Typography>
         <FormControlLabel
           control={
@@ -45,7 +45,7 @@ export default function Switcher(): JSX.Element {
                 fontSize: { xs: '0.75rem', sm: '1rem' },
               }}
             >
-              English
+              {t('footer.langEn')}
             </Typography>
           }
         />

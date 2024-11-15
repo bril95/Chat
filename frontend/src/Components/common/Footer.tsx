@@ -1,8 +1,11 @@
 import { IconButton, Toolbar, Typography, AppBar, Box } from '@mui/material';
 import { Telegram, LinkedIn } from '@mui/icons-material';
 import Switcher from './Switcher';
+import { useTranslation } from 'react-i18next';
 
 export default function Footer(): JSX.Element {
+  const { t } = useTranslation();
+
   return (
     <AppBar
       position="static"
@@ -28,7 +31,7 @@ export default function Footer(): JSX.Element {
               fontSize: { xs: '0.75rem', sm: '1rem' },
             }}
           >
-            Bril Vadim
+            {t('footer.author')}
           </Typography>
           <IconButton
             sx={{
